@@ -146,7 +146,6 @@ public class View extends javax.swing.JFrame {
        listado_ruta.View ventana= new listado_ruta.View();
        ventana.setLocationRelativeTo(null);
        ventana.setVisible(true);
-       this.jMenuItemListadoRutas.setVisible(false);
        
     }//GEN-LAST:event_jMenuItemListadoRutasActionPerformed
 
