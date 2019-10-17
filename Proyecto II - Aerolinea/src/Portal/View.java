@@ -34,9 +34,10 @@ public class View extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenuVentanas = new javax.swing.JMenu();
+        jMenuVentanasListados = new javax.swing.JMenu();
         jMenuItemListadoPaises = new javax.swing.JMenuItem();
         jMenuItemListadoCuidades = new javax.swing.JMenuItem();
+        jMenuItemListadoRutas = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -48,6 +49,7 @@ public class View extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Gestion de Aerolinea");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         jLabelVuelos.setText("Vuelos de la semana");
@@ -65,7 +67,7 @@ public class View extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jMenuVentanas.setText("Ventana");
+        jMenuVentanasListados.setText("Ventana");
 
         jMenuItemListadoPaises.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemListadoPaises.setText("Listado Paises");
@@ -74,7 +76,7 @@ public class View extends javax.swing.JFrame {
                 jMenuItemListadoPaisesActionPerformed(evt);
             }
         });
-        jMenuVentanas.add(jMenuItemListadoPaises);
+        jMenuVentanasListados.add(jMenuItemListadoPaises);
 
         jMenuItemListadoCuidades.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemListadoCuidades.setText("Listado Ciudades");
@@ -83,9 +85,18 @@ public class View extends javax.swing.JFrame {
                 jMenuItemListadoCuidadesActionPerformed(evt);
             }
         });
-        jMenuVentanas.add(jMenuItemListadoCuidades);
+        jMenuVentanasListados.add(jMenuItemListadoCuidades);
 
-        jMenuBar1.add(jMenuVentanas);
+        jMenuItemListadoRutas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemListadoRutas.setText("Listado Rutas");
+        jMenuItemListadoRutas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemListadoRutasActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(jMenuItemListadoRutas);
+
+        jMenuBar1.add(jMenuVentanasListados);
 
         jMenu2.setText("Ayuda");
         jMenuBar1.add(jMenu2);
@@ -130,6 +141,14 @@ public class View extends javax.swing.JFrame {
         listadoCiudades.setLocationRelativeTo(null);
         listadoCiudades.setVisible(true);
     }//GEN-LAST:event_jMenuItemListadoCuidadesActionPerformed
+
+    private void jMenuItemListadoRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoRutasActionPerformed
+       listado_ruta.View ventana= new listado_ruta.View();
+       ventana.setLocationRelativeTo(null);
+       ventana.setVisible(true);
+       this.jMenuItemListadoRutas.setVisible(false);
+       
+    }//GEN-LAST:event_jMenuItemListadoRutasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,7 +195,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItemListadoCuidades;
     private javax.swing.JMenuItem jMenuItemListadoPaises;
-    private javax.swing.JMenu jMenuVentanas;
+    private javax.swing.JMenuItem jMenuItemListadoRutas;
+    private javax.swing.JMenu jMenuVentanasListados;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

@@ -34,7 +34,7 @@ public class DBQuerys {
                 //Retrieve by column name
                 String atributo = rs.getString("variable");
                 //Display values
-                System.out.println("Atributo: " + atributo);
+                System.out.println("Informacion Obtenida de la base de datos en AWS: " + atributo);
             }
             //STEP 6: Clean-up environment
         }

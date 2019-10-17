@@ -18,6 +18,9 @@ public class main {
      public static void main(String[] args) throws Exception {
       DBQuerys db= new DBQuerys();
       db.runTestQuery();
+      login.View app= new  login.View();
+      app.setLocationRelativeTo(null);
+      app.setVisible(true);
     }
        
  
