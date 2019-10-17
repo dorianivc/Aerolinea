@@ -64,6 +64,11 @@ public class View extends javax.swing.JFrame {
         JButtonBuscar.setText("Buscar");
 
         jButtonAgregar.setText("AGREGAR ");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
 
         jButtonEliminar.setText("ELIMINAR");
 
@@ -133,6 +138,12 @@ public class View extends javax.swing.JFrame {
     private void JTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldBuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_JTextFieldBuscadorActionPerformed
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+        agregar_pais.View agregarPais= new agregar_pais.View();
+        agregarPais.setVisible(true);
+        
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     /**
      * @param args the command line arguments
