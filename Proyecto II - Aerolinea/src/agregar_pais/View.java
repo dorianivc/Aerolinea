@@ -35,7 +35,8 @@ public class View extends javax.swing.JFrame {
         jButtonCancelar = new javax.swing.JButton();
         jLabelTitulo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("AGREGANDO PAIS");
 
         jLabel1.setText("Codigo de Identificacion(3 Letras):");
 
@@ -113,7 +114,7 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-    this.setVisible(false);
+    this.dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**

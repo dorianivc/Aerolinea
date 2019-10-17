@@ -38,7 +38,8 @@ public class View extends javax.swing.JFrame {
         jButtonModificar = new javax.swing.JButton();
         jLabel_Paises = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LISTADO DE PAISES");
 
         JTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

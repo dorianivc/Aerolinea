@@ -38,7 +38,8 @@ public class View extends javax.swing.JFrame {
         jButtonModificar = new javax.swing.JButton();
         jButtonEscoger = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LISTADO DE CIUDADES");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,6 +66,11 @@ public class View extends javax.swing.JFrame {
         jLabel2.setText("Nombre: ");
 
         jButtonAgregar.setText("AGREGAR");
+        jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarActionPerformed(evt);
+            }
+        });
 
         jButtonEliminar.setText("ELIMINAR");
 
@@ -129,6 +135,12 @@ public class View extends javax.swing.JFrame {
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBuscarActionPerformed
+
+    private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
+       agregar_ciudad.View ventana= new agregar_ciudad.View();
+       ventana.setLocationRelativeTo(null);
+       ventana.setVisible(true);
+    }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     /**
      * @param args the command line arguments

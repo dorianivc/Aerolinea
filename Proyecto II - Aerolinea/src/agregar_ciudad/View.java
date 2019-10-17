@@ -39,7 +39,8 @@ public class View extends javax.swing.JFrame {
         jLabelPais = new javax.swing.JLabel();
         jComboBoxPaises = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("AGREGANDO CIUDAD");
 
         jLabel1.setText("Codigo de Identificacion(3 Letras):");
 
@@ -130,7 +131,7 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-    this.setVisible(false);        // TODO add your handling code here:
+    this.dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     /**
