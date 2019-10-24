@@ -26,15 +26,16 @@ public class DBQuerys {
         System.out.println("Creating statement...");
         statement = conn.createStatement();
         String sql;
-        sql = "SELECT * FROM sys.sys_config";
+        sql = "select * from Aerolinea.Pais; ";
         //STEP 5: Extract data from result set
         try (ResultSet rs = statement.executeQuery(sql)) {
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
-                String atributo = rs.getString("variable");
+                String atributo = rs.getString("pais");
+                String atributo2= rs.getString("nombre");
                 //Display values
-                System.out.println("Informacion Obtenida de la base de datos en AWS: " + atributo);
+                System.out.println("Informacion Pais de la base de datos en AWS--> " + "Codigo de Pais: "+atributo+ " Nombre: "+ atributo2);
             }
             //STEP 6: Clean-up environment
         }

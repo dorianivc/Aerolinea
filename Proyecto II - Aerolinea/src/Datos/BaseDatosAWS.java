@@ -28,7 +28,8 @@ public class BaseDatosAWS {
         this.conexion=null;
          try {
         conexion = DriverManager.
-                getConnection("jdbc:mysql://" + "ec2-54-208-33-122.compute-1.amazonaws.com" + ":" +"3306" + "/" + "sys", "aerolinea", "progra3");
+                getConnection("jdbc:mysql://" + "ec2-54-208-33-122.compute-1.amazonaws.com" + ":" +"3306" + "/" + "Aerolinea", "aerolinea", "progra3");
+             System.out.println("jdbc:mysql://" + "ec2-54-208-33-122.compute-1.amazonaws.com" + ":" +"3306" + "/" + "Aerolinea");
         } catch (SQLException e) {
         System.out.println("Connection Failed!:\n" + e.getMessage());
             }

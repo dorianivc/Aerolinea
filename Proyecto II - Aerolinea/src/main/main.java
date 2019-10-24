@@ -7,6 +7,8 @@ package main;
 
 import Datos.BaseDatosAWS;
 import Datos.DBQuerys;
+import Datos.PaisJpaController;
+import Logica.Pais;
 
 /**
  *
