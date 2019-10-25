@@ -18,10 +18,10 @@ import javax.persistence.Persistence;
 
 public class BaseDatosAWS {
     public Connection conexion;
-    public static EntityManagerFactory EntityManager=null;
+    public  EntityManagerFactory EntityManager=null;
     
     
-    private static EntityManager createEntityManager(){
+    private  EntityManager createEntityManager(){
         try{
         if(EntityManager ==null){
             EntityManager=Persistence.createEntityManagerFactory("Proyecto_II_-_AerolineaPU");

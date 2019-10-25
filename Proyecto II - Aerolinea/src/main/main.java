@@ -8,7 +8,9 @@ package main;
 import Datos.BaseDatosAWS;
 import Datos.DBQuerys;
 import Datos.PaisJpaController;
+import Datos.RutaJpaController;
 import Logica.Pais;
+import Logica.Ruta;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,14 @@ public class main {
      for(int i=0;i<lista.size();i++){
               Pais pais= lista.get(i);
               System.out.println(pais.toString());
-      }
-     PaisJpaController daoPais= new PaisJpaController(db.db.EntityManager);
-     Pais Corea= new Pais("COR");
-     Corea.setNombre("COREA");
-     //daoPais.destroy(Corea.getPais());
+     }
+     RutaJpaController daoRuta= new RutaJpaController(db.db.EntityManager);
+     List<Ruta> lista2;
+     lista2 = daoRuta.findRutaEntities();
+     for(int i=0;i<lista2.size();i++){
+              Ruta ruta= lista2.get(i);
+              System.out.println("Ruta --> "+ruta.getCiudadSalida().getNombre()+ " - "+ ruta.getCiudadLlegada().getNombre());
+     }
       Presentacion.login.View app= new  Presentacion.login.View();
       app.setLocationRelativeTo(null);
       app.setVisible(true);
