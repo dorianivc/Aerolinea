@@ -9,6 +9,9 @@ import Datos.BaseDatosAWS;
 import Datos.DBQuerys;
 import Datos.PaisJpaController;
 import Logica.Pais;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -17,10 +20,14 @@ import Logica.Pais;
 public class main {
   
     
-     public static void main(String[] args) throws Exception {
+     public static void main(String[] args) throws SQLException, Exception {
       DBQuerys db= new DBQuerys();
-      db.runTestQuery();
-      login.View app= new  login.View();
+      List<Pais> lista= db.listadoPaises();
+     for(int i=0;i<lista.size();i++){
+              Pais pais= lista.get(i);
+              System.out.println(pais.toString());
+      }
+      Presentacion.login.View app= new  Presentacion.login.View();
       app.setLocationRelativeTo(null);
       app.setVisible(true);
     }

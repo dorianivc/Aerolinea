@@ -5,10 +5,14 @@
  */
 package Datos;
 
+import Logica.Pais;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 
 
 public class DBQuerys {
@@ -17,6 +21,67 @@ public class DBQuerys {
    public DBQuerys(){
        db=new BaseDatosAWS();
    }
+   public List<Pais> listadoPaises() throws SQLException{
+      Connection conn=db.conexion;
+    Statement statement = null;
+    List<Pais> lista= new ArrayList<>();
+    try {
+
+        System.out.println("Creating statement...");
+        statement = conn.createStatement();
+        String sql;
+        sql = "select * from Aerolinea.Pais; ";
+        System.out.println(sql);
+        //STEP 5: Extract data from result set
+        try (ResultSet rs = statement.executeQuery(sql)) {
+            //STEP 5: Extract data from result set
+            while (rs.next()) {
+                //Retrieve by column name
+                String llave = rs.getString("pais");
+                String nombre= rs.getString("nombre");
+                //Display values
+               Pais pais= new Pais(llave);
+               pais.setNombre(nombre);
+               lista.add(pais);
+            }
+            //STEP 6: Clean-up environment
+           
+        }
+        statement.close();
+        
+        
+    } catch (SQLException se) {
+
+        }
+
+    return lista;
+       
+   }
+   
+    public int executeUpdate(String statement) {
+        try {
+            Statement stm = db.conexion.createStatement();
+            stm.executeUpdate(statement);
+            return stm.getUpdateCount();
+        } catch (SQLException ex) {
+            return 0;
+        }
+    }
+    
+    
+   public void agregarPais(Pais pais) throws SQLException, Exception{
+       Connection conn=db.conexion;
+       String sql="insert into Aerolinea.Pais (pais, nombre) "+
+                "values('%s','%s')";
+        sql=String.format(sql,pais.getPais(),pais.getNombre());
+        System.out.println(sql);
+        int count=executeUpdate(sql);
+        if (count==0){
+            throw new Exception("Pais ya existe");
+        }
+   }
+     
+   
    
  public void runTestQuery() throws SQLException {
     Connection conn=db.conexion;
