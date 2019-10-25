@@ -5,10 +5,26 @@
  */
 package Presentacion.Presentacion_Ciudad.agregar_ciudad;
 
-/**
- *
- * @author Monica
- */
+import Logica.Ciudad;
+import Logica.Pais;
+import java.sql.SQLException;
+import java.util.List;
+
+
 public class Controller {
+    Model modelo;
+    public Controller(){
+        this.modelo= new Model();
+        
+    }
     
+    public List<Pais> getListadoPaises() throws SQLException{
+        return modelo.listaPaises();
+    }
+    
+    public void agregarCiudad(Ciudad ciudad){
+        modelo.agregarCiudad(ciudad);
 }
+
+}
+

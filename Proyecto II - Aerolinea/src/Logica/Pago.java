@@ -21,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,6 +30,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Pago")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Pago.findAll", query = "SELECT p FROM Pago p")
     , @NamedQuery(name = "Pago.findByPago", query = "SELECT p FROM Pago p WHERE p.pago = :pago")
@@ -83,6 +86,7 @@ public class Pago implements Serializable {
         this.fecha = fecha;
     }
 
+    @XmlTransient
     public List<Reserva> getReservaList() {
         return reservaList;
     }

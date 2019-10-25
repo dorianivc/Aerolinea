@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-  <persistence-unit name="Proyecto II - Aerolinea DAO" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="Proyecto_II_-_AerolineaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>Logica.Usuario</class>
+    <class>Logica.Vuelo</class>
+    <class>Logica.Ticket</class>
+    <class>Logica.Pago</class>
+    <class>Logica.TipodePago</class>
+    <class>Logica.Ciudad</class>
+    <class>Logica.Horario</class>
+    <class>Logica.Pais</class>
+    <class>Logica.AvionDisponible</class>
+    <class>Logica.Reserva</class>
+    <class>Logica.Viaje</class>
+    <class>Logica.Ruta</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://ec2-54-208-33-122.compute-1.amazonaws.com:3306/Aerolinea"/>
       <property name="javax.persistence.jdbc.user" value="dorianivc"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="07octubre99"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>
 </persistence>

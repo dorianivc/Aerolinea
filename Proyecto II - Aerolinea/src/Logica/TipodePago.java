@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -23,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "Tipo_de_Pago")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "TipodePago.findAll", query = "SELECT t FROM TipodePago t")
     , @NamedQuery(name = "TipodePago.findByTipoDePago", query = "SELECT t FROM TipodePago t WHERE t.tipoDePago = :tipoDePago")
@@ -62,6 +65,7 @@ public class TipodePago implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<Pago> getPagoList() {
         return pagoList;
     }

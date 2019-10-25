@@ -5,6 +5,8 @@
  */
 package Presentacion.Presentacion_Pais.agregar_pais;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Monica
@@ -112,7 +114,15 @@ public class View extends javax.swing.JFrame {
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
     String pais= this.jTextFieldCodigo.getText();
     String nombre= this.jTextFieldNombre.getText();
-    this.controller.agregarPais(pais, nombre);
+    if(pais.length()>=1&& nombre.length()>=1){
+        this.controller.agregarPais(pais, nombre);
+        this.jTextFieldCodigo.setText("");
+        this.jTextFieldNombre.setText("");
+    }else{
+        JOptionPane.showMessageDialog(null, "Datos Ingresados son Invalidos", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
+    }
+    
+    
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

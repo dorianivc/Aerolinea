@@ -23,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -30,6 +32,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Ruta")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ruta.findAll", query = "SELECT r FROM Ruta r")
     , @NamedQuery(name = "Ruta.findByRuta", query = "SELECT r FROM Ruta r WHERE r.ruta = :ruta")
@@ -93,6 +96,7 @@ public class Ruta implements Serializable {
         this.ciudadLlegada = ciudadLlegada;
     }
 
+    @XmlTransient
     public List<Vuelo> getVueloList() {
         return vueloList;
     }

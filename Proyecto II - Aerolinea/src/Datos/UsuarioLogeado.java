@@ -5,10 +5,10 @@
  */
 package Datos;
 
+/**
+ *
+ * @author Monica
+ */
 public class UsuarioLogeado {
-  Logica.Usuario logeado;
-  
- public UsuarioLogeado(){
-      logeado= new Logica.Usuario("");
-  }
+    
 }

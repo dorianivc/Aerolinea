@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -26,6 +28,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Avion_Disponible")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "AvionDisponible.findAll", query = "SELECT a FROM AvionDisponible a")
     , @NamedQuery(name = "AvionDisponible.findByCodigoMatricula", query = "SELECT a FROM AvionDisponible a WHERE a.codigoMatricula = :codigoMatricula")
@@ -121,6 +124,7 @@ public class AvionDisponible implements Serializable {
         this.cantidadDePasajeros = cantidadDePasajeros;
     }
 
+    @XmlTransient
     public List<Vuelo> getVueloList() {
         return vueloList;
     }

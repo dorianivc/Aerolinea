@@ -35,7 +35,6 @@ public class View extends javax.swing.JFrame {
         jButtonAgregar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonEscoger = new javax.swing.JButton();
-        jButtonModificar = new javax.swing.JButton();
         jLabel_Paises = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -75,8 +74,6 @@ public class View extends javax.swing.JFrame {
 
         jButtonEscoger.setText("Escoger");
 
-        jButtonModificar.setText("MODIFICAR");
-
         jLabel_Paises.setText("Paises");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -90,9 +87,7 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jButtonAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonEliminar)
-                        .addGap(25, 25, 25)
-                        .addComponent(jButtonModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(119, 119, 119)
                         .addComponent(jButtonEscoger)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -128,8 +123,7 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonEscoger)
-                    .addComponent(jButtonEliminar)
-                    .addComponent(jButtonModificar))
+                    .addComponent(jButtonEliminar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -188,7 +182,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonEscoger;
-    private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;
     private javax.swing.JScrollPane jScrollPane1;

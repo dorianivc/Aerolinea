@@ -2,6 +2,9 @@
 package Presentacion.Presentacion_Pais.agregar_pais;
 
 import Logica.Pais;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class Model {
     public Datos.DBQuerys db;
@@ -13,14 +16,20 @@ public class Model {
     void agregarPais(String Pais, String nombre){
         Pais pais= new Pais(Pais);
         pais.setNombre(nombre);
+        Icon icon= new ImageIcon(getClass().getResource("check_verde.png"));
         try{
             db.agregarPais(pais);
-           }catch(Exception ex){
-               System.out.println(ex);
-           }
+          
+       
+       JOptionPane.showMessageDialog(null, "Pais agregado satisfactoriamente", "Pais Agregado",JOptionPane.PLAIN_MESSAGE, icon);
+        
+       }catch(Exception ex){
+         JOptionPane.showMessageDialog(null, "Pais ya existe en los registros", "Pais Agregado",JOptionPane.PLAIN_MESSAGE, icon);
         }
     
     
     
     }
+}
+
     

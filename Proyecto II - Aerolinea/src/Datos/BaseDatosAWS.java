@@ -11,10 +11,30 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 public class BaseDatosAWS {
     public Connection conexion;
+    public static EntityManagerFactory EntityManager=null;
+    
+    
+    private static EntityManager createEntityManager(){
+        try{
+        if(EntityManager ==null){
+            EntityManager=Persistence.createEntityManagerFactory("Proyecto_II_-_AerolineaPU");
+        }
+        }catch(Exception se){
+            System.out.println(se.getMessage());
+        }
+        
+        return EntityManager.createEntityManager();
+    }
+    
+    
+    
     
        public BaseDatosAWS(){
         System.out.println("----MySQL JDBC Connection Testing -------");
@@ -33,10 +53,13 @@ public class BaseDatosAWS {
         } catch (SQLException e) {
         System.out.println("Connection Failed!:\n" + e.getMessage());
             }
-    
-           
-           
-    }
+         try{
+             EntityManager=(EntityManagerFactory) createEntityManager();
+         }catch(Exception se){
+             System.out.println(se.getMessage());
+         }
+         }
+   
     
     
 

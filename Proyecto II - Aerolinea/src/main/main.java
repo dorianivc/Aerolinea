@@ -27,6 +27,10 @@ public class main {
               Pais pais= lista.get(i);
               System.out.println(pais.toString());
       }
+     PaisJpaController daoPais= new PaisJpaController(db.db.EntityManager);
+     Pais Corea= new Pais("COR");
+     Corea.setNombre("COREA");
+     //daoPais.destroy(Corea.getPais());
       Presentacion.login.View app= new  Presentacion.login.View();
       app.setLocationRelativeTo(null);
       app.setVisible(true);

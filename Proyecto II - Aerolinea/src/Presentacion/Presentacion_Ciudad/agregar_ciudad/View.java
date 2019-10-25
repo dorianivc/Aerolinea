@@ -5,6 +5,11 @@
  */
 package Presentacion.Presentacion_Ciudad.agregar_ciudad;
 
+import Logica.Ciudad;
+import Logica.Pais;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Monica
@@ -16,6 +21,16 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+         List<Pais> lista=null;
+        try{
+             lista=this.controller.getListadoPaises();
+        }catch(Exception se){
+            System.out.println(se);
+        }
+        for(int i=0;i<lista.size();i++){
+            this.jComboBoxPaises.addItem(lista.get(i));
+        }
+        
     }
 
     /**
@@ -62,7 +77,11 @@ public class View extends javax.swing.JFrame {
 
         jLabelPais.setText("Pais: ");
 
-        jComboBoxPaises.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPaises.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxPaisesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,12 +144,32 @@ public class View extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-        // TODO add your handling code here:
+       Pais pais=(Pais) this.jComboBoxPaises.getSelectedItem();
+       String codigo= this.jTextFieldCodigo.getText();
+       String nombre=this.jTextFieldNombre.getText();
+       Ciudad ciudad= new Ciudad();
+       ciudad.setCiudad(codigo);
+       ciudad.setNombre(nombre);
+       ciudad.setPais(pais);
+       if(codigo.length()>=1&&nombre.length()>=1){
+           controller.agregarCiudad(ciudad);
+           this.jTextFieldCodigo.setText("");
+           this.jTextFieldNombre.setText("");
+           JOptionPane.showMessageDialog(null, "Ciudad Agregada Satisfactoriamente", "Ciudad agregada",JOptionPane.PLAIN_MESSAGE);
+       }
+       else{
+        JOptionPane.showMessageDialog(null, "Debe ingresar datos validos", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
+       }
+       
     }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
     this.dispose();      // TODO add your handling code here:
     }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jComboBoxPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxPaisesActionPerformed
+       
+    }//GEN-LAST:event_jComboBoxPaisesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -177,7 +216,7 @@ public class View extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JComboBox<String> jComboBoxPaises;
+    private javax.swing.JComboBox<Pais> jComboBoxPaises;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelPais;
@@ -185,4 +224,5 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldCodigo;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
+    public Controller controller= new Controller();
 }
