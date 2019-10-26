@@ -16,7 +16,7 @@ public class View extends javax.swing.JFrame {
             this.jComboBoxHoraLlegada.addItem(i);
             this.jComboBoxHoraSalida.addItem(i);
         }
-        for(int i=0;i<61;i++){
+        for(int i=0;i<60;i++){
             this.jComboBoxMinutosLlegada.addItem(i);
             this.jComboBoxMinutosSalida.addItem(i);
         }
@@ -54,7 +54,6 @@ public class View extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("AGREGANDO HORARIO");
-        setPreferredSize(new java.awt.Dimension(333, 300));
         setSize(new java.awt.Dimension(333, 300));
 
         jLabelTitulo.setText("Agregando un Nuevo Horario");
@@ -93,7 +92,7 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        jLabelNombre.setText("Nombre de la Ruta: ");
+        jLabelNombre.setText("Nombre del Horario: ");
 
         jLabelHoraDeSalida.setText("Hora");
 
@@ -215,26 +214,36 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxHoraSalidaActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-       String nombre= this.jLabelNombre.getText();
+       String nombre= this.jTextFieldNombre.getText();
        if(nombre.length()<1){
             JOptionPane.showMessageDialog(null, "Error--> Ha dejado el siguiente campo en blanco: Nombre de Ruta", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
        }else if(nombre.length()>=1 ){
            String dia=(String) this.jComboBoxDias.getSelectedItem();
            Date salida= new Date();
            Date llegada= new Date();
+           
            int horaLlegada=(int) this.jComboBoxHoraLlegada.getSelectedItem();
            int minLlegada=(int)this.jComboBoxMinutosLlegada.getSelectedItem();
            int horaSalida=(int)this.jComboBoxHoraSalida.getSelectedItem();
            int minSalida=(int)this.jComboBoxMinutosSalida.getSelectedItem();
            salida.setHours(horaSalida-6);
            salida.setMinutes(minSalida);
+           
            llegada.setHours(horaLlegada-6);
            llegada.setMinutes(minLlegada);
+           salida.setSeconds(0);
+           llegada.setSeconds(0);
            Horario horario= new Horario();
            horario.setHorario(nombre);
            horario.setLlegada(llegada);
            horario.setSalida(salida);
            horario.setDiaDeLaSemana(dia);
+           try{
+               controller.agregarHorarioaBD(horario);
+           }catch(Exception se){
+               JOptionPane.showMessageDialog(null, se.getMessage(), "Exception Error",JOptionPane.PLAIN_MESSAGE);
+           }
+           
            
        }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
@@ -302,4 +311,5 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
+    Controller controller= new Controller();
 }
