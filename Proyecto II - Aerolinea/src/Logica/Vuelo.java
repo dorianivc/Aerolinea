@@ -120,7 +120,7 @@ public class Vuelo implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.Vuelo[ vuelo=" + vuelo + " ]";
+        return this.vuelo+" -"+ this.rutaAsignada.toString() +" "+ this.horario.getDiaDeLaSemana().charAt(0)+this.horario.getDiaDeLaSemana().charAt(1);
     }
     
 }

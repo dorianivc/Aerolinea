@@ -80,6 +80,11 @@ public class View extends javax.swing.JFrame {
         jLabel2.setText("Codigo Matricula");
 
         Regresar.setText("Regresar");
+        Regresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegresarActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Modelo");
 
@@ -176,6 +181,10 @@ public class View extends javax.swing.JFrame {
     private void CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CodigoActionPerformed
+
+    private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_RegresarActionPerformed
 
     /**
      * @param args the command line arguments
