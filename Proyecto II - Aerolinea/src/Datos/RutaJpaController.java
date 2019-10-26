@@ -78,7 +78,7 @@ public class RutaJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } finally {
+        }finally {
             if (em != null) {
                 em.close();
             }

@@ -5,6 +5,8 @@
  */
 package Presentacion.Registrar_usuario;
 
+import Logica.Usuario;
+
 /**
  *
  * @author sergi
@@ -204,7 +206,7 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_RegresarActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     /**

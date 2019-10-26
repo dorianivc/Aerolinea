@@ -5,6 +5,12 @@
  */
 package Presentacion.Presentacion_Ruta.agregar_ruta;
 
+import Logica.Ciudad;
+import Logica.Ruta;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Monica
@@ -16,6 +22,14 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+        List<Ciudad> lista=controller.listadoCiudad();
+        for(int i=0;i<lista.size();i++){
+            this.jComboBoxOrigen.addItem(lista.get(i));
+            this.jComboBoxDestino.addItem(lista.get(i));
+        }
+        for(int i=0;i<61;i++){
+            this.jComboBoxMinutos.addItem(i);
+        }
     }
 
     /**
@@ -27,15 +41,27 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jLabelCodigoRuta = new javax.swing.JLabel();
         jLabelCiudadDestino = new javax.swing.JLabel();
         jLabelDuracion = new javax.swing.JLabel();
-        jTextFieldDuracion = new javax.swing.JTextField();
-        jComboBoxCiudad = new javax.swing.JComboBox<>();
-        jComboBoxCiudad2 = new javax.swing.JComboBox<>();
+        jTextFieldHoras = new javax.swing.JTextField();
+        jComboBoxOrigen = new javax.swing.JComboBox<>();
+        jComboBoxDestino = new javax.swing.JComboBox<>();
         jLabelAddRuta = new javax.swing.JLabel();
         jButtonAceptar = new javax.swing.JButton();
         JButtonCancelar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBoxMinutos = new javax.swing.JComboBox<>();
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("AGREGANDO RUTA");
@@ -46,14 +72,17 @@ public class View extends javax.swing.JFrame {
 
         jLabelDuracion.setText("Duracion: ");
 
-        jComboBoxCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxCiudad.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxCiudadActionPerformed(evt);
+                jComboBoxOrigenActionPerformed(evt);
             }
         });
 
-        jComboBoxCiudad2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxDestinoActionPerformed(evt);
+            }
+        });
 
         jLabelAddRuta.setText("Agregando Ruta");
 
@@ -71,37 +100,49 @@ public class View extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Horas");
+
+        jLabel2.setText("Minutos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonAceptar)
-                .addGap(105, 105, 105))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabelCodigoRuta)
+                        .addGap(29, 29, 29)
+                        .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelCiudadDestino)
+                            .addComponent(jLabelDuracion))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldHoras)
+                            .addComponent(jComboBoxDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(JButtonCancelar))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelCodigoRuta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(26, 26, 26)
+                                .addComponent(jButtonAceptar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(JButtonCancelar)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabelCiudadDestino)
-                                        .addComponent(jLabelDuracion)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldDuracion)
-                                    .addComponent(jComboBoxCiudad2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBoxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(112, 112, 112)
                         .addComponent(jLabelAddRuta)))
-                .addContainerGap(130, Short.MAX_VALUE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,36 +152,73 @@ public class View extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCodigoRuta)
-                    .addComponent(jComboBoxCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelCiudadDestino)
-                    .addComponent(jComboBoxCiudad2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelDuracion)
-                    .addComponent(jTextFieldDuracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jTextFieldHoras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxMinutos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAceptar)
                     .addComponent(JButtonCancelar))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCiudadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxCiudadActionPerformed
+    private void jComboBoxOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOrigenActionPerformed
+        
+    }//GEN-LAST:event_jComboBoxOrigenActionPerformed
 
     private void JButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCancelarActionPerformed
        this.dispose();
     }//GEN-LAST:event_JButtonCancelarActionPerformed
 
     private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
-
+        Ciudad origen=(Ciudad) this.jComboBoxOrigen.getSelectedItem();
+        Ciudad destino= (Ciudad) this.jComboBoxDestino.getSelectedItem();
+        String horasS= this.jTextFieldHoras.getText();
+        if(origen.equals(destino)){
+            JOptionPane.showMessageDialog(null, "Error: Se ha elegido la misma ciudad como origen y destino", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
+        }else if(horasS.length()<=0 ){
+            JOptionPane.showMessageDialog(null, "Error: Dejo la casilla de Horas vacia", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
+           }
+        else{
+            int horas= Integer.parseInt(this.jTextFieldHoras.getText());
+            int minutos=(int) this.jComboBoxMinutos.getSelectedItem();
+            Date fecha= new Date();
+            fecha.setHours(horas-6);
+            fecha.setMinutes(minutos);
+            fecha.setSeconds(0);
+            Ruta ruta=new Ruta();
+            ruta.setCiudadSalida(origen);
+            ruta.setCiudadLlegada(destino);
+            ruta.setDuracion(fecha);
+            System.out.println(fecha);
+            try{
+                controller.agregarRuta(ruta);
+                JOptionPane.showMessageDialog(null, "Se ha agregado la ruta satisfactoriamente", "Ruta Agregada",JOptionPane.PLAIN_MESSAGE);
+                this.jTextFieldHoras.setText("");
+                this.jComboBoxMinutos.setSelectedIndex(0);
+            }catch(Exception se){
+                System.out.println(se.getMessage());
+            }
+        }
     }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jComboBoxDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxDestinoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxDestinoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,12 +258,18 @@ public class View extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonCancelar;
     private javax.swing.JButton jButtonAceptar;
-    private javax.swing.JComboBox<String> jComboBoxCiudad;
-    private javax.swing.JComboBox<String> jComboBoxCiudad2;
+    private javax.swing.JComboBox<Ciudad> jComboBoxDestino;
+    private javax.swing.JComboBox<Integer> jComboBoxMinutos;
+    private javax.swing.JComboBox<Ciudad> jComboBoxOrigen;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelAddRuta;
     private javax.swing.JLabel jLabelCiudadDestino;
     private javax.swing.JLabel jLabelCodigoRuta;
     private javax.swing.JLabel jLabelDuracion;
-    private javax.swing.JTextField jTextFieldDuracion;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextFieldHoras;
     // End of variables declaration//GEN-END:variables
+Controller controller= new Controller();
 }

@@ -13,6 +13,7 @@ import Logica.Pais;
 import Logica.Ruta;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,6 +37,7 @@ public class main {
               Ruta ruta= lista2.get(i);
               System.out.println("Ruta --> "+ruta.getCiudadSalida().getNombre()+ " - "+ ruta.getCiudadLlegada().getNombre());
      }
+       
       Presentacion.login.View app= new  Presentacion.login.View();
       app.setLocationRelativeTo(null);
       app.setVisible(true);

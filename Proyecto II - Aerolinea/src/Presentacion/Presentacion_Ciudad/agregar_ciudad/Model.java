@@ -40,7 +40,7 @@ void agregarCiudad(Ciudad ciudad){
             "Ciudad ya existe"
                
         };
-          int option=JOptionPane.showConfirmDialog(null, message, "Datos Existente",JOptionPane.PLAIN_MESSAGE);
+          int option=JOptionPane.showConfirmDialog(null, message, "Datos Existentes",JOptionPane.PLAIN_MESSAGE);
         if(option==JOptionPane.OK_OPTION){
             try{
             }catch(NumberFormatException e){

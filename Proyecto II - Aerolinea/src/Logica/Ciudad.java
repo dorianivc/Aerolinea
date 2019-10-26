@@ -120,7 +120,7 @@ public class Ciudad implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.Ciudad[ ciudad=" + ciudad + " ]";
+        return this.ciudad+" - "+ this.nombre;
     }
     
 }

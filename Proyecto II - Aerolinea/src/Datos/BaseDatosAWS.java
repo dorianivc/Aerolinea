@@ -37,14 +37,14 @@ public class BaseDatosAWS {
     
     
        public BaseDatosAWS(){
-        System.out.println("----MySQL JDBC Connection Testing -------");
+        //System.out.println("----MySQL JDBC Connection Testing -------");
           try {
         Class.forName("com.mysql.jdbc.Driver");
                 } catch (ClassNotFoundException e) {
                     System.out.println("Where is your MySQL JDBC Driver?");
                     return ;
                 }
-        System.out.println("MySQL JDBC Driver Registered!");
+        //System.out.println("MySQL JDBC Driver Registered!");
         this.conexion=null;
          try {
         conexion = DriverManager.

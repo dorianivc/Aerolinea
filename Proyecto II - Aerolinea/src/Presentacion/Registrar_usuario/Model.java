@@ -5,10 +5,21 @@
  */
 package Presentacion.Registrar_usuario;
 
+import Datos.DBQuerys;
+import Datos.UsuarioJpaController;
+import Logica.Usuario;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sergi
  */
 public class Model {
+    public DBQuerys db;
     
+    public Model(){
+        db=new DBQuerys();
+    }
+    
+   
 }
