@@ -155,7 +155,7 @@ public class AvionDisponible implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.AvionDisponible[ codigoMatricula=" + codigoMatricula + " ]";
+        return this.codigoMatricula+" - "+ this.marca+" "+ this.modelo;
     }
     
 }

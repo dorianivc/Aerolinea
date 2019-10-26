@@ -127,7 +127,9 @@ public class Ruta implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.Ruta[ ruta=" + ruta + " ]";
+       Integer rute= this.ruta;
+       String ruta= rute.toString();
+       return ruta+" - "+this.ciudadSalida.getCiudad()+" - "+this.ciudadLlegada.getCiudad();
     }
     
 }

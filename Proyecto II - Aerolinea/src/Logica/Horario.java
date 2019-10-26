@@ -123,7 +123,15 @@ public class Horario implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.Horario[ horario=" + horario + " ]";
+        String salida= this.horario+" - "+ this.getDiaDeLaSemana().charAt(0)+this.getDiaDeLaSemana().charAt(1);
+        Integer hora= this.salida.getHours();
+        System.out.println(hora);
+        Integer hora2=this.llegada.getHours();
+        System.out.println(hora2);
+        hora2-=18;
+        hora-=18;
+        String salida2= " S:"+ hora.toString()+"-L:"+ hora2.toString();
+        return salida+salida2;
     }
     
 }
