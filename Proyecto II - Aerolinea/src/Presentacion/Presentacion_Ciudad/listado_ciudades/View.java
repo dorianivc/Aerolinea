@@ -5,11 +5,17 @@
  */
 package Presentacion.Presentacion_Ciudad.listado_ciudades;
 
+import Logica.Ciudad;
+import Logica.Pais;
+import Presentacion.Presentacion_Pais.listado_paises.PaisTableModel;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Monica
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form View
@@ -28,8 +34,8 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        Tablaciudades = new javax.swing.JTable();
+        nombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jButtonBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -41,7 +47,7 @@ public class View extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTADO DE CIUDADES");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tablaciudades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -52,7 +58,7 @@ public class View extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tablaciudades);
 
         jLabel1.setText("Ciudades");
 
@@ -73,8 +79,18 @@ public class View extends javax.swing.JFrame {
         });
 
         jButtonEliminar.setText("ELIMINAR");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
 
         jButtonModificar.setText("MODIFICAR");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
         jButtonEscoger.setText("Escoger");
 
@@ -88,7 +104,7 @@ public class View extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addComponent(jLabel2)
                         .addGap(46, 46, 46)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonBuscar))
                     .addGroup(layout.createSequentialGroup()
@@ -115,7 +131,7 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBuscar)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
@@ -133,7 +149,7 @@ public class View extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
-        // TODO add your handling code here:
+           controller.buscar(nombre.getText());        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
@@ -141,6 +157,19 @@ public class View extends javax.swing.JFrame {
        ventana.setLocationRelativeTo(null);
        ventana.setVisible(true);
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+         int row = this.Tablaciudades.getSelectedRow();
+        controller.eliminar(row);
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+           int row = this.Tablaciudades.getSelectedRow();
+        Presentacion.Presentacion_Ciudad.Modificar.Model modell = new Presentacion.Presentacion_Ciudad.Modificar.Model(this.getValueat(row));
+        Presentacion.Presentacion_Ciudad.Modificar.View view = new Presentacion.Presentacion_Ciudad.Modificar.View();
+        Presentacion.Presentacion_Ciudad.Modificar.Controller controllerr = new Presentacion.Presentacion_Ciudad.Modificar.Controller(modell,view);
+        view.setVisible(true);
+    }//GEN-LAST:event_jButtonModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,8 +205,38 @@ public class View extends javax.swing.JFrame {
             }
         });
     }
+     @Override
+    public void update(Observable o, Object arg) {
+        this.Tablaciudades.setRowHeight(40);
+        this.Tablaciudades.setModel(new CiudaTableModel(model.getCiudades()));
+    }
 
+    Presentacion.Presentacion_Ciudad.listado_ciudades.Model model;
+    Presentacion.Presentacion_Ciudad.listado_ciudades.Controller controller;
+
+    public Presentacion.Presentacion_Ciudad.listado_ciudades.Model getModel() {
+        return model;
+    }
+
+    public void setModel(Presentacion.Presentacion_Ciudad.listado_ciudades.Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Presentacion.Presentacion_Ciudad.listado_ciudades.Controller getController() {
+       return controller;
+    }
+
+    public void setController(Presentacion.Presentacion_Ciudad.listado_ciudades.Controller controller) {
+       this.controller = controller;
+    }
+    
+     public Ciudad getValueat(int row){
+        return model.getCiudades().get(row);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tablaciudades;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
@@ -186,7 +245,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

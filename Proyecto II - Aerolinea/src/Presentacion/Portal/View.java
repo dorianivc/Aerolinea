@@ -152,20 +152,26 @@ public class View extends javax.swing.JFrame {
 
     private void jMenuItemListadoPaisesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoPaisesActionPerformed
         Presentacion.Presentacion_Pais.listado_paises.View listadoPaises= new Presentacion.Presentacion_Pais.listado_paises.View();
+        Presentacion.Presentacion_Pais.listado_paises.Model ModelPaises = new Presentacion.Presentacion_Pais.listado_paises.Model();
+        Presentacion.Presentacion_Pais.listado_paises.Controller PaisController = new Presentacion.Presentacion_Pais.listado_paises.Controller(ModelPaises,listadoPaises);        
         listadoPaises.setLocationRelativeTo(null);
         listadoPaises.setVisible(true);
     }//GEN-LAST:event_jMenuItemListadoPaisesActionPerformed
 
     private void jMenuItemListadoCuidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoCuidadesActionPerformed
         Presentacion.Presentacion_Ciudad.listado_ciudades.View listadoCiudades= new Presentacion.Presentacion_Ciudad.listado_ciudades.View();
+        Presentacion.Presentacion_Ciudad.listado_ciudades.Model ModelCiudad = new Presentacion.Presentacion_Ciudad.listado_ciudades.Model();
+        Presentacion.Presentacion_Ciudad.listado_ciudades.Controller ciudadController = new Presentacion.Presentacion_Ciudad.listado_ciudades.Controller(ModelCiudad,listadoCiudades);
         listadoCiudades.setLocationRelativeTo(null);
         listadoCiudades.setVisible(true);
     }//GEN-LAST:event_jMenuItemListadoCuidadesActionPerformed
 
     private void jMenuItemListadoRutasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemListadoRutasActionPerformed
-       Presentacion.Presentacion_Ruta.listado_ruta.View ventana= new Presentacion.Presentacion_Ruta.listado_ruta.View();
-       ventana.setLocationRelativeTo(null);
-       ventana.setVisible(true);
+       Presentacion.Presentacion_Ruta.listado_ruta.Model model = new Presentacion.Presentacion_Ruta.listado_ruta.Model();
+       Presentacion.Presentacion_Ruta.listado_ruta.View view= new Presentacion.Presentacion_Ruta.listado_ruta.View();
+       Presentacion.Presentacion_Ruta.listado_ruta.Controller controller = new Presentacion.Presentacion_Ruta.listado_ruta.Controller(model, view);       
+       view.setLocationRelativeTo(null);
+       view.setVisible(true);
        
     }//GEN-LAST:event_jMenuItemListadoRutasActionPerformed
 
@@ -178,7 +184,7 @@ public class View extends javax.swing.JFrame {
     private void MetodosDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodosDePagoActionPerformed
         Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model listadoModel = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model();
         Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.View listadoView = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.View();
-        //Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller listadoController = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller(listadoModel,listadoView);
+        Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller listadoController = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller(listadoModel,listadoView);
         listadoView.setLocationRelativeTo(null);
         listadoView.setVisible(true);        
     }//GEN-LAST:event_MetodosDePagoActionPerformed

@@ -5,11 +5,15 @@
  */
 package Presentacion.Presentacion_Horario.listado_horarios;
 
+import Logica.Horario;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Gabriel
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -32,7 +36,7 @@ public class View extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         Buscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaHorarios = new javax.swing.JTable();
         Agregar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
@@ -48,7 +52,7 @@ public class View extends javax.swing.JFrame {
 
         Buscar.setText("Buscar");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,7 +63,7 @@ public class View extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaHorarios);
 
         Agregar.setText("AGREGAR");
 
@@ -163,7 +167,36 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablaHorarios;
     // End of variables declaration//GEN-END:variables
+
+    Model model;
+    Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    
+    public Horario getValueat(int row){
+        return model.getHorarios().get(row);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

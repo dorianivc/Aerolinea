@@ -5,6 +5,14 @@
  */
 package Presentacion.Presentacion_Avion.Agregar_Avion;
 
+import Logica.AvionDisponible;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author sergi
@@ -28,46 +36,41 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel5 = new javax.swing.JLabel();
-        Correo = new javax.swing.JTextField();
+        Filas = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        Nacimiento = new javax.swing.JTextField();
-        Direccion = new javax.swing.JTextField();
+        Columnas = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        Agregar = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        Modificar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Codigo = new javax.swing.JTextField();
-        Eliminar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        Contraseña = new javax.swing.JTextField();
+        Anio = new javax.swing.JTextField();
         Regresar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        Nombre = new javax.swing.JTextField();
+        Modelo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        Apellidos = new javax.swing.JTextField();
+        Marca = new javax.swing.JTextField();
+        cantPasajeros = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel5.setText("Marca");
 
         jLabel6.setText("Filas");
 
-        Direccion.addActionListener(new java.awt.event.ActionListener() {
+        jLabel10.setText("Columnas");
+
+        Agregar.setText("Agregar");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DireccionActionPerformed(evt);
+                AgregarActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Columnas");
-
-        jButton1.setText("Agregar");
-
         jLabel11.setText("Pasajeros");
 
-        Modificar.setText("Modificar");
-
-        jLabel1.setText("Agregar Avion");
+        jLabel1.setText("Agregar/Modificar Avion");
 
         Codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,11 +78,9 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        Eliminar.setText("Eliminar");
-
         jLabel2.setText("Codigo Matricula");
 
-        Regresar.setText("Regresar");
+        Regresar.setText("Cancelar");
         Regresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegresarActionPerformed(evt);
@@ -89,6 +90,8 @@ public class View extends javax.swing.JFrame {
         jLabel3.setText("Modelo");
 
         jLabel4.setText("Año");
+
+        cantPasajeros.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,23 +114,19 @@ public class View extends javax.swing.JFrame {
                             .addComponent(jLabel11))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Contraseña)
+                            .addComponent(Anio, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                             .addComponent(Codigo)
-                            .addComponent(Nombre)
-                            .addComponent(Apellidos)
-                            .addComponent(Correo)
-                            .addComponent(Nacimiento)
-                            .addComponent(Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(Modelo)
+                            .addComponent(Marca)
+                            .addComponent(Filas)
+                            .addComponent(Columnas)
+                            .addComponent(cantPasajeros)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(Modificar)
-                        .addGap(14, 14, 14)
-                        .addComponent(Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(25, 25, 25)
+                        .addComponent(Agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
                         .addComponent(Regresar)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,46 +140,66 @@ public class View extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(Contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Anio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Modelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(Apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(Correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Filas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(Nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Columnas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(Direccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantPasajeros))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(Modificar)
-                    .addComponent(Regresar)
-                    .addComponent(Eliminar))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(Agregar)
+                    .addComponent(Regresar))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void DireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DireccionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DireccionActionPerformed
-
     private void CodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CodigoActionPerformed
+
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+        String matricula=this.Codigo.getText();
+        int anio=Integer.parseInt(this.Anio.getText());
+        Date fecha = new Date();
+        fecha.setYear(anio-1900);
+        String modelo=this.Modelo.getText();
+        String marca=this.Marca.getText();
+        int filas=Integer.parseInt(this.Filas.getText()); 
+        int columnas=Integer.parseInt(this.Columnas.getText());
+        
+        if(matricula.length()<1 || anio<1 || modelo.length()<1 || marca.length()<1 || filas<1 || columnas<1){
+            JOptionPane.showMessageDialog(null, "Datos Ingresados son Invalidos", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
+        }else{
+            AvionDisponible avion=new AvionDisponible(matricula,fecha,modelo,marca,filas,columnas,filas*columnas);
+            
+            
+//            avion.setAno(fecha);
+//            avion.setModelo(modelo);
+//            avion.setMarca(marca);
+//            avion.setFilas(filas);
+//            avion.setColumnas(columnas);
+////            this.cantPasajeros.setText(filas*columnas);
+            this.controller.agregarAvion(avion);
+        }
+    }//GEN-LAST:event_AgregarActionPerformed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
         this.dispose();
@@ -222,17 +241,15 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField Apellidos;
+    private javax.swing.JButton Agregar;
+    private javax.swing.JTextField Anio;
     private javax.swing.JTextField Codigo;
-    private javax.swing.JTextField Contraseña;
-    private javax.swing.JTextField Correo;
-    private javax.swing.JTextField Direccion;
-    private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Modificar;
-    private javax.swing.JTextField Nacimiento;
-    private javax.swing.JTextField Nombre;
+    private javax.swing.JTextField Columnas;
+    private javax.swing.JTextField Filas;
+    private javax.swing.JTextField Marca;
+    private javax.swing.JTextField Modelo;
     private javax.swing.JButton Regresar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel cantPasajeros;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -242,4 +259,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     // End of variables declaration//GEN-END:variables
+    
+    public Controller controller=new Controller();
 }

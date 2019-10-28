@@ -3,39 +3,35 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_TipoDePago.modificar_tipo_pago;
+package Presentacion.Presentacion_Ciudad.Modificar;
 
-import Logica.TipodePago;
+import Logica.Ciudad;
+import Logica.Pais;
 import java.util.Observable;
 import java.util.Observer;
 
-
 /**
  *
- * @author Gabriel
+ * @author sergi
  */
 public class Model extends Observable{
     
-    public TipodePago pago;
-    
-    public TipodePago getPago() {
-        return pago;
+    public Ciudad ciudad;
+
+    public Ciudad getCiudad() {
+        return ciudad;
     }
 
-    public void setPago(TipodePago pago) {
-        this.pago = pago;
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
         this.setChanged();
         this.notifyObservers();
     }
-    
-    
-    public Model(TipodePago pago){
-        this.pago=pago;
-        this.setChanged();
-        this.notifyObservers();
+
+    public Model(Ciudad ciudad) {
+        this.ciudad = ciudad;
     }
     
-     
     
     @Override
     public void addObserver(Observer o){
@@ -44,3 +40,4 @@ public class Model extends Observable{
         this.notifyObservers();   
     }    
 }
+

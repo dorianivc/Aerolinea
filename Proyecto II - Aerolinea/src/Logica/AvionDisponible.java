@@ -64,6 +64,18 @@ public class AvionDisponible implements Serializable {
     public AvionDisponible() {
     }
 
+    public AvionDisponible(String codigoMatricula, Date ano, String modelo, String marca, Integer filas, Integer columnas, Integer cantidadDePasajeros) {
+        this.codigoMatricula = codigoMatricula;
+        this.ano = ano;
+        this.modelo = modelo;
+        this.marca = marca;
+        this.filas = filas;
+        this.columnas = columnas;
+        this.cantidadDePasajeros = cantidadDePasajeros;
+    }
+    
+    
+    
     public AvionDisponible(String codigoMatricula) {
         this.codigoMatricula = codigoMatricula;
     }

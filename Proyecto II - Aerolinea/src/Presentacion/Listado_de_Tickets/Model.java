@@ -9,6 +9,3 @@ package Presentacion.Listado_de_Tickets;
  *
  * @author sergi
  */
-public class Model {
-    
-}

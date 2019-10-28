@@ -47,7 +47,7 @@ public class Controller {
             }
         }
         catch(Exception ex){
-            System.out.println(ex.getMessage());
+            
         }
     }
     

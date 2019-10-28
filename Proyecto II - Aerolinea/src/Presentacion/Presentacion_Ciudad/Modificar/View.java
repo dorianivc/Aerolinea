@@ -3,16 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_TipoDePago.modificar_tipo_pago;
+package Presentacion.Presentacion_Ciudad.Modificar;
 
-import Logica.TipodePago;
 import java.util.Observable;
 import java.util.Observer;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Gabriel
+ * @author sergi
  */
 public class View extends javax.swing.JFrame implements Observer {
 
@@ -32,21 +30,25 @@ public class View extends javax.swing.JFrame implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        descripcion = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         modificar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
-        tipoPago = new javax.swing.JLabel();
+        Codigopais = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        pais = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Modificando tipo de pago");
+        jLabel3.setText("Nombre");
 
-        jLabel2.setText("Tipo de pago: ");
-
-        jLabel3.setText("Descripcion: ");
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
 
         modificar.setText("Modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -62,7 +64,15 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
 
-        tipoPago.setText(" ");
+        Codigopais.setText("-");
+
+        jLabel1.setText("Modificando Ciudad");
+
+        jLabel2.setText("Codigo de Ciudad");
+
+        jLabel4.setText("Pais");
+
+        pais.setText("-");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,7 +86,7 @@ public class View extends javax.swing.JFrame implements Observer {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tipoPago, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(Codigopais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(10, 10, 10)
@@ -85,11 +95,15 @@ public class View extends javax.swing.JFrame implements Observer {
                                         .addComponent(modificar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(cancelar))
-                                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pais, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
-                        .addComponent(jLabel1)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,31 +113,40 @@ public class View extends javax.swing.JFrame implements Observer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tipoPago))
+                    .addComponent(Codigopais))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(pais))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(modificar)
                     .addComponent(cancelar))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
-        tipoPago.setText("");
-        descripcion.setText("");
-        this.dispose();
-    }//GEN-LAST:event_cancelarActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        model.getPago().setDescripcion(descripcion.getText());
-        controller.ModificarTipoDePago(model.getPago());
+        model.getCiudad().setNombre(nombre.getText());
+        controller.ModificarCiudad(model.getCiudad());
     }//GEN-LAST:event_modificarActionPerformed
+
+    private void cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarActionPerformed
+        Codigopais.setText("");
+        nombre.setText("");
+        this.pais.setText("");
+        this.dispose();
+    }//GEN-LAST:event_cancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,19 +182,10 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelar;
-    private javax.swing.JTextField descripcion;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton modificar;
-    private javax.swing.JLabel tipoPago;
-    // End of variables declaration//GEN-END:variables
-
-    Model model;
-    Controller controller;
+    
+    
+  Model model;
+  Controller controller;
 
     public Model getModel() {
         return model;
@@ -182,19 +196,31 @@ public class View extends javax.swing.JFrame implements Observer {
         model.addObserver(this);
     }
 
-    public Controller getController() {
+    public Controller  getController() {
         return controller;
     }
 
-    public void setController(Controller controller) {
+    public void setController(Controller  controller) {
         this.controller = controller;
     }
     
     @Override
     public void update(Observable o, Object arg) {
-        this.tipoPago.setText(model.pago.getTipoDePago());
-        this.descripcion.setText(model.pago.getDescripcion());
-        
-        
+        this.Codigopais.setText(model.ciudad.getCiudad());
+        this.nombre.setText(model.ciudad.getNombre());
+        this.pais.setText(model.ciudad.getPais().getNombre());
     }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Codigopais;
+    private javax.swing.JButton cancelar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton modificar;
+    private javax.swing.JTextField nombre;
+    private javax.swing.JLabel pais;
+    // End of variables declaration//GEN-END:variables
 }

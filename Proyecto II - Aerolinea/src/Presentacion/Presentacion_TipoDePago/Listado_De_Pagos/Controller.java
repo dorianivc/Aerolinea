@@ -37,30 +37,6 @@ public class Controller {
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
     }
-
-    public Model getModel() {
-        return model;
-    }
-
-    public void setModel(Model model) {
-        this.model = model;
-    }
-
-    public View getView() {
-        return view;
-    }
-
-    public void setView(View view) {
-        this.view = view;
-    }
-
-    public DBQuerys getDb() {
-        return db;
-    }
-
-    public void setDb(DBQuerys db) {
-        this.db = db;
-    }
     
     public void eliminar(int row){
         try{

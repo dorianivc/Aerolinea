@@ -5,12 +5,16 @@
  */
 package Presentacion.Presentacion_Pais.listado_paises;
 
+import Logica.Pais;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author Monica
  */
-public class View extends javax.swing.JFrame {
-
+public class View extends javax.swing.JFrame implements Observer{
+ public static Presentacion.Presentacion_Pais.agregar_pais.Controller PaisController;
     /**
      * Creates new form View
      */
@@ -28,19 +32,20 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        JTable = new javax.swing.JTable();
-        JTextFieldBuscador = new javax.swing.JTextField();
+        Tablapaises = new javax.swing.JTable();
+        nombre = new javax.swing.JTextField();
         jLabelNombre_Pais = new javax.swing.JLabel();
         JButtonBuscar = new javax.swing.JButton();
         jButtonAgregar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonEscoger = new javax.swing.JButton();
         jLabel_Paises = new javax.swing.JLabel();
+        jButtonModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTADO DE PAISES");
 
-        JTable.setModel(new javax.swing.table.DefaultTableModel(
+        Tablapaises.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,30 +56,52 @@ public class View extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(JTable);
+        Tablapaises.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TablapaisesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(Tablapaises);
 
-        JTextFieldBuscador.addActionListener(new java.awt.event.ActionListener() {
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextFieldBuscadorActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
         jLabelNombre_Pais.setText("Nombre del Pais: ");
 
         JButtonBuscar.setText("Buscar");
+        JButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonBuscarActionPerformed(evt);
+            }
+        });
 
-        jButtonAgregar.setText("AGREGAR ");
+        jButtonAgregar.setText("Agregar");
         jButtonAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarActionPerformed(evt);
             }
         });
 
-        jButtonEliminar.setText("ELIMINAR");
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
 
         jButtonEscoger.setText("Escoger");
 
         jLabel_Paises.setText("Paises");
+
+        jButtonModificar.setText("Modificar");
+        jButtonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +114,9 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jButtonAgregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonEliminar)
-                        .addGap(119, 119, 119)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonModificar)
+                        .addGap(28, 28, 28)
                         .addComponent(jButtonEscoger)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -98,7 +127,7 @@ public class View extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelNombre_Pais)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(29, 29, 29)
                                 .addComponent(JButtonBuscar)))
                         .addGap(40, 40, 40))))
@@ -114,7 +143,7 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jLabel_Paises)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombre_Pais)
                     .addComponent(JButtonBuscar))
                 .addGap(18, 18, 18)
@@ -123,22 +152,46 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonEscoger)
-                    .addComponent(jButtonEliminar))
+                    .addComponent(jButtonEliminar)
+                    .addComponent(jButtonModificar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldBuscadorActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTextFieldBuscadorActionPerformed
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
         Presentacion.Presentacion_Pais.agregar_pais.View agregarPais= new Presentacion.Presentacion_Pais.agregar_pais.View();
         agregarPais.setVisible(true);
         
     }//GEN-LAST:event_jButtonAgregarActionPerformed
+
+    private void JButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonBuscarActionPerformed
+          controller.buscar(nombre.getText());
+    }//GEN-LAST:event_JButtonBuscarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+        int row = this.Tablapaises.getSelectedRow();
+        controller.eliminar(row);
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModificarActionPerformed
+        // TODO add your handling code here:
+        int row = this.Tablapaises.getSelectedRow();
+        Presentacion.Presentacion_Pais.Modificar.Model model = new Presentacion.Presentacion_Pais.Modificar.Model(this.getValueat(row));
+        Presentacion.Presentacion_Pais.Modificar.View view = new Presentacion.Presentacion_Pais.Modificar.View();
+        Presentacion.Presentacion_Pais.Modificar.Controller controller = new Presentacion.Presentacion_Pais.Modificar.Controller(model,view);
+        view.setVisible(true);
+      
+    }//GEN-LAST:event_jButtonModificarActionPerformed
+
+    private void TablapaisesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TablapaisesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TablapaisesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -175,15 +228,47 @@ public class View extends javax.swing.JFrame {
         });
     }
 
+      @Override
+    public void update(Observable o, Object arg) {
+        this.Tablapaises.setRowHeight(40);
+        this.Tablapaises.setModel(new PaisTableModel(model.getPaises()));
+    }
+
+    Model model;
+    Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    
+     public Pais getValueat(int row){
+        return model.getPaises().get(row);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonBuscar;
-    private javax.swing.JTable JTable;
-    private javax.swing.JTextField JTextFieldBuscador;
+    private javax.swing.JTable Tablapaises;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonEscoger;
+    private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

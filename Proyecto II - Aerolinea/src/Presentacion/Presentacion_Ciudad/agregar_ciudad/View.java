@@ -8,13 +8,15 @@ package Presentacion.Presentacion_Ciudad.agregar_ciudad;
 import Logica.Ciudad;
 import Logica.Pais;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Monica
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame  implements Observer {
 
     /**
      * Creates new form eliminar_pais
@@ -225,4 +227,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldNombre;
     // End of variables declaration//GEN-END:variables
     public Controller controller= new Controller();
+
+    @Override
+    public void update(Observable o, Object arg) {
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

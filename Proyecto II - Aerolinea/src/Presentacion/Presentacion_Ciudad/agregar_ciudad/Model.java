@@ -10,10 +10,11 @@ import Logica.Ciudad;
 import Logica.Pais;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Observable;
 import javax.swing.JOptionPane;
 
 
-public class Model {
+public class Model extends Observable{
     
 public DBQuerys db;
 
@@ -40,7 +41,7 @@ void agregarCiudad(Ciudad ciudad){
             "Ciudad ya existe"
                
         };
-          int option=JOptionPane.showConfirmDialog(null, message, "Datos Existentes",JOptionPane.PLAIN_MESSAGE);
+          int option=JOptionPane.showConfirmDialog(null, message, "Datos Existente",JOptionPane.PLAIN_MESSAGE);
         if(option==JOptionPane.OK_OPTION){
             try{
             }catch(NumberFormatException e){
@@ -49,4 +50,18 @@ void agregarCiudad(Ciudad ciudad){
     }
 }
 }
+
+    static Model the_instance;
+    public static Model instance(){
+        if (the_instance==null){
+            the_instance = new Model();
+        }
+        return the_instance;
+    }
+    
+       public List<Ciudad> buscar(String nombre){
+        List<Ciudad> result = db.CiudadSearch(nombre);
+         return result;
+    }
+
 }
