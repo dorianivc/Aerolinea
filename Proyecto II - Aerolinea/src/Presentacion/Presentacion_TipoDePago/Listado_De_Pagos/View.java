@@ -5,11 +5,15 @@
  */
 package Presentacion.Presentacion_TipoDePago.Listado_De_Pagos;
 
+import Logica.TipodePago;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author sergi
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -27,45 +31,47 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JTextFieldBuscador = new javax.swing.JTextField();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
+        tipoDePago = new javax.swing.JTextField();
         jLabelNombre_Pais = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
-        Agregar = new javax.swing.JButton();
-        Eliminar = new javax.swing.JButton();
         Escoger = new javax.swing.JButton();
-        Modificar = new javax.swing.JButton();
         jLabel_Paises = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        TablePagos = new javax.swing.JTable();
+        tablaPagos = new javax.swing.JTable();
+        Eliminar = new javax.swing.JButton();
+        Modificar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
-        JTextFieldBuscador.addActionListener(new java.awt.event.ActionListener() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        tipoDePago.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextFieldBuscadorActionPerformed(evt);
+                tipoDePagoActionPerformed(evt);
             }
         });
 
-        jLabelNombre_Pais.setText("Codigo-Transaccion");
+        jLabelNombre_Pais.setText("Tipo de pago:");
 
         Buscar.setText("Buscar");
-
-        Agregar.setText("Agregar");
-        Agregar.addActionListener(new java.awt.event.ActionListener() {
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarActionPerformed(evt);
+                BuscarActionPerformed(evt);
             }
         });
 
-        Eliminar.setText("Eliminar");
+        Escoger.setText("Agregar");
+        Escoger.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EscogerActionPerformed(evt);
+            }
+        });
 
-        Escoger.setText("Escoger");
+        jLabel_Paises.setText("Metodos de pago");
 
-        Modificar.setText("Modificar");
-
-        jLabel_Paises.setText("Pagos");
-
-        TablePagos.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPagos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -76,40 +82,50 @@ public class View extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(TablePagos);
+        jScrollPane1.setViewportView(tablaPagos);
+
+        Eliminar.setText("Eliminar");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
+
+        Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelNombre_Pais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(Buscar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Agregar)
-                                .addGap(18, 18, 18)
-                                .addComponent(Eliminar)
-                                .addGap(26, 26, 26)
-                                .addComponent(Modificar)
-                                .addGap(28, 28, 28)
-                                .addComponent(Escoger)))))
-                .addGap(40, 40, 40))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(176, 176, 176)
                 .addComponent(jLabel_Paises)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(Escoger)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Eliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Modificar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jLabelNombre_Pais)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tipoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(29, 29, 29)
+                            .addComponent(Buscar))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(11, 11, 11))))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,31 +134,47 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jLabel_Paises)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tipoDePago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombre_Pais)
                     .addComponent(Buscar))
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Escoger)
-                    .addComponent(Modificar)
                     .addComponent(Eliminar)
-                    .addComponent(Agregar))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(Modificar))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldBuscadorActionPerformed
+    private void tipoDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoDePagoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTextFieldBuscadorActionPerformed
+    }//GEN-LAST:event_tipoDePagoActionPerformed
 
-    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        Presentacion.Presentacion_Pais.agregar_pais.View agregarPais= new Presentacion.Presentacion_Pais.agregar_pais.View();
-        agregarPais.setVisible(true);
-    }//GEN-LAST:event_AgregarActionPerformed
+    private void EscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EscogerActionPerformed
+        Presentacion.Presentacion_TipoDePago.agregar_tipo_pago.View ventana = new Presentacion.Presentacion_TipoDePago.agregar_tipo_pago.View();
+        ventana.setVisible(true);
+    }//GEN-LAST:event_EscogerActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        int row = this.tablaPagos.getSelectedRow();
+        controller.eliminar(row);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        int row = this.tablaPagos.getSelectedRow();
+        Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.Model model = new Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.Model(this.getValueat(row));
+        Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.View view = new Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.View();
+        Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.Controller controller = new Presentacion.Presentacion_TipoDePago.modificar_tipo_pago.Controller(model,view);
+        view.setVisible(true);
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        controller.buscar(this.tipoDePago.getText());
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,15 +212,45 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Escoger;
-    private javax.swing.JTextField JTextFieldBuscador;
     private javax.swing.JButton Modificar;
-    private javax.swing.JTable TablePagos;
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaPagos;
+    private javax.swing.JTextField tipoDePago;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.tablaPagos.setRowHeight(40);
+        this.tablaPagos.setModel(new tipoPagoTableModel(model.getTipos()));
+    }
+    
+    Model model;
+    Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    
+    public TipodePago getValueat(int row){
+        return model.getTipos().get(row);
+    }
 }

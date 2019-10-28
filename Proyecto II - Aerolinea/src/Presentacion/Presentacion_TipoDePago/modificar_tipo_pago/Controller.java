@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_TipoDePago.agregar_tipo_pago;
+package Presentacion.Presentacion_TipoDePago.modificar_tipo_pago;
 
 import Datos.TipodePagoJpaController;
 import Logica.TipodePago;
@@ -15,22 +15,31 @@ import javax.swing.JOptionPane;
  *
  * @author Gabriel
  */
-public class Model {
+public class Controller {
+    public Model model;
+    public View view;
     public Datos.DBQuerys db;
     
-    public Model(){
-        db = new Datos.DBQuerys();
-    }
     
-    void agregarMetodoDePago(TipodePago tipoPago){
-        Icon icon= new ImageIcon(getClass().getResource("check_verde.png"));
+    public Controller(Model model,View view){    
+        this.model=model;
+        this.view=view;
+        db = new Datos.DBQuerys();
+        view.setModel(model);
+        view.setController(this);
+    }    
+    
+    public void ModificarTipoDePago(TipodePago tipoPago){
         try{
             TipodePagoJpaController tipoPagoDao = new TipodePagoJpaController(db.db.EntityManager);
-            tipoPagoDao.create(tipoPago);
-            JOptionPane.showMessageDialog(null, "Tipo de pago agregado con éxito", "Agregando tipo de pago", JOptionPane.PLAIN_MESSAGE, icon);
+            tipoPagoDao.edit(tipoPago);
+            JOptionPane.showMessageDialog(null, "Tipo de pago modificado con éxito", "Modificando el tipo de pago", JOptionPane.PLAIN_MESSAGE,null);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
-    }
+    } 
     
+    public void show(){
+        view.setVisible(true);
+    }
 }

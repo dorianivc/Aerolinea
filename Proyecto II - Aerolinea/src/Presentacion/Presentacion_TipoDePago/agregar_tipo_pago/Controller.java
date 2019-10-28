@@ -5,10 +5,21 @@
  */
 package Presentacion.Presentacion_TipoDePago.agregar_tipo_pago;
 
+import Logica.TipodePago;
+
 /**
  *
  * @author Gabriel
  */
 public class Controller {
+    public Model model;
+    
+    public Controller(){
+        model = new Model();
+    }    
+    
+    public void agregarTipoDePago(TipodePago tipoPago){
+        model.agregarMetodoDePago(tipoPago);
+    }
     
 }

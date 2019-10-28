@@ -10,5 +10,25 @@ package Presentacion.Presentacion_Avion.Listado_aviones_disponibles;
  * @author sergi
  */
 public class Controller {
-    
+//    Model model;
+//    View view;
+//
+//    public Controller(Model model, View view) {
+//        this.model = model;
+//        this.view = view;
+//        view.setModel(model);
+//        view.setController(this);
+//    }
+//    
+//    public void buscar(String nombre){
+//        
+//    }
+//    
+//    public void show(){
+//        view.setVisible(true);
+//    }
+//    
+//    public void editar(int row){
+//        
+//    }
 }

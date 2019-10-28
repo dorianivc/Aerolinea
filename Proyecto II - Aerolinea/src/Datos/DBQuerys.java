@@ -7,6 +7,7 @@ package Datos;
 
 import Logica.Ciudad;
 import Logica.Pais;
+import Logica.TipodePago;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -136,6 +137,52 @@ public class DBQuerys {
         if (count==0){
             throw new Exception("Pais ya existe");
         }
+    }
+  
+    public List<Pais> PaisSearch(String nombre){
+        Statement statement = null;
+         Connection conn=db.conexion;
+        List<Pais> resultado = new ArrayList<Pais>();
+        try {
+              statement = conn.createStatement();
+            String sql="select * from " +
+            "Aerolinea.Pais p  where pais like '%%%s%%'";
+            sql=String.format(sql,nombre);
+            ResultSet rs =  statement.executeQuery(sql);
+            while (rs.next()) {
+                
+                String llave = rs.getString("pais");
+                String nombree= rs.getString("nombre");
+              
+               Pais pais= new Pais(llave);
+               pais.setNombre(nombree);
+               resultado.add(pais);
+            }
+        } catch (SQLException ex) { }
+        return resultado;
+    }
+    
+    public List<TipodePago> tipoDePagoSearch(String tipo){
+        Statement statement = null;
+        Connection conn=db.conexion;
+        List<TipodePago> resultado = new ArrayList<>();
+        try {
+              statement = conn.createStatement();
+            String sql="select * from " +
+            "Aerolinea.Tipo_de_Pago p  where tipo_de_pago like '%%%s%%'";
+            sql=String.format(sql,tipo);
+            ResultSet rs =  statement.executeQuery(sql);
+            while (rs.next()) {
+                
+                String llave = rs.getString("tipo_de_pago");
+                String descripcion= rs.getString("descripcion");
+              
+               TipodePago tipoPago=new TipodePago(llave);
+               tipoPago.setDescripcion(descripcion);
+               resultado.add(tipoPago);
+            }
+        } catch (SQLException ex) { }
+        return resultado;
     }
     
 }

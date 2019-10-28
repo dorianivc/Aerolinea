@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_Ruta.listado_ruta;
+package Presentacion.Presentacion_Ruta.modificar_ruta;
 
+import Datos.CiudadJpaController;
+import Datos.DBQuerys;
+import Logica.Ciudad;
 import Logica.Ruta;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,37 +16,27 @@ import java.util.Observer;
 
 /**
  *
- * @author Monica
+ * @author Gabriel
  */
 public class Model extends Observable {
-    List<Ruta> rutas;
-    
-    public Model(List<Ruta> rutas){
-        this.rutas = rutas;
+    public Ruta ruta;
+
+    public Model(Ruta ruta) {
+        this.ruta = ruta;    
     }
     
-    public Model(){
-        rutas = new ArrayList<>();
+    public Ruta getRuta() {
+        return ruta;
     }
 
-    public List<Ruta> getRutas() {
-        return rutas;
-    }
-
-    public void setRutas(List<Ruta> rutas) {
-        this.rutas = rutas;
-        this.setChanged();
-        this.notifyObservers();
+    public void setRuta(Ruta ruta) {
+        this.ruta = ruta;
     }
     
     @Override
     public void addObserver(Observer o){
         super.addObserver(o);
         this.setChanged();
-        this.notifyObservers();
-    }
-    
-    
-    
-    
+        this.notifyObservers();   
+    } 
 }

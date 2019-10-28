@@ -38,6 +38,8 @@ public class View extends javax.swing.JFrame {
         jMenuItemListadoPaises = new javax.swing.JMenuItem();
         jMenuItemListadoCuidades = new javax.swing.JMenuItem();
         jMenuItemListadoRutas = new javax.swing.JMenuItem();
+        ListadoVuelos = new javax.swing.JMenuItem();
+        MetodosDePago = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -96,6 +98,24 @@ public class View extends javax.swing.JFrame {
         });
         jMenuVentanasListados.add(jMenuItemListadoRutas);
 
+        ListadoVuelos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        ListadoVuelos.setText("Flota de Aviones");
+        ListadoVuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListadoVuelosActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(ListadoVuelos);
+
+        MetodosDePago.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
+        MetodosDePago.setText("Metodos de Pago");
+        MetodosDePago.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MetodosDePagoActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(MetodosDePago);
+
         jMenuBar1.add(jMenuVentanasListados);
 
         jMenu2.setText("Ayuda");
@@ -149,6 +169,20 @@ public class View extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItemListadoRutasActionPerformed
 
+    private void ListadoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoVuelosActionPerformed
+        Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View ventana = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View();
+       ventana.setLocationRelativeTo(null);
+       ventana.setVisible(true);        
+    }//GEN-LAST:event_ListadoVuelosActionPerformed
+
+    private void MetodosDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodosDePagoActionPerformed
+        Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model listadoModel = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model();
+        Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.View listadoView = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.View();
+        //Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller listadoController = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Controller(listadoModel,listadoView);
+        listadoView.setLocationRelativeTo(null);
+        listadoView.setVisible(true);        
+    }//GEN-LAST:event_MetodosDePagoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -185,6 +219,8 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem ListadoVuelos;
+    private javax.swing.JMenuItem MetodosDePago;
     private javax.swing.JLabel jLabelVuelos;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
