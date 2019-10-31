@@ -46,20 +46,24 @@ public class View extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
         jLabelTitulo = new javax.swing.JLabel();
         jLabelVuelo = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         JComboBoxAvion = new javax.swing.JComboBox<>();
         jLabelAvion = new javax.swing.JLabel();
         Codigo = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
         Regresar = new javax.swing.JButton();
         jLabelHorario = new javax.swing.JLabel();
         jComboBoxHorario = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jComboBoxRuta = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1.setViewportView(jTree1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabelTitulo.setText("Agregar Vuelo");
 
@@ -67,10 +71,10 @@ public class View extends javax.swing.JFrame {
 
         jLabelAvion.setText("Avion:");
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                agregarActionPerformed(evt);
             }
         });
 
@@ -98,26 +102,27 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelAvion)
-                            .addComponent(jLabelVuelo)
-                            .addComponent(jLabel1))
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBoxHorario, 0, 126, Short.MAX_VALUE)
-                            .addComponent(Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JComboBoxAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBoxRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 82, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(Regresar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelHorario))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Regresar)
+                                .addGap(120, 120, 120)
+                                .addComponent(agregar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabelAvion)
+                                    .addComponent(jLabelVuelo)
+                                    .addComponent(jLabel1))
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jComboBoxHorario, 0, 126, Short.MAX_VALUE)
+                                    .addComponent(Codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(JComboBoxAvion, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxRuta, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 82, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,16 +149,16 @@ public class View extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jComboBoxRuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Regresar)
-                    .addComponent(jButton1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(agregar)
+                    .addComponent(Regresar))
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
       String codigo= this.Codigo.getText();
       if(codigo.length()<1){
           JOptionPane.showMessageDialog(null, "Error---> Ha dejado las siguientes casillas vacias: Codigo de Vuelo ", "Error al agregar Vuelo",JOptionPane.PLAIN_MESSAGE);
@@ -173,7 +178,7 @@ public class View extends javax.swing.JFrame {
           }
           
     }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_agregarActionPerformed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
     this.dispose();
@@ -218,7 +223,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JTextField Codigo;
     private javax.swing.JComboBox<AvionDisponible> JComboBoxAvion;
     private javax.swing.JButton Regresar;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton agregar;
     private javax.swing.JComboBox<Horario> jComboBoxHorario;
     private javax.swing.JComboBox<Ruta> jComboBoxRuta;
     private javax.swing.JLabel jLabel1;
@@ -227,6 +232,8 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelHorario;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelVuelo;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
     Controller controller = new Controller();
 }

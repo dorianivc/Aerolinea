@@ -5,21 +5,58 @@
  */
 package Presentacion.Registrar_usuario;
 
-import Datos.DBQuerys;
-import Datos.UsuarioJpaController;
-import Logica.Usuario;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author sergi
  */
+import Datos.DBQuerys;
+import Datos.UsuarioJpaController;
+import Logica.Usuario;
+
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+
+
 public class Model {
-    public DBQuerys db;
     
-    public Model(){
-        db=new DBQuerys();
+public DBQuerys db;
+
+public Model(){
+    this.db= new DBQuerys();
+}
+
+
+void agregarUsuario(Usuario usuario){
+     UsuarioJpaController usuarioDao=new UsuarioJpaController(db.db.EntityManager);
+    try{
+          if (usuario.getNombre() == " " || usuario.getApellidos() == " " || usuario.getCelular() ==" " || usuario.getContrasena() ==" "
+             || usuario.getCorreoElectronico() ==" " || usuario.getDireccion() ==" " || usuario.getFechaNacimiento() == null||
+                usuario.getTelefono() == " " || usuario.getUsuario() ==" "){
+              int x = 999;
+              int x2;
+        throw new Exception();
+        
+        }
+          else usuarioDao.create(usuario);
+    }catch(Exception es){
+        JOptionPane.showMessageDialog(null, "Usuario ya registrado");
+     
+    }
+}
+
+ static Model the_instance;
+    public static Model instance(){
+        if (the_instance==null){
+            the_instance = new Model();
+        }
+        return the_instance;
     }
     
-   
+       public List<Usuario> buscar(String nombre){
+        List<Usuario> result = db.UsuarioSearch(nombre);
+         return result;
+    }
+
 }
+

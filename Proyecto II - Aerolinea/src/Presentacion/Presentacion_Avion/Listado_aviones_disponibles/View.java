@@ -5,11 +5,17 @@
  */
 package Presentacion.Presentacion_Avion.Listado_aviones_disponibles;
 
+import Logica.AvionDisponible;
+import Logica.Ciudad;
+import Presentacion.Presentacion_Ciudad.listado_ciudades.CiudaTableModel;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author sergi
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -29,7 +35,7 @@ public class View extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         TableAviones = new javax.swing.JTable();
-        JTextFieldBuscador = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabelNombre_Pais = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
         Agregar = new javax.swing.JButton();
@@ -52,9 +58,9 @@ public class View extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(TableAviones);
 
-        JTextFieldBuscador.addActionListener(new java.awt.event.ActionListener() {
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JTextFieldBuscadorActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
@@ -95,29 +101,31 @@ public class View extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addComponent(jLabelNombre_Pais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel_Paises)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Buscar))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(Agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Eliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Modificar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabelNombre_Pais)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(53, 53, 53)
+                                        .addComponent(jLabel_Paises))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Buscar))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(Agregar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Eliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(Modificar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,25 +134,25 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jLabel_Paises)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombre_Pais)
                     .addComponent(Buscar))
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Agregar)
                     .addComponent(Eliminar)
-                    .addComponent(Modificar)
-                    .addComponent(Agregar))
-                .addContainerGap(92, Short.MAX_VALUE))
+                    .addComponent(Modificar))
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JTextFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JTextFieldBuscadorActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_JTextFieldBuscadorActionPerformed
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         Presentacion.Presentacion_Avion.Agregar_Avion.View ventana = new Presentacion.Presentacion_Avion.Agregar_Avion.View();
@@ -153,14 +161,22 @@ public class View extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         // TODO add your handling code here:
+             int row = this.TableAviones.getSelectedRow();
+        Presentacion.Presentacion_Avion.modificar.Model modell = new Presentacion.Presentacion_Avion.modificar.Model(this.getValueat(row));
+        Presentacion.Presentacion_Avion.modificar.View view = new Presentacion.Presentacion_Avion.modificar.View();
+        Presentacion.Presentacion_Avion.modificar.Controller controllerr = new Presentacion.Presentacion_Avion.modificar.Controller(modell,view);
+        view.setVisible(true);
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
         // TODO add your handling code here:
+            controller.buscar(nombre.getText());  
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
+          int row = this.TableAviones.getSelectedRow();
+         controller.eliminar(row);
     }//GEN-LAST:event_EliminarActionPerformed
 
     /**
@@ -198,15 +214,45 @@ public class View extends javax.swing.JFrame {
         });
     }
 
+         @Override
+    public void update(Observable o, Object arg) {
+        this.TableAviones.setRowHeight(40);
+        this.TableAviones.setModel(new AvionTableModel(model.getAviones()));
+    }
+
+    Model model;
+    Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller getController() {
+       return controller;
+    }
+
+    public void setController(Controller controller) {
+       this.controller = controller;
+    }
+    
+     public AvionDisponible getValueat(int row){
+        return model.getAviones().get(row);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton Eliminar;
-    private javax.swing.JTextField JTextFieldBuscador;
     private javax.swing.JButton Modificar;
     private javax.swing.JTable TableAviones;
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 }

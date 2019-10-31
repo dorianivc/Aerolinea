@@ -10,25 +10,26 @@ package Presentacion.Presentacion_Avion.Listado_aviones_disponibles;
  * @author sergi
  */
 public class Controller {
-//    Model model;
-//    View view;
-//
-//    public Controller(Model model, View view) {
-//        this.model = model;
-//        this.view = view;
-//        view.setModel(model);
-//        view.setController(this);
-//    }
-//    
-//    public void buscar(String nombre){
-//        
-//    }
-//    
-//    public void show(){
-//        view.setVisible(true);
-//    }
-//    
-//    public void editar(int row){
-//        
-//    }
+    Model model;
+    View view;
+
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+        view.setModel(model);
+        view.setController(this);
+    }
+    
+    public void buscar(String nombre){
+       
+      model.setAviones(Presentacion.Presentacion_Avion.Agregar_Avion.Model.instance().buscar(nombre));
+    }
+    
+    public void show(){
+        view.setVisible(true);
+    }
+    
+      public void eliminar(int row){
+        model.eliminar(row);
+    }
 }

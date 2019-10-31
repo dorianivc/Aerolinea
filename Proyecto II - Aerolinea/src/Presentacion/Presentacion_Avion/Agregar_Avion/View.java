@@ -8,6 +8,7 @@ package Presentacion.Presentacion_Avion.Agregar_Avion;
 import Logica.AvionDisponible;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -178,8 +179,8 @@ public class View extends javax.swing.JFrame {
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         String matricula=this.Codigo.getText();
         int anio=Integer.parseInt(this.Anio.getText());
-        Date fecha = new Date();
-        fecha.setYear(anio-1900);
+        Date fecha = new Date(anio,0,1);
+     
         String modelo=this.Modelo.getText();
         String marca=this.Marca.getText();
         int filas=Integer.parseInt(this.Filas.getText()); 
@@ -188,15 +189,8 @@ public class View extends javax.swing.JFrame {
         if(matricula.length()<1 || anio<1 || modelo.length()<1 || marca.length()<1 || filas<1 || columnas<1){
             JOptionPane.showMessageDialog(null, "Datos Ingresados son Invalidos", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
         }else{
-            AvionDisponible avion=new AvionDisponible(matricula,fecha,modelo,marca,filas,columnas,filas*columnas);
-            
-            
-//            avion.setAno(fecha);
-//            avion.setModelo(modelo);
-//            avion.setMarca(marca);
-//            avion.setFilas(filas);
-//            avion.setColumnas(columnas);
-////            this.cantPasajeros.setText(filas*columnas);
+            AvionDisponible avion=new AvionDisponible(matricula,fecha,modelo,marca,filas,columnas,(filas*columnas));
+            String x = avion.getMarca();
             this.controller.agregarAvion(avion);
         }
     }//GEN-LAST:event_AgregarActionPerformed

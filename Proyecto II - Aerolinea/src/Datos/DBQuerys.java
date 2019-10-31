@@ -5,10 +5,14 @@
  */
 package Datos;
 
+import Logica.AvionDisponible;
 import Logica.Ciudad;
+import Logica.Horario;
 import Logica.Pais;
 import Logica.Ruta;
 import Logica.TipodePago;
+import Logica.Usuario;
+import Logica.Vuelo;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -240,4 +244,244 @@ public class DBQuerys {
         }
     }
 
+    public List<Ruta> rutaNombrePaisSearch(String nombre) {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<Ruta> resultado = new ArrayList<Ruta>();
+        try {
+            CiudadJpaController ciudadDao = new CiudadJpaController(this.db.EntityManager);
+            statement = conn.createStatement();
+            String sql = "select * from Aerolinea.Ruta r inner join  Aerolinea.Ciudad c on r.ciudad_llegada = c.ciudad ||"
+                    + "r.ciudad_salida = c.ciudad where c.nombre like '%%%s%%%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                int llave = rs.getInt("ruta");
+                Date anio = (Date) rs.getObject("duracion");
+                String salida = rs.getString("ciudad_salida");
+                String llegada = rs.getString("ciudad_llegada");
+
+                Ruta ruta = new Ruta(llave);
+                ruta.setDuracion(anio);
+                ruta.setCiudadSalida(ciudadDao.findCiudad(salida));
+                ruta.setCiudadLlegada(ciudadDao.findCiudad(llegada));
+                resultado.add(ruta);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    public void UsuarioUpdate(Usuario u) throws Exception {
+        String sql = "update Aerolinea.Usuario u  set u.contrasena  ='%s', u.nombre ='%s',  u.apellidos ='%s', "
+                + " u.correo_electronico ='%s',  u.direccion ='%s',  u.telefono ='%s', "
+                + " u.celular ='%s' "
+                + "where u.usuario ='%s'";
+        sql = String.format(sql, u.getContrasena(), u.getNombre(), u.getApellidos(), u.getCorreoElectronico(),
+                u.getDireccion(), u.getTelefono(), u.getCelular(), u.getUsuario());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal ");
+        }
+    }
+
+    public void AvionAdd(AvionDisponible a) throws Exception {
+        String sql = "insert into Aerolinea.Avion_Disponible (codigo_matricula, ano, modelo, marca,  "
+                + " filas, columnas, cantidad_de_pasajeros) "
+                + " values('%s','%s','%s','%s','%s','%s','%s')";
+        sql = String.format(sql, a.getCodigoMatricula(), a.getAno().getYear(), a.getModelo(), a.getMarca(), a.getFilas(),
+                a.getColumnas(), a.getCantidadDePasajeros());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Avion ya existe");
+        }
+    }
+
+    public List<AvionDisponible> AvionSearch(String nombre) {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<AvionDisponible> resultado = new ArrayList<AvionDisponible>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from "
+                    + "Aerolinea.Avion_Disponible a  where a.codigo_matricula like '%%%s%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                String llave = rs.getString("codigo_matricula");
+                int ano = Integer.parseInt(rs.getString("ano"));
+                String modelo = rs.getString("modelo");
+                String marca = rs.getString("marca");
+                int filas = Integer.parseInt(rs.getString("filas"));
+                int columnas = Integer.parseInt(rs.getString("columnas"));
+                int can = Integer.parseInt(rs.getString("cantidad_de_pasajeros"));
+                Date fecha = new Date(ano, 0, 1);
+                AvionDisponible avion = new AvionDisponible();
+                avion.setCodigoMatricula(llave);
+                avion.setModelo(modelo);
+                avion.setMarca(marca);
+                avion.setAno(fecha);
+                avion.setFilas(filas);
+                avion.setColumnas(columnas);
+                avion.setCantidadDePasajeros(can);
+
+                resultado.add(avion);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    public void AvionDelete(AvionDisponible a) throws Exception {
+        String sql = "delete from Aerolinea.Avion_Disponible where codigo_matricula='%s'";
+        sql = String.format(sql, a.getCodigoMatricula());
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal");
+        }
+    }
+
+    public void AvionUpdate(AvionDisponible a) throws Exception {
+        String sql = "update Aerolinea.Avion_Disponible a  set a.ano  ='%s', a.modelo ='%s',  a.marca ='%s', "
+                + " a.filas ='%s',  a.columnas ='%s',  a.cantidad_de_pasajeros ='%s' "
+                + "where a.codigo_matricula ='%s'";
+        sql = String.format(sql, a.getAno().getYear(), a.getModelo(), a.getMarca(), a.getFilas(),
+                a.getColumnas(), a.getCantidadDePasajeros(), a.getCodigoMatricula());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal ");
+        }
+    }
+
+    public List<Usuario> UsuarioSearch(String nombre) {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<Usuario> resultado = new ArrayList<Usuario>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from "
+                    + "Aerolinea.Usuario u  where u.usuario like '%%%s%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                String llave = rs.getString("usuario");
+                String nombree = rs.getString("nombre");
+                String apellidos = rs.getString("apellidos");
+                String password = rs.getString("contrasena");
+                String correo = rs.getString("correo_electronico");
+                String nacimiento = rs.getString("fecha_nacimiento");
+                int year = Integer.parseInt(nacimiento.substring(0, 4));
+                year = year - 1900;
+                int month = Integer.parseInt(nacimiento.substring(5, 7));
+                month--;
+                int day = Integer.parseInt(nacimiento.substring(8, 10));
+                String direccion = rs.getString("direccion");
+                String telefono = rs.getString("telefono");
+                String cel = rs.getString("celular");
+                short admin = 0;
+
+                Date nacimiento2 = new Date(year, month, day);
+
+                Usuario user = new Usuario(llave, password, nombree, apellidos, correo, nacimiento2, direccion, telefono, cel, admin);
+
+                resultado.add(user);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    public List<Vuelo> VueloSearch(String nombre) throws Exception {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from Aerolinea.Vuelo v "
+                    + "where v.vuelo like '%%%s%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                String llave = rs.getString("vuelo");
+                String horario = rs.getString("horario");
+                String avionn = rs.getString("avion_asignado");
+                int ruta = Integer.parseInt(rs.getString("ruta_asignada"));
+
+                AvionDisponible a = new AvionDisponible();
+                // AvionDisponibleJpaController aDao = new  AvionDisponibleJpaController(db.EntityManager);
+                // a= aDao.findAvionDisponible(avionn);
+                a = AvionGet(avionn);
+
+                Ruta r = new Ruta();
+                RutaJpaController rDao = new RutaJpaController(db.EntityManager);
+                r = rDao.findRuta(ruta);
+
+                Horario h = new Horario();
+                HorarioJpaController hDao = new HorarioJpaController(db.EntityManager);
+                h = hDao.findHorario(horario);
+
+                Vuelo v = new Vuelo();
+                v.setVuelo(llave);
+                v.setAvionAsignado(a);
+                v.setRutaAsignada(r);
+                v.setHorario(h);
+
+                resultado.add(v);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+
+    public AvionDisponible AvionGet(String id) throws Exception {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        statement = conn.createStatement();
+        String sql = "select * from "
+                + " Aerolinea.Avion_Disponible a where a.codigo_matricula like '%%%s%%' ";
+        sql = String.format(sql, id);
+        ResultSet rs = statement.executeQuery(sql);
+        if (rs.next()) {
+            String llave = rs.getString("codigo_matricula");
+            int ano = Integer.parseInt(rs.getString("ano"));
+            String modelo = rs.getString("modelo");
+            String marca = rs.getString("marca");
+            int filas = Integer.parseInt(rs.getString("filas"));
+            int columnas = Integer.parseInt(rs.getString("columnas"));
+            int can = Integer.parseInt(rs.getString("cantidad_de_pasajeros"));
+            Date fecha = new Date(ano, 0, 1);
+            AvionDisponible avion = new AvionDisponible();
+            avion.setCodigoMatricula(llave);
+            avion.setModelo(modelo);
+            avion.setMarca(marca);
+            avion.setAno(fecha);
+            avion.setFilas(filas);
+            avion.setColumnas(columnas);
+            avion.setCantidadDePasajeros(can);
+            return avion;
+        } else {
+            throw new Exception("avion no Existe");
+        }
+    }
+
+    public void VueloUpdate(Vuelo v) throws Exception {
+        String sql = " update Aerolinea.Vuelo v "
+                + "set v.horario  ='%s', v.avion_asignado ='%s',  v.ruta_asignada ='%s'"
+                + " where v.vuelo ='%s'";
+        sql = String.format(sql, v.getHorario().getHorario(), v.getAvionAsignado().getCodigoMatricula(),
+                v.getRutaAsignada().getRuta(), v.getVuelo());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal ");
+
+        }
+    }
 }

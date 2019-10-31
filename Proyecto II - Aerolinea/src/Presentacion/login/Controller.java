@@ -10,5 +10,14 @@ package Presentacion.login;
  * @author Monica
  */
 public class Controller {
-    
+
+    public Model model;
+    public View view;
+
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+        view.setModel(model);
+        view.setController(this);
+    }
 }

@@ -5,11 +5,18 @@
  */
 package Presentacion.login;
 
+import Logica.Usuario;
+import java.util.Observable;
+import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Monica
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer{
 
     /**
      * Creates new form View
@@ -36,7 +43,7 @@ public class View extends javax.swing.JFrame {
         jButtonRegistrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jButtonNoRegistrar = new javax.swing.JButton();
+        jAdministradorButton = new javax.swing.JButton();
         jButtonCliente = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
@@ -77,10 +84,10 @@ public class View extends javax.swing.JFrame {
 
         jLabel3.setText("Login");
 
-        jButtonNoRegistrar.setText("Administrador");
-        jButtonNoRegistrar.addActionListener(new java.awt.event.ActionListener() {
+        jAdministradorButton.setText("Administrador");
+        jAdministradorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNoRegistrarActionPerformed(evt);
+                jAdministradorButtonActionPerformed(evt);
             }
         });
 
@@ -103,47 +110,49 @@ public class View extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonRegistrar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonNoRegistrar))
+                        .addComponent(jAdministradorButton))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jPasswordField))
                         .addGroup(layout.createSequentialGroup()
+                            .addGap(6, 6, 6)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(layout.createSequentialGroup()
                                     .addGap(65, 65, 65)
                                     .addComponent(jLabel3))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonCliente)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAcceder)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonCliente)
+                    .addComponent(jButtonAcceder))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel3)
-                .addGap(42, 42, 42)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(1, 1, 1)
+                .addComponent(jButtonAcceder)
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAcceder)
                     .addComponent(jButtonRegistrar)
                     .addComponent(jButtonCancelar)
-                    .addComponent(jButtonNoRegistrar)
+                    .addComponent(jAdministradorButton)
                     .addComponent(jButtonCliente))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,7 +163,15 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     private void jButtonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccederActionPerformed
-        
+        Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
+        if(user != null){
+            if(model.esAdmin(user)){
+                this.jAdministradorButtonActionPerformed(evt);
+            }else
+                this.jButtonClienteActionPerformed(evt);
+        }else{
+            JOptionPane.showMessageDialog(null, "Datos invalidos", "Error", JOptionPane.PLAIN_MESSAGE, null);
+        }
     }//GEN-LAST:event_jButtonAccederActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -162,24 +179,26 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarActionPerformed
-
         Presentacion.Registrar_usuario.View ventana = new Presentacion.Registrar_usuario.View();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
 
-    private void jButtonNoRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNoRegistrarActionPerformed
+    private void jAdministradorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdministradorButtonActionPerformed
         Presentacion.Portal.View ventana= new  Presentacion.Portal.View();
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jButtonNoRegistrarActionPerformed
+    }//GEN-LAST:event_jAdministradorButtonActionPerformed
 
     private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
-        Presentacion.Presentacion_Usuario.Vuelo_Usuario.View ventana = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.View();
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
+        Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
+        Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model model = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model(user);
+        Presentacion.Presentacion_Usuario.Vuelo_Usuario.View view = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.View();
+        Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller controller = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller(model, view);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonClienteActionPerformed
 
@@ -219,11 +238,11 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jAdministradorButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAcceder;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JButton jButtonCliente;
-    private javax.swing.JButton jButtonNoRegistrar;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -231,4 +250,31 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables
+
+   Model model;
+  Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller  getController() {
+        return controller;
+    }
+
+    public void setController(Controller  controller) {
+        this.controller = controller;
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        
+    }
+
+
 }

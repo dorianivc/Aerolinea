@@ -40,7 +40,6 @@ public class View extends javax.swing.JFrame implements Observer {
         Agregar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Modificar = new javax.swing.JButton();
-        Escoger = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Horarios");
@@ -51,6 +50,11 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel2.setText("Día de la semana:");
 
         Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         tablaHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -66,12 +70,25 @@ public class View extends javax.swing.JFrame implements Observer {
         jScrollPane1.setViewportView(tablaHorarios);
 
         Agregar.setText("AGREGAR");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarActionPerformed(evt);
+            }
+        });
 
         Eliminar.setText("ELIMINAR");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
 
         Modificar.setText("MODIFICAR");
-
-        Escoger.setText("Escoger");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,19 +102,17 @@ public class View extends javax.swing.JFrame implements Observer {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Buscar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Agregar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Eliminar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Modificar)
-                        .addGap(18, 18, 18)
-                        .addComponent(Escoger)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Modificar)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,13 +130,36 @@ public class View extends javax.swing.JFrame implements Observer {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Agregar)
                     .addComponent(Eliminar)
-                    .addComponent(Modificar)
-                    .addComponent(Escoger))
+                    .addComponent(Modificar))
                 .addContainerGap(80, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+        Presentacion.Presentacion_Horario.agregar_horario.View view = new Presentacion.Presentacion_Horario.agregar_horario.View();
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_AgregarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        int row = this.tablaHorarios.getSelectedRow();
+        controller.eliminar(row);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        int row = this.tablaHorarios.getSelectedRow();
+        Presentacion.Presentacion_Horario.modificar_horario.Model model = new Presentacion.Presentacion_Horario.modificar_horario.Model(getValueAt(row));
+        Presentacion.Presentacion_Horario.modificar_horario.View view = new Presentacion.Presentacion_Horario.modificar_horario.View();
+        Presentacion.Presentacion_Horario.modificar_horario.Controller controller = new Presentacion.Presentacion_Horario.modificar_horario.Controller(model,view);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_ModificarActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        controller.buscar();
+    }//GEN-LAST:event_BuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,7 +200,6 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Escoger;
     private javax.swing.JButton Modificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -197,6 +234,11 @@ public class View extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.tablaHorarios.setRowHeight(40);
+        this.tablaHorarios.setModel(new horarioTableModel(model.getHorarios()));        
+    }
+    
+    public Horario getValueAt(int row){
+        return model.getHorarios().get(row);
     }
 }

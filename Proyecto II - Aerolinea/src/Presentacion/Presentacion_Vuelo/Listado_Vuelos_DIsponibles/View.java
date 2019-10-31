@@ -5,11 +5,15 @@
  */
 package Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles;
 
+import Logica.Vuelo;
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  *
  * @author sergi
  */
-public class View extends javax.swing.JFrame {
+public class View extends javax.swing.JFrame implements Observer {
 
     /**
      * Creates new form View
@@ -36,11 +40,15 @@ public class View extends javax.swing.JFrame {
         Buscar = new javax.swing.JButton();
         Agregar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
-        Escoger = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         Modificar.setText("Modificar");
+        Modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarActionPerformed(evt);
+            }
+        });
 
         jLabel_Paises.setText("Vuelos  Disponibles");
 
@@ -63,9 +71,14 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        jLabelNombre_Pais.setText("Codigo del vuelo");
+        jLabelNombre_Pais.setText("Codigo del vuelo:");
 
         Buscar.setText("Buscar");
+        Buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarActionPerformed(evt);
+            }
+        });
 
         Agregar.setText("Agregar");
         Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,41 +88,42 @@ public class View extends javax.swing.JFrame {
         });
 
         Eliminar.setText("Eliminar");
-
-        Escoger.setText("Escoger");
+        Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelNombre_Pais)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(Buscar))
+                        .addComponent(Agregar)
+                        .addGap(45, 45, 45)
+                        .addComponent(Eliminar)
+                        .addGap(44, 44, 44)
+                        .addComponent(Modificar)
+                        .addGap(11, 11, 11))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(11, 11, 11))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(Agregar)
-                                .addGap(18, 18, 18)
-                                .addComponent(Eliminar)
-                                .addGap(26, 26, 26)
-                                .addComponent(Modificar)
-                                .addGap(28, 28, 28)
-                                .addComponent(Escoger)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelNombre_Pais)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(JTextFieldBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel_Paises)
+                                .addGap(47, 47, 47)))
+                        .addComponent(Buscar)))
                 .addGap(40, 40, 40))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(jLabel_Paises)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,14 +136,13 @@ public class View extends javax.swing.JFrame {
                     .addComponent(jLabelNombre_Pais)
                     .addComponent(Buscar))
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Escoger)
-                    .addComponent(Modificar)
+                    .addComponent(Agregar)
                     .addComponent(Eliminar)
-                    .addComponent(Agregar))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(Modificar))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,9 +153,27 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_JTextFieldBuscadorActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        Presentacion.Presentacion_Pais.agregar_pais.View agregarPais= new Presentacion.Presentacion_Pais.agregar_pais.View();
-        agregarPais.setVisible(true);
+        Presentacion.Presentacion_Vuelo.Agregar_Vuelo.View ventana = new Presentacion.Presentacion_Vuelo.Agregar_Vuelo.View();
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);
     }//GEN-LAST:event_AgregarActionPerformed
+
+    private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
+        controller.buscar(this.JTextFieldBuscador.getText());
+    }//GEN-LAST:event_BuscarActionPerformed
+
+    private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
+        int row = this.TableVuelos.getSelectedRow();
+        controller.eliminar(row);
+    }//GEN-LAST:event_EliminarActionPerformed
+
+    private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
+        int row = this.TableVuelos.getSelectedRow();
+        Presentacion.Presentacion_Vuelo.Modificar_Vuelo.Model model = new Presentacion.Presentacion_Vuelo.Modificar_Vuelo.Model(this.getValueat(row));
+        Presentacion.Presentacion_Vuelo.Modificar_Vuelo.View view = new Presentacion.Presentacion_Vuelo.Modificar_Vuelo.View();
+        Presentacion.Presentacion_Vuelo.Modificar_Vuelo.Controller controller = new Presentacion.Presentacion_Vuelo.Modificar_Vuelo.Controller(model, view);
+        view.setVisible(true);
+    }//GEN-LAST:event_ModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +214,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton Agregar;
     private javax.swing.JButton Buscar;
     private javax.swing.JButton Eliminar;
-    private javax.swing.JButton Escoger;
     private javax.swing.JTextField JTextFieldBuscador;
     private javax.swing.JButton Modificar;
     private javax.swing.JTable TableVuelos;
@@ -191,4 +221,34 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_Paises;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.TableVuelos.setRowHeight(40);
+        this.TableVuelos.setModel(new VuelosTableModel(model.getVuelos()));
+    }
+    
+    Model model;
+    Controller controller;
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+        model.addObserver(this);
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    
+    public Vuelo getValueat(int row){
+        return model.getVuelos().get(row);
+    }
 }

@@ -14,31 +14,33 @@ import Logica.AvionDisponible;
  * @author Gabriel
  */
 public class AvionTableModel extends AbstractTableModel{
-    List<AvionDisponible> aviones;
-    
-    public AvionTableModel(List<AvionDisponible> aviones){
-        this.aviones=aviones;
-    }
+    List<AvionDisponible> aviones;   
 
-    public void setAviones(List<AvionDisponible> aviones) {
+    public AvionTableModel(List<AvionDisponible> aviones) {
         this.aviones = aviones;
     }
 
     public List<AvionDisponible> getAviones() {
         return aviones;
     }
+
+    public void setAviones(List<AvionDisponible> aviones) {
+        this.aviones = aviones;
+    }
+
+  
     
-        @Override
+    @Override
     public int getRowCount() {
         return aviones.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 6;
+        return 7;
     }
     
-        @Override    
+         @Override    
     public String getColumnName(int columnIndex){
         switch(columnIndex){
             case 0: return "Matricula: ";
@@ -48,26 +50,34 @@ public class AvionTableModel extends AbstractTableModel{
             case 4: return "Filas: ";
             case 5: return "Columnas: ";
             case 6: return "Pasajeros: ";
+            
             default: return "";
         }        
     }
     
-    @Override
+        @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         AvionDisponible a=aviones.get(rowIndex);
         switch(columnIndex){
             case 0: return a.getCodigoMatricula();
-            case 1: return a.getAno();
-            case 2: return a.getMarca();
-            case 3: return a.getModelo();
+           case 1: return a.getAno().getYear();
+           case 2: return a.getMarca();
+           case 3: return a.getModelo();
             case 4: return a.getFilas();
-            case 5: return a.getColumnas();
-            case 6: return a.getCantidadDePasajeros();
+          case 5: return a.getColumnas();
+           case 6: return a.getCantidadDePasajeros();
             default: return "";
         }
     }    
 
-
-   
+    
+    @Override
+    public Class<?> getColumnClass(int i){
+        switch(i){
+            default: return super.getColumnClass(i);
+        }
+    }
+    
+  
     
 }

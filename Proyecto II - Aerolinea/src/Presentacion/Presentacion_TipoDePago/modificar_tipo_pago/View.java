@@ -193,8 +193,6 @@ public class View extends javax.swing.JFrame implements Observer {
     @Override
     public void update(Observable o, Object arg) {
         this.tipoPago.setText(model.pago.getTipoDePago());
-        this.descripcion.setText(model.pago.getDescripcion());
-        
-        
+        this.descripcion.setText(model.pago.getDescripcion());  
     }
 }

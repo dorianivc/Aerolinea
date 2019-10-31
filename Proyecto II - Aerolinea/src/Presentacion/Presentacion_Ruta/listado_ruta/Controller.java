@@ -31,20 +31,9 @@ public class Controller {
     
     public void buscar(String pais){
         try{
-            RutaJpaController rutaDao=new RutaJpaController(db.db.EntityManager);
-            List<Ruta> rutas = rutaDao.findRutaEntities();
             
-            if(pais.isEmpty()){
-                model.setRutas(rutas);
-            }else{
-                List<Ruta> rutas2 = new ArrayList<Ruta>();
-                for(int i=0; i<rutas.size();i++){
-                    if(rutas.get(i).getCiudadLlegada().getNombre().equals(pais) || rutas.get(i).getCiudadSalida().getNombre().equals(pais)){
-                        rutas2.add(rutas.get(i));
-                    }
-                }
-                model.setRutas(rutas2);
-            }
+            List<Ruta> rutas = db.rutaNombrePaisSearch(pais);
+            model.setRutas(rutas);
         }
         catch(Exception ex){
             

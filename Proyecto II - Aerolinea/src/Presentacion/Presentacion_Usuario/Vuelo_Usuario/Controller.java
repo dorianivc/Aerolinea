@@ -10,5 +10,15 @@ package Presentacion.Presentacion_Usuario.Vuelo_Usuario;
  * @author Gabriel
  */
 public class Controller {
+    Model model;
+    View view; 
+    
+    public Controller(Model model, View view) {
+        this.model = model;
+        this.view = view;
+        view.setModel(model);
+        view.setController(this);
+    }
+    
     
 }

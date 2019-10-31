@@ -72,6 +72,19 @@ public class Usuario implements Serializable {
 
     public Usuario() {
     }
+    
+     public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correoElectronico, Date fechaNacimiento, String direccion, String telefono, String celular, Short admin) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correoElectronico = correoElectronico;
+        this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.admin = admin;
+    }
 
     public Usuario(String usuario) {
         this.usuario = usuario;

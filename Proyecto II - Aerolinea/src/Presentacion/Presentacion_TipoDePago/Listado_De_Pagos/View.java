@@ -144,7 +144,7 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addComponent(Escoger)
                     .addComponent(Eliminar)
                     .addComponent(Modificar))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();

@@ -40,6 +40,9 @@ public class View extends javax.swing.JFrame {
         jMenuItemListadoRutas = new javax.swing.JMenuItem();
         ListadoVuelos = new javax.swing.JMenuItem();
         MetodosDePago = new javax.swing.JMenuItem();
+        Horarios = new javax.swing.JMenuItem();
+        listadoUsuarios = new javax.swing.JMenuItem();
+        vuelos = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -116,6 +119,33 @@ public class View extends javax.swing.JFrame {
         });
         jMenuVentanasListados.add(MetodosDePago);
 
+        Horarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        Horarios.setText("Horarios");
+        Horarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HorariosActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(Horarios);
+
+        listadoUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
+        listadoUsuarios.setText("Listado de usuarios");
+        listadoUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listadoUsuariosActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(listadoUsuarios);
+
+        vuelos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        vuelos.setText("Listado de vuelos");
+        vuelos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vuelosActionPerformed(evt);
+            }
+        });
+        jMenuVentanasListados.add(vuelos);
+
         jMenuBar1.add(jMenuVentanasListados);
 
         jMenu2.setText("Ayuda");
@@ -177,8 +207,10 @@ public class View extends javax.swing.JFrame {
 
     private void ListadoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoVuelosActionPerformed
         Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View ventana = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View();
-       ventana.setLocationRelativeTo(null);
-       ventana.setVisible(true);        
+        Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Model modelA = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Model();
+        Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Controller ControllerA = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Controller(modelA,ventana);
+        ventana.setLocationRelativeTo(null);
+        ventana.setVisible(true);        
     }//GEN-LAST:event_ListadoVuelosActionPerformed
 
     private void MetodosDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodosDePagoActionPerformed
@@ -188,6 +220,30 @@ public class View extends javax.swing.JFrame {
         listadoView.setLocationRelativeTo(null);
         listadoView.setVisible(true);        
     }//GEN-LAST:event_MetodosDePagoActionPerformed
+
+    private void HorariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HorariosActionPerformed
+        Presentacion.Presentacion_Horario.listado_horarios.Model model = new  Presentacion.Presentacion_Horario.listado_horarios.Model();
+        Presentacion.Presentacion_Horario.listado_horarios.View view = new Presentacion.Presentacion_Horario.listado_horarios.View();
+        Presentacion.Presentacion_Horario.listado_horarios.Controller controller = new Presentacion.Presentacion_Horario.listado_horarios.Controller(model, view);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_HorariosActionPerformed
+
+    private void listadoUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listadoUsuariosActionPerformed
+        Presentacion.Presentacion_Usuario.Listado_Usuario.View listadoUser = new Presentacion.Presentacion_Usuario.Listado_Usuario.View();
+        Presentacion.Presentacion_Usuario.Listado_Usuario.Model modelUser = new Presentacion.Presentacion_Usuario.Listado_Usuario.Model();
+        Presentacion.Presentacion_Usuario.Listado_Usuario.Controller controllerUser = new Presentacion.Presentacion_Usuario.Listado_Usuario.Controller(modelUser,listadoUser);
+        listadoUser.setLocationRelativeTo(null);
+        listadoUser.setVisible(true);           
+    }//GEN-LAST:event_listadoUsuariosActionPerformed
+
+    private void vuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vuelosActionPerformed
+        Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.Model model = new Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.Model();
+        Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.View view = new Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.View();
+        Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.Controller controller = new Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.Controller(model, view);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
+    }//GEN-LAST:event_vuelosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,6 +281,7 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Horarios;
     private javax.swing.JMenuItem ListadoVuelos;
     private javax.swing.JMenuItem MetodosDePago;
     private javax.swing.JLabel jLabelVuelos;
@@ -240,5 +297,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuVentanasListados;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem listadoUsuarios;
+    private javax.swing.JMenuItem vuelos;
     // End of variables declaration//GEN-END:variables
 }

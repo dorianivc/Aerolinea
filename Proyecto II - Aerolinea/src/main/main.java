@@ -10,9 +10,11 @@ import Datos.DBQuerys;
 import Datos.PaisJpaController;
 import Datos.RutaJpaController;
 import Datos.TipodePagoJpaController;
+import Datos.VueloJpaController;
 import Logica.Pais;
 import Logica.Ruta;
 import Logica.TipodePago;
+import Logica.Vuelo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,9 +29,9 @@ public class main {
     
      public static void main(String[] args) throws SQLException, Exception {
       DBQuerys db= new DBQuerys();
-     List<Pais> lista= db.listadoPaises();
+      List<Pais> lista= db.listadoPaises();
      for(int i=0;i<lista.size();i++){
-             Pais pais= lista.get(i);
+              Pais pais= lista.get(i);
               System.out.println(pais.toString());
      }
      RutaJpaController daoRuta= new RutaJpaController(db.db.EntityManager);
@@ -47,8 +49,12 @@ public class main {
          TipodePago pago=lista3.get(i);
          System.out.println(pago.getTipoDePago());
      }
+     
+  
        
       Presentacion.login.View app= new  Presentacion.login.View();
+      Presentacion.login.Model model = new Presentacion.login.Model();
+      Presentacion.login.Controller controller = new Presentacion.login.Controller(model, app);
       app.setLocationRelativeTo(null);
       app.setVisible(true);
     }

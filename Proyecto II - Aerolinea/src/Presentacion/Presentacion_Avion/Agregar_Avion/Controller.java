@@ -28,10 +28,10 @@ public class Controller {
     }
     
     public void modificarAvion(String Matricula,Date anio, String modelo,String marca,int filas, int columnas){
-        model.modificarAvion(Matricula, anio, modelo, marca, filas, columnas);
+     //   model.modificarAvion(Matricula, anio, modelo, marca, filas, columnas);
     }
     
     public void eliminarAvion(String Matricula){
-        model.eliminarAvion(Matricula);
+    //    model.eliminarAvion(Matricula);
     }
 }

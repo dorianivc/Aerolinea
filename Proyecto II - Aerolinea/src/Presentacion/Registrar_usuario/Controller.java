@@ -9,6 +9,22 @@ package Presentacion.Registrar_usuario;
  *
  * @author sergi
  */
+
+import Logica.Usuario;
+import java.sql.SQLException;
+import java.util.List;
+
+
 public class Controller {
+    Model modelo;
+    public Controller(){
+        this.modelo= new Model();
+        
+    }
     
+ 
+    public void agregarUsuario(Usuario usuario){ 
+        modelo.agregarUsuario(usuario);
+}
+
 }

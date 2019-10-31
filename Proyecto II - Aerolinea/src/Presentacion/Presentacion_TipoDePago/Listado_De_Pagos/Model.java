@@ -36,6 +36,7 @@ public class Model extends Observable{
         this.notifyObservers();         
     }
 
+    @Override
     public void addObserver(Observer o){
         super.addObserver(o);
         this.setChanged();
