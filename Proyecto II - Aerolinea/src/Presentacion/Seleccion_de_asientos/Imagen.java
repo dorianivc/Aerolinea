@@ -22,10 +22,53 @@ public class Imagen extends ImageIcon implements java.util.Observer {
     private int numero_asiento;
     private int x;
     private int y;
-   
+    private Boolean vendido;
+
+    @Override
+    public String toString() {
+        return "Imagen{" + "numero_asiento=" + numero_asiento + ", x=" + x + ", y=" + y + ", vendido=" + vendido + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Imagen other = (Imagen) obj;
+        if (this.numero_asiento != other.numero_asiento) {
+            return false;
+        }
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        return true;
+    }
 
     public int getNumero_asiento() {
         return numero_asiento;
+    }
+
+    public Boolean getVendido() {
+        return vendido;
+    }
+
+    public void setVendido(Boolean vendido) {
+        this.vendido = vendido;
     }
 
     public void setNumero_asiento(int numero_asiento) {
@@ -39,6 +82,7 @@ public class Imagen extends ImageIcon implements java.util.Observer {
         this.numero_asiento=numAsiento;
         this.x=x;
         this.y=y;
+        this.vendido=false;
     }
 
     public int getX() {

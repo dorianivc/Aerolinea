@@ -1,5 +1,7 @@
 package Presentacion.Seleccion_de_asientos;
 
+import java.util.List;
+
 
 
 /*
@@ -25,6 +27,9 @@ class Controlador {
            System.out.println(ex.getMessage());
        }
        return null;
+   }
+   void bloquearAsientos(List<Imagen> lista){
+       this.model.bloquearAsientos(lista);
    }
    public void cambiarTipo(Imagen imagen){
        try{

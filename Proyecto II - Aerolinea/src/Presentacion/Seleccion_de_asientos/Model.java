@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -29,7 +30,20 @@ public class Model extends Observable{
     public int getFilas() {
         return filas;
     }
-
+    public void bloquearAsientos(List<Imagen> lista){
+        for(int x=0;x<filas;x++){
+            for(int y=0;y<columnas;y++){
+                
+                for(int i=0;i<lista.size();i++){
+                    if(lista.get(i).equals(asientos[x][y])){
+                        asientos[x][y].setVendido(Boolean.TRUE);
+                    }
+                }
+                
+                
+            }
+        }
+    }
     public void setFilas(int filas) {
         this.filas = filas;
     }
@@ -91,7 +105,7 @@ public class Model extends Observable{
      int ejeX=75;
      int asiento=0;
      for(int i=0;i<filas;i++){
-         int ejeY=50;
+         int ejeY=60;
          for(int y=0;y<columnas;y++){
              int plano=20;
           

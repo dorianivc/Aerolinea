@@ -18,6 +18,7 @@ import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,21 +39,35 @@ public class Vista extends JFrame implements java.util.Observer {
  
     public Model modelo;
     public Controlador controller;
-    private javax.swing.JButton jButtonAceptar;
+   private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabelPasillo;
     private javax.swing.JLabel jLabelVentana;
     private javax.swing.JLabel jLabelVentana1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBarAyuda;
+    private javax.swing.JMenuItem jMenuItemInstrucciones;
+    public List<Imagen> asientos_seleccionados;
     public Vista() throws IOException{
+       this.asientos_seleccionados= new ArrayList<>();
+       
+       
+       
+       
+       
        
         
       this.setTitle("SELECCION DE ASIENTOS DEL VUELO");
+     
      
         jButtonAceptar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabelPasillo = new javax.swing.JLabel();
         jLabelVentana = new javax.swing.JLabel();
         jLabelVentana1 = new javax.swing.JLabel();
+        jMenuBarAyuda = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItemInstrucciones = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +90,21 @@ public class Vista extends JFrame implements java.util.Observer {
         jLabelVentana.setText("Ventana");
 
         jLabelVentana1.setText("Ventana");
+
+        jMenu1.setText("Ayuda");
+
+        jMenuItemInstrucciones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemInstrucciones.setText("Instrucciones");
+        jMenuItemInstrucciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItemInstrucciones);
+
+        jMenuBarAyuda.add(jMenu1);
+
+        setJMenuBar(jMenuBarAyuda);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,7 +131,7 @@ public class Vista extends JFrame implements java.util.Observer {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap(94, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVentana1)
                     .addComponent(jLabelVentana))
@@ -113,6 +143,7 @@ public class Vista extends JFrame implements java.util.Observer {
                     .addComponent(jButtonCancelar))
                 .addGap(62, 62, 62))
         );
+
         
         
         
@@ -127,20 +158,49 @@ public class Vista extends JFrame implements java.util.Observer {
     @Override
     public void mouseClicked(MouseEvent e) 
     {
-        Imagen imagen;
+        clickAsiento(e);
+        }
+            });
+        
+    }
+    
+    
+  private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {  
+      refresh();
+      JOptionPane.showMessageDialog(null,"Clickee sobre los asientos que desea reservar una vez, cambiaran de color negro a blanco."+ "\n"+"Si deseea revertir la eleccion, solamente vuelva a dar click sobre el asiento para desmarcarlo. Una vez seleccionados correctamente, presione aceptar para continuar"+ "\n"+ "**importante** DESPUES DE ACEPTAR LOS ASIENTOS, NO EXISTE POSIBILIDAD DE MODIFICAR LA SELECCION DE NUEVO **importante**" , "INSTRUCCIONES DE ELECCION DE ASIENTO ",JOptionPane.PLAIN_MESSAGE);
+       
+    }  
+        
+ public void clickAsiento(MouseEvent e){
+     Imagen imagen;
         try{
              imagen=buscarAsiento(e.getPoint());
+             if(!imagen.getVendido()){
+                 
+             if(this.asientos_seleccionados.contains(imagen)){
+              this.asientos_seleccionados.remove(imagen);
+                 
+             }else if(!this.asientos_seleccionados.contains(imagen)){
+                 this.asientos_seleccionados.add(imagen);
+             }
+                 
              controller.cambiarTipo(imagen);
+             if(this.asientos_seleccionados.isEmpty()){
+                 System.out.println("Lista Vacia");
+             }else{
+                 for(int i=0;i<this.asientos_seleccionados.size();i++){
+                 System.out.println(this.asientos_seleccionados.get(i).toString());
+             } 
+             }
+            
+                }
+             
         }catch(Exception se){
             System.out.println(se.getMessage());
         }
        
         refresh();
-        }
-            });
-        
-    }
- 
+ }
     public Model getModelo() {
         return modelo;
     }
@@ -153,12 +213,39 @@ public class Vista extends JFrame implements java.util.Observer {
         return controller;
     }
     
-    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {  
+        String mensaje;
+        if(this.asientos_seleccionados.isEmpty()){
+         mensaje="Seleccione un asiento para poder continuar";
+        }else{
         System.out.println("Presiono Aceptar, modificar codigo aquí");
+        
+        mensaje="Usted ha elegido los asientos: ";
+        for(int i=0;i<this.asientos_seleccionados.size();i++){
+           Integer num=this.asientos_seleccionados.get(i).getNumero_asiento();
+           mensaje= mensaje + num.toString();
+           if(i!=this.asientos_seleccionados.size()-1){
+               mensaje=mensaje +", ";
+            }
+           else{
+               mensaje=mensaje +".";
+           }         
+        }
+        mensaje=mensaje+"\n"+"Para un total de: ";
+        Integer numeroAsientos=this.asientos_seleccionados.size();
+        mensaje=mensaje+ numeroAsientos.toString()+ " asientos reservados";
+        
+        controller.bloquearAsientos(asientos_seleccionados);
+        this.asientos_seleccionados.clear();
+        JOptionPane.showMessageDialog(null,mensaje , "ACEPTAR ASIENTOS",JOptionPane.PLAIN_MESSAGE);
+        refresh(); //this.dispose();
+        
+        }
     }                                              
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {                                                
-        System.out.println("Presiono Cancelar, modificar codigo aquí");
+       JOptionPane.showMessageDialog(null,"Ha cancelado la eleccion de asientos" , "OPERACION CANCELADA ",JOptionPane.PLAIN_MESSAGE);
+       this.dispose();
     }     
     public void setControl(Controlador control) {
         this.controller = control;
