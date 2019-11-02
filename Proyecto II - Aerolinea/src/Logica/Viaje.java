@@ -134,5 +134,8 @@ public class Viaje implements Serializable {
     public void setPrecio(Integer precio) {
         this.precio = precio;
     }
+    public void nada(){
+        
+    }
     
 }
