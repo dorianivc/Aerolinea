@@ -44,7 +44,7 @@ public class BaseDatosAWS {
     public void reporte(){
         
         JasperReport reporte=null;
-        String path="Report.jasper";
+        String path="Reportes.jasper";
         try {
             reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
             JasperPrint jPrint= JasperFillManager.fillReport(path,null,this.conexion);
