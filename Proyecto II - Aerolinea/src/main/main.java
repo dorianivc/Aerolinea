@@ -28,6 +28,8 @@ public class main {
   
     
      public static void main(String[] args) throws SQLException, Exception {
+         
+     /*
       DBQuerys db= new DBQuerys();
       List<Pais> lista= db.listadoPaises();
      for(int i=0;i<lista.size();i++){
@@ -49,7 +51,7 @@ public class main {
          TipodePago pago=lista3.get(i);
          System.out.println(pago.getTipoDePago());
      }
-     
+     */
   
        
       Presentacion.login.View app= new  Presentacion.login.View();

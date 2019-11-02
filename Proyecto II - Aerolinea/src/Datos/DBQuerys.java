@@ -54,6 +54,7 @@ public class DBQuerys {
                     String llave = rs.getString("viaje");
                     String vuelo = rs.getString("vuelo");
                     String fecha= rs.getString("fecha");
+                    Integer precio= Integer.parseInt(rs.getString("precio"));
                     //Display values
                     Logica.Viaje viaje = new Viaje(Integer.parseInt(llave));
                     viaje.setVuelo(new Vuelo(vuelo));
@@ -61,6 +62,7 @@ public class DBQuerys {
                     int mes=Integer.parseInt(fecha.substring(5, 6));
                     int dia=Integer.parseInt(fecha.substring(8, 9));
                     viaje.setFecha(new Date(ano,mes,dia));
+                    viaje.setPrecio(precio);
                     lista.add(viaje);
                 }
                 //STEP 6: Clean-up environment
@@ -323,10 +325,10 @@ public class DBQuerys {
     public void UsuarioUpdate(Usuario u) throws Exception {
         String sql = "update Aerolinea.Usuario u  set u.contrasena  ='%s', u.nombre ='%s',  u.apellidos ='%s', "
                 + " u.correo_electronico ='%s',  u.direccion ='%s',  u.telefono ='%s', "
-                + " u.celular ='%s' "
+                + " u.celular ='%s', u.admin='%s' "
                 + "where u.usuario ='%s'";
         sql = String.format(sql, u.getContrasena(), u.getNombre(), u.getApellidos(), u.getCorreoElectronico(),
-                u.getDireccion(), u.getTelefono(), u.getCelular(), u.getUsuario());
+                u.getDireccion(), u.getTelefono(), u.getCelular(),u.getAdmin(), u.getUsuario());
 
         int count = executeUpdate(sql);
         if (count == 0) {
@@ -360,18 +362,17 @@ public class DBQuerys {
             while (rs.next()) {
 
                 String llave = rs.getString("codigo_matricula");
-                int ano = Integer.parseInt(rs.getString("ano"));
+                String ano = rs.getString("ano");
                 String modelo = rs.getString("modelo");
                 String marca = rs.getString("marca");
                 int filas = Integer.parseInt(rs.getString("filas"));
                 int columnas = Integer.parseInt(rs.getString("columnas"));
                 int can = Integer.parseInt(rs.getString("cantidad_de_pasajeros"));
-               
                 AvionDisponible avion = new AvionDisponible();
                 avion.setCodigoMatricula(llave);
                 avion.setModelo(modelo);
                 avion.setMarca(marca);
-                avion.setAno("");
+                avion.setAno(ano);
                 avion.setFilas(filas);
                 avion.setColumnas(columnas);
                 avion.setCantidadDePasajeros(can);
@@ -431,7 +432,7 @@ public class DBQuerys {
                 String direccion = rs.getString("direccion");
                 String telefono = rs.getString("telefono");
                 String cel = rs.getString("celular");
-                short admin = 0;
+                short admin = (short)Integer.parseInt(rs.getString("admin"));
 
                 Date nacimiento2 = new Date(year, month, day);
 
@@ -444,7 +445,7 @@ public class DBQuerys {
         return resultado;
     }
 
-    public List<Vuelo> VueloSearch(String nombre) throws Exception {
+       public List<Vuelo> VueloSearch(String nombre) throws Exception {
         Statement statement = null;
         Connection conn = db.conexion;
         List<Vuelo> resultado = new ArrayList<Vuelo>();
@@ -643,9 +644,9 @@ public class DBQuerys {
     
     public void addViaje(Viaje v) throws Exception{
         String sql = "insert into Aerolinea.Viaje "
-                + " values('%s','%s','%s')";
+                + " values('%s','%s','%s','%s')";
         System.out.print(v.getViaje()+v.getVuelo().getVuelo()+v.getFechaS());
-        sql = String.format(sql,v.getViaje(),v.getVuelo().getVuelo(),v.getFechaS());
+        sql = String.format(sql,v.getViaje(),v.getVuelo().getVuelo(),v.getFechaS(),v.getPrecio());
 
         int count = executeUpdate(sql);
         if (count == 0) {
@@ -655,9 +656,9 @@ public class DBQuerys {
     
     public void viajeUpdate(Viaje v) throws Exception{
         String sql = " update Aerolinea.Viaje v "
-                + "set v.vuelo  ='%s', v.fecha ='%s' where v.viaje ='%s'";
+                + "set v.vuelo  ='%s', v.fecha ='%s', v.precio='%s' where v.viaje ='%s'";
         System.out.print(v.getViaje()+v.getVuelo().getVuelo()+v.getFechaS());
-        sql = String.format(sql, v.getVuelo().getVuelo(),v.getFechaS(), v.getViaje());
+        sql = String.format(sql, v.getVuelo().getVuelo(),v.getFechaS(),v.getPrecio(), v.getViaje());
 
         int count = executeUpdate(sql);
         if (count == 0) {

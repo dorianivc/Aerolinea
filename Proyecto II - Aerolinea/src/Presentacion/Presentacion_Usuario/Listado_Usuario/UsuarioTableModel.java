@@ -39,7 +39,7 @@ public class UsuarioTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 9;
+        return 10;
     }
     
     @Override    
@@ -54,7 +54,7 @@ public class UsuarioTableModel extends AbstractTableModel {
             case 6: return "Direccion: ";
             case 7: return "Telefono: ";
             case 8: return "Celular: ";
-            default: return "";
+            default: return "Admin: ";
         }        
     }
 
@@ -71,6 +71,9 @@ public class UsuarioTableModel extends AbstractTableModel {
             case 6: return u.getDireccion();
             case 7: return u.getTelefono();
             case 8: return u.getCelular();
+            case 9: if( u.getAdmin()==1){
+                return "SI";
+            }else return "NO";
             default: return "";
         }
     }

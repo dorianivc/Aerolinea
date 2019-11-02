@@ -170,8 +170,8 @@ public class View extends javax.swing.JFrame implements Observer{
     }// </editor-fold>//GEN-END:initComponents
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        int anioo=Integer.parseInt(anio.getText());
-        model.getAvion().setAno(anio.getText());
+        String anioo=anio.getText();
+        model.getAvion().setAno(anioo);
         model.getAvion().setModelo(modelo.getText());
         model.getAvion().setMarca(this.marca.getText());
         model.getAvion().setFilas(Integer.parseInt(filas.getText()));

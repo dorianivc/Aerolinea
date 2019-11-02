@@ -6,6 +6,7 @@
 package Presentacion.Presentacion_Usuario.Viajes_Usuario;
 
 import Datos.DBQuerys;
+import Datos.ViajeJpaController;
 import Logica.Usuario;
 import Logica.Viaje;
 import Logica.Vuelo;
@@ -29,6 +30,8 @@ public class Model extends Observable{
         db = new DBQuerys();
         try{
             this.viajes=db.ViajeSearchVuelo(vuelo.getVuelo());
+            //ViajeJpaController viajeDao= new ViajeJpaController(db.db.EntityManager);
+            //viajes=viajeDao.findViajeEntities();
         }catch(Exception ex){
             System.out.print("error al mostrar los viajes");
         }

@@ -5,6 +5,7 @@
  */
 package Presentacion.Presentacion_Usuario.Listado_Usuario;
 
+import Datos.UsuarioJpaController;
 import Logica.Usuario;
 import java.util.Observable;
 import java.util.Observer;
@@ -20,6 +21,8 @@ public class View extends javax.swing.JFrame implements Observer {
      */
     public View() {
         initComponents();
+        
+        
     }
 
     /**

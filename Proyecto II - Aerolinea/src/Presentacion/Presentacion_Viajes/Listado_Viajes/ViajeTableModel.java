@@ -37,7 +37,7 @@ public class ViajeTableModel extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 4;
     }
     
     @Override    
@@ -46,6 +46,7 @@ public class ViajeTableModel extends AbstractTableModel{
             case 0: return "Viaje: ";
             case 1: return "Fecha: ";
             case 2: return "Vuelo: ";
+            case 3: return "Precio: ";
             default: return "";
         }        
     }
@@ -57,6 +58,7 @@ public class ViajeTableModel extends AbstractTableModel{
             case 0: return v.getViaje();
             case 1: return v.getFecha();
             case 2: return v.getVuelo().getVuelo();
+            case 3: return v.getPrecio();
             default: return "";
         }
     }

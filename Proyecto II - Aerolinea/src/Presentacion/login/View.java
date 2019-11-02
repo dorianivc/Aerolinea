@@ -163,7 +163,8 @@ public class View extends javax.swing.JFrame implements Observer{
     }//GEN-LAST:event_jPasswordFieldActionPerformed
 
     private void jButtonAccederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAccederActionPerformed
-        Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
+        try{
+            Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
         if(user != null){
             if(model.esAdmin(user)){
                 this.jAdministradorButtonActionPerformed(evt);
@@ -172,6 +173,10 @@ public class View extends javax.swing.JFrame implements Observer{
         }else{
             JOptionPane.showMessageDialog(null, "Datos invalidos", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
+        }catch(Exception se){
+            JOptionPane.showMessageDialog(null, se.getMessage(), "Error producido", JOptionPane.PLAIN_MESSAGE, null);
+        }
+        
     }//GEN-LAST:event_jButtonAccederActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed

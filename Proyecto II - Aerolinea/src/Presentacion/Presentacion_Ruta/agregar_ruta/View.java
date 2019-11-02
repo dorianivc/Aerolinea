@@ -27,7 +27,7 @@ public class View extends javax.swing.JFrame {
             this.jComboBoxOrigen.addItem(lista.get(i));
             this.jComboBoxDestino.addItem(lista.get(i));
         }
-        for(int i=0;i<61;i++){
+        for(int i=0;i<60;i++){
             this.jComboBoxMinutos.addItem(i);
         }
     }
@@ -197,7 +197,7 @@ public class View extends javax.swing.JFrame {
             int horas= Integer.parseInt(this.jTextFieldHoras.getText());
             int minutos=(int) this.jComboBoxMinutos.getSelectedItem();
             Date fecha= new Date();
-            fecha.setHours(horas-6);
+            fecha.setHours(horas-24);
             fecha.setMinutes(minutos);
             fecha.setSeconds(0);
             Ruta ruta=new Ruta();

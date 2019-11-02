@@ -38,7 +38,7 @@ public class View extends javax.swing.JFrame {
         jMenuItemListadoPaises = new javax.swing.JMenuItem();
         jMenuItemListadoCuidades = new javax.swing.JMenuItem();
         jMenuItemListadoRutas = new javax.swing.JMenuItem();
-        ListadoVuelos = new javax.swing.JMenuItem();
+        ListadoDeAviones = new javax.swing.JMenuItem();
         MetodosDePago = new javax.swing.JMenuItem();
         Horarios = new javax.swing.JMenuItem();
         listadoUsuarios = new javax.swing.JMenuItem();
@@ -103,14 +103,14 @@ public class View extends javax.swing.JFrame {
         });
         viajes.add(jMenuItemListadoRutas);
 
-        ListadoVuelos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
-        ListadoVuelos.setText("Flota de Aviones");
-        ListadoVuelos.addActionListener(new java.awt.event.ActionListener() {
+        ListadoDeAviones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
+        ListadoDeAviones.setText("Flota de Aviones");
+        ListadoDeAviones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ListadoVuelosActionPerformed(evt);
+                ListadoDeAvionesActionPerformed(evt);
             }
         });
-        viajes.add(ListadoVuelos);
+        viajes.add(ListadoDeAviones);
 
         MetodosDePago.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_D, java.awt.event.InputEvent.CTRL_MASK));
         MetodosDePago.setText("Metodos de Pago");
@@ -157,6 +157,7 @@ public class View extends javax.swing.JFrame {
         });
         viajes.add(jMenuItemListadoViajes);
 
+        reservas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_J, java.awt.event.InputEvent.CTRL_MASK));
         reservas.setText("Listado de reservas");
         reservas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,13 +225,13 @@ public class View extends javax.swing.JFrame {
        
     }//GEN-LAST:event_jMenuItemListadoRutasActionPerformed
 
-    private void ListadoVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoVuelosActionPerformed
+    private void ListadoDeAvionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListadoDeAvionesActionPerformed
         Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View ventana = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.View();
         Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Model modelA = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Model();
         Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Controller ControllerA = new Presentacion.Presentacion_Avion.Listado_aviones_disponibles.Controller(modelA,ventana);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);        
-    }//GEN-LAST:event_ListadoVuelosActionPerformed
+    }//GEN-LAST:event_ListadoDeAvionesActionPerformed
 
     private void MetodosDePagoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MetodosDePagoActionPerformed
         Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model listadoModel = new Presentacion.Presentacion_TipoDePago.Listado_De_Pagos.Model();
@@ -317,7 +318,7 @@ public class View extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem Horarios;
-    private javax.swing.JMenuItem ListadoVuelos;
+    private javax.swing.JMenuItem ListadoDeAviones;
     private javax.swing.JMenuItem MetodosDePago;
     private javax.swing.JLabel jLabelVuelos;
     private javax.swing.JMenu jMenu2;

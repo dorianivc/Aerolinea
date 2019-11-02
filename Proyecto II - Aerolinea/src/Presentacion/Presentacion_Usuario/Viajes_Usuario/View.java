@@ -34,6 +34,7 @@ public class View extends javax.swing.JFrame implements Observer {
      */
     public View() {
         initComponents();
+       
     }
 
     /**
@@ -121,10 +122,11 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void escogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogerActionPerformed
-        int row=this.TablaViajes.getSelectedRow();
-        Viaje viaje=getValueat(row);
-        Vuelo vueloAux=this.model.vuelo;
-        try {
+       
+        try { 
+            int row=this.TablaViajes.getSelectedRow();
+             Viaje viaje=getValueat(row);
+             Vuelo vueloAux=this.model.vuelo;
             System.out.println("Filas: "+ vueloAux.getAvionAsignado().getFilas() + "Columnas: "+ vueloAux.getAvionAsignado().getColumnas());
             System.out.println("Precio del vuelo: "+ viaje.getPrecio());
             Presentacion.Seleccion_de_asientos.Model model=new Presentacion.Seleccion_de_asientos.Model(vueloAux.getAvionAsignado().getFilas(),vueloAux.getAvionAsignado().getColumnas());

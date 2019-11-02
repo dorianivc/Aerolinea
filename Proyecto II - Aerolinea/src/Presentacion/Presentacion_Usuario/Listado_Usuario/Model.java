@@ -28,7 +28,16 @@ public class Model extends Observable{
 
    
     public Model() {
-       usuarios = new ArrayList<>();
+        try{
+            UsuarioJpaController usuarioDao = new UsuarioJpaController (db.db.EntityManager);
+            usuarios=usuarioDao.findUsuarioEntities();
+        }catch(Exception se){
+            System.out.println(se.getMessage());
+        }
+        if(usuarios==null || usuarios.isEmpty()){
+            usuarios=null;
+            usuarios= new ArrayList<>();
+        }
         this.db= new DBQuerys();
     }
 

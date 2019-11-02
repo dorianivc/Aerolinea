@@ -33,7 +33,7 @@ public class Controller {
     public void ModificarUsuario(Usuario usuario){
          UsuarioJpaController UsuarioDao = new UsuarioJpaController(db.db.EntityManager);
         try{      
-           // UsuarioDao.edit(usuario);
+            //UsuarioDao.edit(usuario);
              db.UsuarioUpdate(usuario);
             JOptionPane.showMessageDialog(null, "Usuario modificado con éxito", "Modificando al usuario", JOptionPane.PLAIN_MESSAGE,null);
         }catch(Exception ex){

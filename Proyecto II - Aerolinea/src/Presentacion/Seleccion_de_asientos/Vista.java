@@ -151,7 +151,7 @@ public class Vista extends JFrame implements java.util.Observer {
         
         
         this.setSize(400,400);
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setBackground(Color.RED);
         this.addMouseListener(new MouseAdapter() 
         {

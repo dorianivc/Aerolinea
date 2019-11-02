@@ -24,7 +24,12 @@ public class Controller {
     
  
     public void agregarUsuario(Usuario usuario){ 
-        modelo.agregarUsuario(usuario);
+        try{
+            modelo.agregarUsuario(usuario);
+        }catch(Exception se){
+            System.out.println(se.getMessage());
+        }
+        
 }
 
 }

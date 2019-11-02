@@ -32,10 +32,12 @@ public class Controller {
     public void ModificarTipoDePago(TipodePago tipoPago){
         try{
             TipodePagoJpaController tipoPagoDao = new TipodePagoJpaController(db.db.EntityManager);
-            tipoPagoDao.edit(tipoPago);
+            //tipoPagoDao.edit(tipoPago);
+            tipoPagoDao.destroy(tipoPago.getTipoDePago());
+            tipoPagoDao.create(tipoPago);
             JOptionPane.showMessageDialog(null, "Tipo de pago modificado con éxito", "Modificando el tipo de pago", JOptionPane.PLAIN_MESSAGE,null);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
     } 
     

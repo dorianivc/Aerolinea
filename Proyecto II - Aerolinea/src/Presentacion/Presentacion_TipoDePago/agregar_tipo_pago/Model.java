@@ -29,7 +29,7 @@ public class Model {
             tipoPagoDao.create(tipoPago);
             JOptionPane.showMessageDialog(null, "Tipo de pago agregado con éxito", "Agregando tipo de pago", JOptionPane.PLAIN_MESSAGE, icon);
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
+            JOptionPane.showMessageDialog(null, "No se guardo el tipo de pago", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
     }
     

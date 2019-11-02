@@ -54,8 +54,10 @@ public class View extends javax.swing.JFrame  implements Observer{
         modificar = new javax.swing.JButton();
         cancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBoxAdmin = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setText("Codigo");
 
@@ -105,6 +107,10 @@ public class View extends javax.swing.JFrame  implements Observer{
 
         jLabel1.setText("Modificar Usuario");
 
+        jLabel7.setText("Administrador");
+
+        jComboBoxAdmin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SI", "NO" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,19 +121,25 @@ public class View extends javax.swing.JFrame  implements Observer{
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(55, 55, 55)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel2)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel8)
+                                            .addComponent(jLabel9))))
+                                .addGap(52, 52, 52))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel9))))
-                        .addGap(18, 18, 18)
+                                .addGap(61, 61, 61)
+                                .addComponent(jLabel7)
+                                .addGap(35, 35, 35)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(año, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -142,7 +154,8 @@ public class View extends javax.swing.JFrame  implements Observer{
                             .addComponent(Direccion)
                             .addComponent(Telefono)
                             .addComponent(Celular, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                            .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(codigo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(modificar)
@@ -154,7 +167,7 @@ public class View extends javax.swing.JFrame  implements Observer{
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(codigo))
@@ -195,7 +208,11 @@ public class View extends javax.swing.JFrame  implements Observer{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(Celular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBoxAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -213,6 +230,11 @@ public class View extends javax.swing.JFrame  implements Observer{
         model.getUsuario().setDireccion(Direccion.getText());
         model.getUsuario().setTelefono(Telefono.getText());
         model.getUsuario().setCelular(Celular.getText());
+        if(this.jComboBoxAdmin.getSelectedItem()=="SI"){
+            model.getUsuario().setAdmin((short)1);
+        }else{
+            model.getUsuario().setAdmin((short)0);
+        }
         
        int Dia = Integer.parseInt(Day.getText());
        int mes = Integer.parseInt(Mes.getText());
@@ -222,7 +244,7 @@ public class View extends javax.swing.JFrame  implements Observer{
        Date fecha = new Date(year,mes,Dia);
         model.getUsuario().setFechaNacimiento(fecha);
         controller.ModificarUsuario(model.getUsuario());
-        
+        this.dispose();
         
     }//GEN-LAST:event_modificarActionPerformed
 
@@ -312,6 +334,12 @@ public class View extends javax.swing.JFrame  implements Observer{
         Direccion.setText(model.usuario.getDireccion());
         Telefono.setText(model.usuario.getTelefono());
         Celular.setText(model.usuario.getCelular());
+        String admin;
+        if(model.usuario.getAdmin()==1){
+            
+        }else{
+            this.jComboBoxAdmin.setSelectedIndex(1);
+        }
         String dia = String.valueOf(model.usuario.getFechaNacimiento());
         String x;
         x = dia.substring(8, 10);
@@ -337,6 +365,7 @@ public class View extends javax.swing.JFrame  implements Observer{
     private javax.swing.JTextField año;
     private javax.swing.JButton cancelar;
     private javax.swing.JLabel codigo;
+    private javax.swing.JComboBox<String> jComboBoxAdmin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -345,6 +374,7 @@ public class View extends javax.swing.JFrame  implements Observer{
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JButton modificar;

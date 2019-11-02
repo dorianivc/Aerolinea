@@ -35,7 +35,7 @@ void agregarUsuario(Usuario usuario){
                 usuario.getTelefono() == " " || usuario.getUsuario() ==" "){
               int x = 999;
               int x2;
-        throw new Exception();
+        throw new Exception("Campos Vacios");
         
         }
           else usuarioDao.create(usuario);

@@ -12,6 +12,7 @@ import Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.VuelosTableMod
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -149,11 +150,22 @@ public class View extends javax.swing.JFrame implements Observer {
 
     private void escogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escogerActionPerformed
         int row = this.TableVuelos.getSelectedRow();
+        try{
+          row = this.TableVuelos.getSelectedRow();
         Presentacion.Presentacion_Usuario.Viajes_Usuario.Model model = new Presentacion.Presentacion_Usuario.Viajes_Usuario.Model(getUsuario(),getValueat(row));
         Presentacion.Presentacion_Usuario.Viajes_Usuario.View view = new Presentacion.Presentacion_Usuario.Viajes_Usuario.View();
         Presentacion.Presentacion_Usuario.Viajes_Usuario.Controller controller = new Presentacion.Presentacion_Usuario.Viajes_Usuario.Controller(model, view);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
+        }catch(Exception se){
+            if("-1".equals(se.getMessage())){
+                JOptionPane.showMessageDialog(null, "Error: No ha seleccionado un viaje", "Seleccion Invalida",JOptionPane.PLAIN_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, se.getMessage(), "Excepcion Producida",JOptionPane.PLAIN_MESSAGE);
+            }
+             
+        }
+        
     }//GEN-LAST:event_escogerActionPerformed
 
     private void reservacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reservacionesActionPerformed

@@ -231,6 +231,8 @@ public class View extends javax.swing.JFrame {
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
         Presentacion.login.View ventana = new Presentacion.login.View();
+        Presentacion.login.Model model = new Presentacion.login.Model();
+        Presentacion.login.Controller controller = new Presentacion.login.Controller(model, ventana);
         ventana.setLocationRelativeTo(null);
         ventana.setVisible(true);
         this.dispose(); 

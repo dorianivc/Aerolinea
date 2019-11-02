@@ -44,8 +44,8 @@ public class horarioTableModel extends AbstractTableModel{
         Horario h = horarios.get(rowIndex);
         switch(columnIndex){
             case 0: return h.getHorario();
-            case 1: return h.getSalida();
-            case 2: return h.getLlegada();
+            case 1: return h.getSalida().getHours()-18+":"+h.getSalida().getMinutes();
+            case 2: return h.getLlegada().getHours()-18+":"+h.getLlegada().getMinutes();
             case 3: return h.getDiaDeLaSemana();
             default:return "";
         }
