@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  *
  * @author Monica
@@ -31,6 +32,9 @@ public class main {
          
      /*
       DBQuerys db= new DBQuerys();
+      db.db.reporte();
+      
+      
       List<Pais> lista= db.listadoPaises();
      for(int i=0;i<lista.size();i++){
               Pais pais= lista.get(i);

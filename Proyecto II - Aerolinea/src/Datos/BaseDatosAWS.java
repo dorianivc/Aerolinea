@@ -11,9 +11,17 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class BaseDatosAWS {
@@ -33,7 +41,19 @@ public class BaseDatosAWS {
         return EntityManager.createEntityManager();
     }
     
-    
+    public void reporte(){
+        
+        JasperReport reporte=null;
+        String path="Report.jasper";
+        try {
+            reporte =(JasperReport) JRLoader.loadObjectFromFile(path);
+            JasperPrint jPrint= JasperFillManager.fillReport(path,null,this.conexion);
+            JasperViewer view = new JasperViewer(jPrint,false);
+            view.setVisible(true);
+        } catch (JRException ex) {
+            Logger.getLogger(BaseDatosAWS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
     
        public BaseDatosAWS(){

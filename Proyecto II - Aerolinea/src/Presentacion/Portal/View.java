@@ -5,6 +5,9 @@
  */
 package Presentacion.Portal;
 
+import Datos.DBQuerys;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Monica
@@ -45,6 +48,7 @@ public class View extends javax.swing.JFrame {
         vuelos = new javax.swing.JMenuItem();
         jMenuItemListadoViajes = new javax.swing.JMenuItem();
         reservas = new javax.swing.JMenuItem();
+        jMenuItemReportes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
 
@@ -166,6 +170,15 @@ public class View extends javax.swing.JFrame {
         });
         viajes.add(reservas);
 
+        jMenuItemReportes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemReportes.setText("Reporte ");
+        jMenuItemReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemReportesActionPerformed(evt);
+            }
+        });
+        viajes.add(jMenuItemReportes);
+
         jMenuBar1.add(viajes);
 
         jMenu2.setText("Ayuda");
@@ -281,6 +294,15 @@ public class View extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_reservasActionPerformed
 
+    private void jMenuItemReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportesActionPerformed
+       DBQuerys db= new DBQuerys();
+       try{
+           db.db.reporte();
+       }catch(Exception se){
+           JOptionPane.showMessageDialog(null, "Se generaron errores al cargar el reporte", "Errores Generados",JOptionPane.PLAIN_MESSAGE);
+       }
+    }//GEN-LAST:event_jMenuItemReportesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -331,6 +353,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemListadoPaises;
     private javax.swing.JMenuItem jMenuItemListadoRutas;
     private javax.swing.JMenuItem jMenuItemListadoViajes;
+    private javax.swing.JMenuItem jMenuItemReportes;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem listadoUsuarios;
