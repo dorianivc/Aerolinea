@@ -31,8 +31,7 @@ public class Model {
     public List<AvionDisponible> listadoAviones(){
         List<AvionDisponible> lista= new ArrayList<>();
         try{
-           AvionDisponibleJpaController avionDao= new AvionDisponibleJpaController(db.db.EntityManager);
-           lista=avionDao.findAvionDisponibleEntities();
+           lista=db.AvionSearch("");
         }catch(Exception se){
             JOptionPane.showMessageDialog(null, se.getMessage(), "Error al Obtener Aviones",JOptionPane.PLAIN_MESSAGE);
         }
@@ -63,8 +62,7 @@ public class Model {
     
     public void agregarVuelo(Vuelo vuelo) throws Exception{
         try{
-            VueloJpaController vueloDao= new VueloJpaController(this.db.db.EntityManager);
-            vueloDao.create(vuelo);
+            db.VueloAdd(vuelo);
             JOptionPane.showMessageDialog(null, "Vuelo agregado exitosamente", "VUELO AGREGADO",JOptionPane.PLAIN_MESSAGE);
         }catch(Exception se){
             JOptionPane.showMessageDialog(null, se.getMessage(), "Error al agregar Vuelo",JOptionPane.PLAIN_MESSAGE);

@@ -28,8 +28,7 @@ public class Model {
    public List<Vuelo> listadoVuelos(){
        List<Vuelo> lista= new ArrayList<>();
        try{
-           VueloJpaController vueloDao= new VueloJpaController(db.db.EntityManager);
-           lista=vueloDao.findVueloEntities();
+            lista=db.VueloSearch("");
        }catch(Exception se){
            JOptionPane.showMessageDialog(null, se.getMessage(), "ERROR AL OBTENER VUELOS",JOptionPane.PLAIN_MESSAGE);
        }
@@ -38,11 +37,10 @@ public class Model {
    
    public void agregarViaje(Viaje viaje){
        try{
-           ViajeJpaController viajeDao= new ViajeJpaController(db.db.EntityManager);
-           viajeDao.create(viaje);
+           db.addViaje(viaje);
            JOptionPane.showMessageDialog(null, "Viaje agregado con exito", "VIAJE AGREGADO",JOptionPane.PLAIN_MESSAGE);
        }catch(Exception se){
-            JOptionPane.showMessageDialog(null, se.getMessage(), "EEROR AL AGREGAR VIAJE",JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(null, se.getMessage(), "ERROR AL AGREGAR VIAJE",JOptionPane.PLAIN_MESSAGE);
        }
    }
 }

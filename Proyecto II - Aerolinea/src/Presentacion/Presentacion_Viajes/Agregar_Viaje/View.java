@@ -22,20 +22,18 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
-        
-        for(int i=1;i<32;i++){
+
+        for (int i = 1; i < 32; i++) {
             this.jComboBoxDia.addItem(i);
         }
-        
-        for(int i=1;i<13;i++){
+        for (int i = 1; i < 13; i++) {
             this.jComboBoxMes.addItem(i);
         }
-        
-        for(int i=2019;i<2200;i++){
+        for (int i = 2019; i < 2200; i++) {
             this.jComboBoxAno.addItem(i);
         }
-        List<Vuelo> lista= this.controller.getListadoVuelosBD();
-        for(int i=0;i<lista.size();i++){
+        List<Vuelo> lista = this.controller.getListadoVuelosBD();
+        for (int i = 0; i < lista.size(); i++) {
             this.jComboBoxVuelos.addItem(lista.get(i));
         }
     }
@@ -63,12 +61,14 @@ public class View extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        viaje = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(400, 220));
         setSize(new java.awt.Dimension(400, 220));
 
@@ -110,6 +110,8 @@ public class View extends javax.swing.JFrame {
 
         jLabel4.setText("Año");
 
+        jLabel5.setText("Viaje:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -118,7 +120,7 @@ public class View extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addComponent(Regresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,11 +129,16 @@ public class View extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelVuelo)
-                            .addComponent(jLabelFecha))
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabelVuelo)
+                                    .addComponent(jLabelFecha))
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel5)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -144,7 +151,8 @@ public class View extends javax.swing.JFrame {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jComboBoxVuelos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxVuelos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(viaje, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -152,7 +160,11 @@ public class View extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(26, 26, 26)
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(viaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelFecha)
                     .addComponent(jComboBoxDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +181,7 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Regresar)
                     .addComponent(jButtonAgregar))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -184,21 +196,25 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBoxVuelosActionPerformed
 
     private void jButtonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarActionPerformed
-
-    int ano=(int) this.jComboBoxAno.getSelectedItem();
-    int mes=(int)this.jComboBoxMes.getSelectedItem();
-    int dia=(int)this.jComboBoxDia.getSelectedItem();
-    Date fecha= new Date(ano-1900,mes-1,dia);
-    Viaje viaje= new Viaje();
-    viaje.setFecha(fecha);
-    Vuelo vuelo=(Vuelo) this.jComboBoxVuelos.getSelectedItem();
-    viaje.setVuelo(vuelo);
-    try{
-        controller.agregarViajeBD(viaje);
-        this.dispose();
-    }catch(Exception se){
-         JOptionPane.showMessageDialog(null, se.getMessage(), "ERROR AL AGREGAR VIAJE",JOptionPane.PLAIN_MESSAGE);
-    }
+        int v = Integer.parseInt(viaje.getText());
+        int ano = (int) this.jComboBoxAno.getSelectedItem();
+        int mes = (int) this.jComboBoxMes.getSelectedItem();
+        int dia = (int) this.jComboBoxDia.getSelectedItem();
+        Date fecha = new Date();
+        fecha.setDate(dia);
+        fecha.setMonth(mes);
+        fecha.setYear(ano);
+        
+        Viaje viaje = new Viaje(v);
+        viaje.setFecha(fecha);
+        Vuelo vuelo = (Vuelo) this.jComboBoxVuelos.getSelectedItem();
+        viaje.setVuelo(vuelo);
+        try {
+            controller.agregarViajeBD(viaje);
+            this.dispose();
+        } catch (Exception se) {
+            JOptionPane.showMessageDialog(null, se.getMessage(), "ERROR AL AGREGAR VIAJE", JOptionPane.PLAIN_MESSAGE);
+        }
     }//GEN-LAST:event_jButtonAgregarActionPerformed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
@@ -251,10 +267,12 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelFecha;
     private javax.swing.JLabel jLabelVuelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField viaje;
     // End of variables declaration//GEN-END:variables
-    Controller controller= new Controller();
+    Controller controller = new Controller();
 }

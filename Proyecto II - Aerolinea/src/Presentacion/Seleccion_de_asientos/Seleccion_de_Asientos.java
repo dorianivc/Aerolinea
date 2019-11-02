@@ -15,16 +15,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template archivoFisicoOcupado, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Monica
- */
 public class Seleccion_de_Asientos {
    
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {

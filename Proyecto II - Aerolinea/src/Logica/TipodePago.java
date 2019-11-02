@@ -96,7 +96,7 @@ public class TipodePago implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.TipodePago[ tipoDePago=" + tipoDePago + " ]";
+        return tipoDePago;
     }
     
 }

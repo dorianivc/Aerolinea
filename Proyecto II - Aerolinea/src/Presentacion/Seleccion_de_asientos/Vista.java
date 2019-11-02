@@ -39,15 +39,17 @@ public class Vista extends JFrame implements java.util.Observer {
  
     public Model modelo;
     public Controlador controller;
-   private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JButton jButtonCancelar;
     private javax.swing.JLabel jLabelPasillo;
     private javax.swing.JLabel jLabelVentana;
     private javax.swing.JLabel jLabelVentana1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuBar jMenuBarAyuda;
     private javax.swing.JMenuItem jMenuItemInstrucciones;
-    public List<Imagen> asientos_seleccionados;
+    public List<Asiento> asientos_seleccionados;
     public Vista() throws IOException{
        this.asientos_seleccionados= new ArrayList<>();
        
@@ -58,16 +60,15 @@ public class Vista extends JFrame implements java.util.Observer {
        
         
       this.setTitle("SELECCION DE ASIENTOS DEL VUELO");
-     
-     
+  
         jButtonAceptar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabelPasillo = new javax.swing.JLabel();
         jLabelVentana = new javax.swing.JLabel();
         jLabelVentana1 = new javax.swing.JLabel();
-        jMenuBarAyuda = new javax.swing.JMenuBar();
+        jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItemInstrucciones = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,49 +94,51 @@ public class Vista extends JFrame implements java.util.Observer {
 
         jMenu1.setText("Ayuda");
 
-        jMenuItemInstrucciones.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemInstrucciones.setText("Instrucciones");
-        jMenuItemInstrucciones.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Instrucciones");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItemInstrucciones);
+        jMenu1.add(jMenuItem1);
 
-        jMenuBarAyuda.add(jMenu1);
+        jMenuBar1.add(jMenu1);
 
-        setJMenuBar(jMenuBarAyuda);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelVentana)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelVentana1)
-                .addGap(38, 38, 38))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jButtonAceptar)
-                        .addGap(97, 97, 97)
-                        .addComponent(jButtonCancelar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
-                        .addComponent(jLabelPasillo)))
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabelVentana)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabelVentana1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(41, 41, 41)
+                                .addComponent(jButtonAceptar)
+                                .addGap(97, 97, 97)
+                                .addComponent(jButtonCancelar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(149, 149, 149)
+                                .addComponent(jLabelPasillo)))
+                        .addGap(0, 100, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelVentana1)
                     .addComponent(jLabelVentana))
-                .addGap(62, 62, 62)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(jLabelPasillo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,10 +146,6 @@ public class Vista extends JFrame implements java.util.Observer {
                     .addComponent(jButtonCancelar))
                 .addGap(62, 62, 62))
         );
-
-        
-        
-        
         
         
         
@@ -163,6 +162,14 @@ public class Vista extends JFrame implements java.util.Observer {
             });
         
     }
+
+    public List<Asiento> getAsientos_seleccionados() {
+        return asientos_seleccionados;
+    }
+
+    public void setAsientos_seleccionados(List<Asiento> asientos_seleccionados) {
+        this.asientos_seleccionados = asientos_seleccionados;
+    }
     
     
   private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {  
@@ -172,7 +179,7 @@ public class Vista extends JFrame implements java.util.Observer {
     }  
         
  public void clickAsiento(MouseEvent e){
-     Imagen imagen;
+     Asiento imagen;
         try{
              imagen=buscarAsiento(e.getPoint());
              if(!imagen.getVendido()){
@@ -238,7 +245,8 @@ public class Vista extends JFrame implements java.util.Observer {
         controller.bloquearAsientos(asientos_seleccionados);
         this.asientos_seleccionados.clear();
         JOptionPane.showMessageDialog(null,mensaje , "ACEPTAR ASIENTOS",JOptionPane.PLAIN_MESSAGE);
-        refresh(); //this.dispose();
+        refresh(); //
+        this.dispose();
         
         }
     }                                              
@@ -258,8 +266,8 @@ public class Vista extends JFrame implements java.util.Observer {
 public void refresh(){
     this.repaint();
 }
-    public Imagen buscarAsiento(Point punto){
-        Imagen asiento=null;
+    public Asiento buscarAsiento(Point punto){
+        Asiento asiento=null;
         try{
           asiento =this.controller.buscar(punto.x, punto.y);
         }catch(Exception es){
@@ -294,14 +302,14 @@ public void refresh(){
 
     
     void renderModel(Model m, Graphics media){
-     int ejeX=50;
+     
      for(int i=0;i<modelo.filas;i++){
-         int ejeY=50;
+         
          for(int y=0;y<modelo.columnas;y++){
              media.drawImage(modelo.asientos[i][y].getImage(),modelo.asientos[i][y].getX(),modelo.asientos[i][y].getY(),this);
-             ejeY+=25;
+             
          }
-         ejeX+=25;
+       
      }
     
     

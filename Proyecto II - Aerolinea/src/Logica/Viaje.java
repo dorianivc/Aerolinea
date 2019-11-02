@@ -69,6 +69,10 @@ public class Viaje implements Serializable {
     public Date getFecha() {
         return fecha;
     }
+    
+    public String getFechaS(){
+        return String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+String.valueOf(fecha.getDay());
+    }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
@@ -114,6 +118,10 @@ public class Viaje implements Serializable {
     @Override
     public String toString() {
         return "Logica.Viaje[ viaje=" + viaje + " ]";
+    }
+    
+    public String mostrarViaje(){
+        return "Viaje: "+getViaje()+" "+getFecha();
     }
     
 }

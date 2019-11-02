@@ -14,13 +14,13 @@ import java.util.List;
  *
  * @author Monica
  */
-class Controlador {
+public class Controlador {
     Model model;
-    Controlador(Model model){
+   public Controlador(Model model){
         this.model=model;
     }
     
-   public Imagen buscar(int x, int y){
+   public Asiento buscar(int x, int y){
        try{
        return this.model.buscarAsiento(x, y);
        }catch(Exception ex){
@@ -28,10 +28,10 @@ class Controlador {
        }
        return null;
    }
-   void bloquearAsientos(List<Imagen> lista){
+   public void bloquearAsientos(List<Asiento> lista){
        this.model.bloquearAsientos(lista);
    }
-   public void cambiarTipo(Imagen imagen){
+   public void cambiarTipo(Asiento imagen){
        try{
            this.model.cambiarTipo(imagen);
        }catch(Exception se){

@@ -5,24 +5,15 @@ package Presentacion.Seleccion_de_asientos;
 
 
 import java.awt.image.BufferedImage;
-import java.util.Observable;
 import javax.swing.ImageIcon;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Monica
- */
-public class Imagen extends ImageIcon implements java.util.Observer {
+public class Asiento extends ImageIcon  {
     private int numero_asiento;
     private int x;
     private int y;
     private Boolean vendido;
+    public BufferedImage imageQ;
 
     @Override
     public String toString() {
@@ -46,7 +37,7 @@ public class Imagen extends ImageIcon implements java.util.Observer {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Imagen other = (Imagen) obj;
+        final Asiento other = (Asiento) obj;
         if (this.numero_asiento != other.numero_asiento) {
             return false;
         }
@@ -77,14 +68,17 @@ public class Imagen extends ImageIcon implements java.util.Observer {
 
    
    
-    public Imagen(BufferedImage image, int numAsiento, int x, int y){
+    public Asiento(BufferedImage image, int numAsiento, int x, int y){
         super(image);
         this.numero_asiento=numAsiento;
         this.x=x;
         this.y=y;
         this.vendido=false;
     }
-
+    public Asiento(int numAsiento){
+       super(new BufferedImage(1,1,1));
+       this.numero_asiento=numAsiento;
+    }
     public int getX() {
         return x;
     }
@@ -101,8 +95,4 @@ public class Imagen extends ImageIcon implements java.util.Observer {
         this.y = y;
     }
 
-    @Override
-    public void update(Observable o, Object o1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }

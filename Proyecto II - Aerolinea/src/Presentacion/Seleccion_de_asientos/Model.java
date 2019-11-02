@@ -5,7 +5,7 @@ package Presentacion.Seleccion_de_asientos;
 
 
 
-import Presentacion.Seleccion_de_asientos.Imagen;
+import Presentacion.Seleccion_de_asientos.Asiento;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class Model extends Observable{
    
    public int filas;
    public int columnas;
-   public Imagen[][] asientos;
+   public Asiento[][] asientos;
    File archivoFisicoOcupado= new File("src/media/cuadrado_en_uso1.png");
    File archivoFisicoDisponible= new File("src/media/negro.png");
    BufferedImage ocupado= ImageIO.read(archivoFisicoOcupado);
@@ -30,13 +30,14 @@ public class Model extends Observable{
     public int getFilas() {
         return filas;
     }
-    public void bloquearAsientos(List<Imagen> lista){
+    public void bloquearAsientos(List<Asiento> lista){
         for(int x=0;x<filas;x++){
             for(int y=0;y<columnas;y++){
                 
                 for(int i=0;i<lista.size();i++){
-                    if(lista.get(i).equals(asientos[x][y])){
+                    if(lista.get(i).getNumero_asiento()==(asientos[x][y].getNumero_asiento())){
                         asientos[x][y].setVendido(Boolean.TRUE);
+                        asientos[x][y].setImage(ocupado);
                     }
                 }
                 
@@ -56,11 +57,11 @@ public class Model extends Observable{
         this.columnas = columnas;
     }
 
-    public Imagen[][] getAsientos() {
+    public Asiento[][] getAsientos() {
         return asientos;
     }
 
-    public void setAsientos(Imagen[][] asientos) {
+    public void setAsientos(Asiento[][] asientos) {
         this.asientos = asientos;
     }
 
@@ -100,16 +101,19 @@ public class Model extends Observable{
        this.filas=filas;
        this.columnas=columnas;
    
-     this.asientos= new Imagen[filas][columnas];
+     this.asientos= new Asiento[filas][columnas];
      
      int ejeX=75;
      int asiento=0;
      for(int i=0;i<filas;i++){
          int ejeY=60;
+         if(i==(filas/2)){
+             ejeX+=35;
+         }
          for(int y=0;y<columnas;y++){
              int plano=20;
           
-             asientos[i][y]= new Imagen(disponible,asiento,ejeX,ejeY);
+             asientos[i][y]= new Asiento(disponible,asiento,ejeX,ejeY);
              ejeY+=25;
              asiento+=1;
          }
@@ -118,7 +122,7 @@ public class Model extends Observable{
  
    }
 
-  public Imagen buscarAsiento(int X,int Y){
+  public Asiento buscarAsiento(int X,int Y){
       for(int i=0;i<filas;i++){
          for(int y=0;y<columnas;y++){
              
@@ -130,7 +134,7 @@ public class Model extends Observable{
       return null;
   }
 
-  public void cambiarTipo(Imagen imagen){
+  public void cambiarTipo(Asiento imagen){
       if(imagen.getImage()==disponible){
          imagen.setImage(ocupado); 
       }else if(imagen.getImage()==ocupado){

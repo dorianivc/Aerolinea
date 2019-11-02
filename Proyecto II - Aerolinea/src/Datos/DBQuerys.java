@@ -9,9 +9,11 @@ import Logica.AvionDisponible;
 import Logica.Ciudad;
 import Logica.Horario;
 import Logica.Pais;
+import Logica.Reserva;
 import Logica.Ruta;
 import Logica.TipodePago;
 import Logica.Usuario;
+import Logica.Viaje;
 import Logica.Vuelo;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,6 +23,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class DBQuerys {
 
@@ -30,6 +35,48 @@ public class DBQuerys {
         db = new BaseDatosAWS();
     }
 
+     public List<Viaje> listadoViajes() throws SQLException {
+        Connection conn = db.conexion;
+        Statement statement = null;
+        List<Viaje> lista = new ArrayList<>();
+        try {
+
+            System.out.println("Creating statement...");
+            statement = conn.createStatement();
+            String sql;
+            sql = "select * from Aerolinea.Viaje; ";
+            System.out.println(sql);
+            //STEP 5: Extract data from result set
+            try (ResultSet rs = statement.executeQuery(sql)) {
+                //STEP 5: Extract data from result set
+                while (rs.next()) {
+                    //Retrieve by column name
+                    String llave = rs.getString("viaje");
+                    String vuelo = rs.getString("vuelo");
+                    String fecha= rs.getString("fecha");
+                    //Display values
+                    Logica.Viaje viaje = new Viaje(Integer.parseInt(llave));
+                    viaje.setVuelo(new Vuelo(vuelo));
+                    int ano= Integer.parseInt(fecha.substring(0, 3));
+                    int mes=Integer.parseInt(fecha.substring(5, 6));
+                    int dia=Integer.parseInt(fecha.substring(8, 9));
+                    viaje.setFecha(new Date(ano,mes,dia));
+                    lista.add(viaje);
+                }
+                //STEP 6: Clean-up environment
+
+            }
+            statement.close();
+
+        } catch (SQLException se) {
+
+        }
+
+        return lista;
+
+    }
+    
+    
     public List<Pais> listadoPaises() throws SQLException {
         Connection conn = db.conexion;
         Statement statement = null;
@@ -484,4 +531,122 @@ public class DBQuerys {
 
         }
     }
+    
+    
+     public void VueloAdd(Vuelo v) throws Exception {
+        String sql = "insert into Aerolinea.Vuelo "
+                + " values('%s','%s','%s','%s')";
+        sql = String.format(sql, v.getVuelo(),v.getHorario().getHorario() ,v.getAvionAsignado().getCodigoMatricula()
+                ,v.getRutaAsignada().getRuta());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Vuelo ya existe");
+        }
+    }
+     
+     public List<Reserva> reservaSearchId(String id) throws Exception{
+        Statement statement = null;
+        Connection conn = db.conexion;
+        statement = conn.createStatement(); 
+        PagoJpaController PagoDao = new PagoJpaController(db.EntityManager);
+        UsuarioJpaController UsuarioDao = new UsuarioJpaController(db.EntityManager);
+        List<Reserva> resultado = new ArrayList<Reserva>();
+        String sql = "select * from Aerolinea.Reserva r inner join "
+                + "Aerolinea.Usuario u on r.usuario = u.usuario where u.usuario like '%%%s%%'";
+        sql = String.format(sql, id);
+        ResultSet rs = statement.executeQuery(sql);
+        if(rs.next()){
+            try {
+                int llave = Integer.parseInt(rs.getString("reserva"));
+                String viaje = String.valueOf(rs.getInt("viaje"));
+                String asientos = rs.getString("numero_asiento");
+//                int pago = Integer.parseInt(rs.getString("pago"));
+                String usuario = rs.getString("usuario");
+                
+                Reserva reserva = new Reserva(llave);
+                reserva.setViaje(this.ViajeSearch(viaje).get(0));
+                reserva.setNumeroAsiento(asientos);
+//                reserva.setPago(PagoDao.findPago(pago));
+                reserva.setUsuario(UsuarioDao.findUsuario(usuario));
+                resultado.add(reserva);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
+            }
+        }
+        return resultado;
+    }
+     
+     
+    public List<Viaje> ViajeSearch(String nombre) throws Exception {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<Viaje> resultado = new ArrayList<Viaje>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from Aerolinea.Viaje v "
+                    + "where v.viaje like '%%%s%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                int llave = Integer.parseInt(rs.getString("viaje"));
+                String vuelo = rs.getString("vuelo");
+                Date fecha = (Date) rs.getObject("fecha");
+
+                Vuelo a = VueloSearch(vuelo).get(0);
+
+
+                Viaje v = new Viaje(llave);
+                v.setFecha(fecha);
+                v.setVuelo(a);
+                System.out.print(v.getVuelo().getVuelo());
+                resultado.add(v);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+    
+    public void addViaje(Viaje v) throws Exception{
+        String sql = "insert into Aerolinea.Viaje "
+                + " values('%s','%s','%s')";
+        System.out.print(v.getViaje()+v.getVuelo().getVuelo()+v.getFechaS());
+        sql = String.format(sql,v.getViaje(),v.getVuelo().getVuelo(),v.getFechaS());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Viaje ya existe");
+        }
+    }
+    
+    public void viajeUpdate(Viaje v) throws Exception{
+        String sql = " update Aerolinea.Viaje v "
+                + "set v.vuelo  ='%s', v.fecha ='%s' where v.viaje ='%s'";
+        System.out.print(v.getViaje()+v.getVuelo().getVuelo()+v.getFechaS());
+        sql = String.format(sql, v.getVuelo().getVuelo(),v.getFechaS(), v.getViaje());
+
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal ");
+
+        }    
+    }
+    
+    public void deleteViaje(Viaje v) throws Exception{
+        String sql = "delete from Aerolinea.Viaje where viaje='%s'";
+        sql = String.format(sql,v.getViaje());
+        int count = executeUpdate(sql);
+        if (count == 0) {
+            throw new Exception("Algo anda mal");
+        }    
+    }
+
+
+
+
+
+
 }
+
+

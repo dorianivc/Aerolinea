@@ -6,11 +6,19 @@
 package Presentacion.Presentacion_Usuario.Vuelo_Usuario;
 
 import Logica.Ciudad;
+import Logica.Usuario;
 import Logica.Vuelo;
 import Presentacion.Presentacion_Vuelo.Listado_Vuelos_DIsponibles.VuelosTableModel;
+import Presentacion.Seleccion_de_asientos.Asiento;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 /**
  *
@@ -23,6 +31,7 @@ public class View extends javax.swing.JFrame implements Observer {
      */
     public View() { 
         initComponents();
+        
     }
 
     /**
@@ -43,6 +52,7 @@ public class View extends javax.swing.JFrame implements Observer {
         OrigenComboBox = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bienvenido");
@@ -58,6 +68,11 @@ public class View extends javax.swing.JFrame implements Observer {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TableVuelos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableVuelosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableVuelos);
 
         jButtonEscoger.setText("Escoger");
@@ -74,6 +89,13 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel1.setText("Origen:");
 
         jLabel2.setText("Destino: ");
+
+        jButton1.setText("Ver reservaciones");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,14 +119,17 @@ public class View extends javax.swing.JFrame implements Observer {
                                 .addComponent(BuscarButton)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonEscoger)
-                        .addGap(0, 539, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(242, 242, 242)
+                                .addComponent(Vuelos_Disponibles))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButtonEscoger)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton1)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(Vuelos_Disponibles)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,20 +145,60 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEscoger)
-                .addGap(54, 54, 54))
+                .addGap(57, 57, 57)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonEscoger)
+                    .addComponent(jButton1))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEscogerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEscogerActionPerformed
-        Presentacion.Presentacion_Usuario.Horario_Usuario.View ventana = new Presentacion.Presentacion_Usuario.Horario_Usuario.View();
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
-        this.dispose();
+        int fila=9;//aqui pasa las filas del avion
+        int columna=8;//aqui pasa las columnas del avion
+        List<Asiento> listaDeAsientoReservados= new ArrayList<>(); //Aqui tiene que traerse los asientos desde las reservas, crealos y pasarselos a la lista;
+        Asiento prueba= new Asiento(34);
+        listaDeAsientoReservados.add(prueba);
+        System.out.println(prueba.toString());
+        Presentacion.Seleccion_de_asientos.Model modelEscoger;
+        Presentacion.Seleccion_de_asientos.Controlador controllerEscoger;
+        Presentacion.Seleccion_de_asientos.Vista viewEscoger ;   
+        List<Asiento> listaDeAsientoEscogidos;
+        try {
+             
+             modelEscoger= new Presentacion.Seleccion_de_asientos.Model(fila, columna); 
+             controllerEscoger= new Presentacion.Seleccion_de_asientos.Controlador(modelEscoger);
+             controllerEscoger.bloquearAsientos(listaDeAsientoReservados);
+             viewEscoger = new Presentacion.Seleccion_de_asientos.Vista() ;
+             viewEscoger.setControl(controllerEscoger);
+             viewEscoger.setModelo(modelEscoger);
+             viewEscoger.setLocationRelativeTo(null);
+             viewEscoger.setVisible(true);
+             listaDeAsientoEscogidos=viewEscoger.asientos_seleccionados;
+             
+        } catch (UnsupportedAudioFileException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (LineUnavailableException ex) {
+            Logger.getLogger(View.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
     }//GEN-LAST:event_jButtonEscogerActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void TableVuelosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableVuelosMouseClicked
+        if(evt.getClickCount()==2){
+           int row =this.TableVuelos.getSelectedRow();
+           ///no seeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+       }
+    }//GEN-LAST:event_TableVuelosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -176,6 +241,7 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JComboBox<Ciudad> OrigenComboBox;
     private javax.swing.JTable TableVuelos;
     private javax.swing.JLabel Vuelos_Disponibles;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEscoger;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -184,7 +250,13 @@ public class View extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        this.setTitle("Bienvenido "+model.usuario.getNombre());
+        String nombre="USUARIO NO LOGEADO";
+        try{
+            nombre=model.usuario.getNombre();
+        }catch(Exception se){
+            System.out.println(se.getMessage());
+        }
+        this.setTitle("Bienvenido "+nombre);
         List<Ciudad> lista = model.getCiudades();
         for(int i=0;i<lista.size();i++){
             this.DestinoComboBox.addItem(lista.get(i));
@@ -216,5 +288,9 @@ public class View extends javax.swing.JFrame implements Observer {
     
     public Vuelo getValueat(int row){
         return model.getVuelos().get(row);
+    }
+    
+    public Usuario getUsuario(){
+        return model.getUsuario();
     }
 }

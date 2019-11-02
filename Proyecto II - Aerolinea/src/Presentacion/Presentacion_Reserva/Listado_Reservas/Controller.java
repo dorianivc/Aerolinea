@@ -3,10 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_Viajes.Listado_Viajes;
-
-import Logica.Viaje;
-import java.util.List;
+package Presentacion.Presentacion_Reserva.Listado_Reservas;
 
 /**
  *
@@ -23,11 +20,4 @@ public class Controller {
         view.setController(this);
     }
     
-    public void buscar(){
-        model.buscar("");
-    }
-    
-    public void eliminar(int row){
-        model.eliminar(row);
-    }
 }
