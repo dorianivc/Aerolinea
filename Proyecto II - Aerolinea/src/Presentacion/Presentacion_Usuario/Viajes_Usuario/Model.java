@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Presentacion.Presentacion_Usuario.Vuelo_Usuario;
+package Presentacion.Presentacion_Usuario.Viajes_Usuario;
 
 import Datos.DBQuerys;
-import Logica.Ciudad;
 import Logica.Usuario;
+import Logica.Viaje;
 import Logica.Vuelo;
 import java.util.List;
 import java.util.Observable;
@@ -17,21 +17,21 @@ import java.util.Observer;
  *
  * @author Gabriel
  */
-public class Model extends Observable {
+public class Model extends Observable{
     Usuario usuario;
-    List<Vuelo> vuelos;
+    List<Viaje> viajes;
     DBQuerys db;
+    Vuelo vuelo;
 
-    public Model(Usuario usuario) {
+    public Model(Usuario usuario, Vuelo vuelo) {
         this.usuario = usuario;
+        this.vuelo = vuelo;
         db = new DBQuerys();
         try{
-            this.vuelos=db.VueloSearch("");
+            this.viajes=db.ViajeSearchVuelo(vuelo.getVuelo());
         }catch(Exception ex){
-            System.out.print("error al mostrar los vuelos");
+            System.out.print("error al mostrar los viajes");
         }
-        this.setChanged();
-        this.notifyObservers();
     }
 
     public Usuario getUsuario() {
@@ -39,26 +39,28 @@ public class Model extends Observable {
     }
 
     public void setUsuario(Usuario usuario) {
-          this.usuario = usuario;
         this.setChanged();
         this.notifyObservers();
-      
+        this.usuario = usuario;
     }
 
-    public List<Vuelo> getVuelos() {
-        return vuelos;
+    public List<Viaje> getViajes() {
+        return viajes;
     }
 
-    public void setVuelos(List<Vuelo> vuelos) {
-        this.setChanged();
-        this.notifyObservers();
-        this.vuelos = vuelos;
+    public void setVuelos(List<Viaje> viajes) {
+        this.viajes = viajes;
+    }
+
+    public Vuelo getVuelo() {
+        return vuelo;
+    }
+
+    public void setVuelo(Vuelo vuelo) {
+        this.vuelo = vuelo;
     }
     
-    public List<Ciudad> getCiudades(){
-        List<Ciudad> ciudades = db.CiudadSearch("");
-        return ciudades;
-    }
+    
 
     @Override
     public void addObserver(Observer o){
@@ -66,7 +68,4 @@ public class Model extends Observable {
         this.setChanged();
         this.notifyObservers();   
     }   
-    
-    
-    
 }

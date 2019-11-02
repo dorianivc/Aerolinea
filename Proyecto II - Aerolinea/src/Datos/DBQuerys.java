@@ -600,6 +600,39 @@ public class DBQuerys {
                 Viaje v = new Viaje(llave);
                 v.setFecha(fecha);
                 v.setVuelo(a);
+                Integer precio= Integer.parseInt(rs.getString("precio"));
+                v.setPrecio(precio);
+                System.out.print(v.getVuelo().getVuelo());
+                resultado.add(v);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
+    }
+    
+    public List<Viaje> ViajeSearchVuelo(String nombre) throws Exception {
+        Statement statement = null;
+        Connection conn = db.conexion;
+        List<Viaje> resultado = new ArrayList<Viaje>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from Aerolinea.Viaje v "
+                    + "where v.vuelo like '%%%s%%'";
+            sql = String.format(sql, nombre);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                int llave = Integer.parseInt(rs.getString("viaje"));
+                String vuelo = rs.getString("vuelo");
+                Date fecha = (Date) rs.getObject("fecha");
+                
+                Vuelo a = VueloSearch(vuelo).get(0);
+                Integer precio= Integer.parseInt(rs.getString("precio"));
+
+                Viaje v = new Viaje(llave);
+                v.setFecha(fecha);
+                v.setVuelo(a);
+                v.setPrecio(precio);
                 System.out.print(v.getVuelo().getVuelo());
                 resultado.add(v);
             }
@@ -640,6 +673,47 @@ public class DBQuerys {
         if (count == 0) {
             throw new Exception("Algo anda mal");
         }    
+    }
+    
+     public List<Vuelo> VueloSearch2(String o, String d) throws Exception{
+       Statement statement = null;
+       Connection conn = db.conexion;
+        List<Vuelo> resultado = new ArrayList<Vuelo>();
+        try {
+            statement = conn.createStatement();
+            String sql = "select * from  Aerolinea.Vuelo v  inner join Aerolinea.Ruta r on v.ruta_asignada = r.ruta " +
+                "where r.ciudad_salida  like '%s' && r.ciudad_llegada like '%s' "; 
+             sql = String.format(sql, o, d);
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+
+                String llave = rs.getString("vuelo");
+                String horario = rs.getString("horario");
+                String avionn = rs.getString("avion_asignado");
+                int ruta = Integer.parseInt(rs.getString("ruta_asignada"));
+
+                AvionDisponible a = new AvionDisponible();
+                a = AvionGet(avionn);
+
+                Ruta r = new Ruta();
+                RutaJpaController rDao = new RutaJpaController(db.EntityManager);
+                r = rDao.findRuta(ruta);
+
+                Horario h = new Horario();
+                HorarioJpaController hDao = new HorarioJpaController(db.EntityManager);
+                h = hDao.findHorario(horario);
+
+                Vuelo v = new Vuelo();
+                v.setVuelo(llave);
+                v.setAvionAsignado(a);
+                v.setRutaAsignada(r);
+                v.setHorario(h);
+
+                resultado.add(v);
+            }
+        } catch (SQLException ex) {
+        }
+        return resultado;
     }
 
 

@@ -5,10 +5,26 @@
  */
 package Presentacion.pagar;
 
-/**
- *
- * @author Gabriel
- */
+import Logica.Reserva;
+import java.util.List;
+
+
 public class Model {
+    public List<Reserva> reservaciones;
     
+    public Model(List<Reserva> reservaciones){
+        
+        this.reservaciones=reservaciones;
+    }
+    public Model(){
+        this.reservaciones=null;
+    }
+
+    public List<Reserva> getReservaciones() {
+        return reservaciones;
+    }
+
+    public void setReservaciones(List<Reserva> reservaciones) {
+        this.reservaciones = reservaciones;
+    }
 }

@@ -5,6 +5,7 @@ package Presentacion.Seleccion_de_asientos;
 
 
 
+import Logica.Reserva;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -243,9 +244,28 @@ public class Vista extends JFrame implements java.util.Observer {
         mensaje=mensaje+ numeroAsientos.toString()+ " asientos reservados";
         
         controller.bloquearAsientos(asientos_seleccionados);
+        List<Reserva> reservaciones= new ArrayList();
+        for(int i=0;i<asientos_seleccionados.size();i++){
+            Reserva reservacion= new Reserva();
+            reservacion.setNumeroAsiento(((Integer)asientos_seleccionados.get(i).getNumero_asiento()).toString());
+            reservacion.setUsuario(this.modelo.usuario);
+            reservacion.setViaje(modelo.viaje);
+            reservaciones.add(reservacion);
+            System.out.println("Reserva # "+ i+ " Numero de Asiento: "+ reservacion.getNumeroAsiento());
+        }
+        Presentacion.pagar.Model modelPago= new Presentacion.pagar.Model();
+        modelPago.setReservaciones(reservaciones);
+        Presentacion.pagar.Controller controladorPago= new Presentacion.pagar.Controller();
+        controladorPago.setModel(modelPago);
+        Presentacion.pagar.View view= new Presentacion.pagar.View();
+        view.setModel(modelPago);
+        view.setController(controladorPago);
+        view.CargarPrecio();
         this.asientos_seleccionados.clear();
         JOptionPane.showMessageDialog(null,mensaje , "ACEPTAR ASIENTOS",JOptionPane.PLAIN_MESSAGE);
         refresh(); //
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
         this.dispose();
         
         }

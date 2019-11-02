@@ -56,7 +56,7 @@ public class ViajeTableModel extends AbstractTableModel{
         switch(columnIndex){
             case 0: return v.getViaje();
             case 1: return v.getFecha();
-            case 3: return v.getVuelo().getVuelo();
+            case 2: return v.getVuelo().getVuelo();
             default: return "";
         }
     }

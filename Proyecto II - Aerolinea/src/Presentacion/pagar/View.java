@@ -5,6 +5,17 @@
  */
 package Presentacion.pagar;
 
+import Datos.DBQuerys;
+import Datos.PagoJpaController;
+import Datos.ReservaJpaController;
+import Datos.TipodePagoJpaController;
+import Logica.Pago;
+import Logica.TipodePago;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Gabriel
@@ -16,8 +27,40 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+        DBQuerys db= new DBQuerys();
+        TipodePagoJpaController tipodepagoDao= new TipodePagoJpaController(db.db.EntityManager);
+        List<TipodePago> lista= tipodepagoDao.findTipodePagoEntities();
+        for(int i=0;i<lista.size();i++){
+            this.jComboBoxPagos.addItem(lista.get(i));
+        }
     }
 
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
+
+    public Controller getController() {
+        return controller;
+    }
+
+    public void setController(Controller controller) {
+        this.controller = controller;
+    }
+    public void CargarPrecio(){
+        Integer precio=0;
+       
+        System.out.println("Viaje: "+this.controller.model.reservaciones.get(0).getViaje().getViaje());
+        for(int i=0;i<this.model.reservaciones.size();i++){
+           System.out.println("Imprimiendo precio: "+ this.controller.model.reservaciones.get(i).getViaje().getPrecio());
+           precio+=model.reservaciones.get(i).getViaje().getPrecio();
+       }
+       this.jTextFieldMonto.setText(precio.toString());
+       this.jTextFieldMonto.setEditable(false);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,12 +71,11 @@ public class View extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabelTipodePago = new javax.swing.JLabel();
+        jComboBoxPagos = new javax.swing.JComboBox<>();
+        jLabelMonto = new javax.swing.JLabel();
+        jButtonAceptar = new javax.swing.JButton();
+        jButtonCancelar = new javax.swing.JButton();
         jTextFieldMonto = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -41,20 +83,21 @@ public class View extends javax.swing.JFrame {
 
         jLabel1.setText("Pagando");
 
-        jLabel2.setText("Tipo de pago:");
+        jLabelTipodePago.setText("Tipo de pago:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabelMonto.setText("Monto:");
 
-        jLabel3.setText("Monto:");
-
-        jLabel4.setText("Fecha:");
-
-        jButton1.setText("Aceptar");
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
+
+        jButtonCancelar.setText("Cancelar");
+        jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelarActionPerformed(evt);
             }
         });
 
@@ -70,19 +113,17 @@ public class View extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabelTipodePago)
+                            .addComponent(jLabelMonto))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextFieldMonto)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jComboBoxPagos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
+                        .addGap(63, 63, 63)
+                        .addComponent(jButtonAceptar)
                         .addGap(75, 75, 75)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonCancelar)))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,27 +133,66 @@ public class View extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelTipodePago)
+                    .addComponent(jComboBoxPagos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(jLabelMonto)
                     .addComponent(jTextFieldMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(48, 48, 48)
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButtonAceptar)
+                    .addComponent(jButtonCancelar))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonCancelarActionPerformed
+
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+     Pago pago= new Pago();
+     pago.setMonto(Double.parseDouble(this.jTextFieldMonto.getText()));
+     Date fecha=new Date();
+     pago.setFecha(fecha);
+     pago.setTipoPagocodigopago((TipodePago) this.jComboBoxPagos.getSelectedItem());
+     try{
+         PagoJpaController pagoDao= new PagoJpaController(db.db.EntityManager);
+         List<Pago> listaDePagos= pagoDao.findPagoEntities();
+         Integer numero_de_pago=0;
+         if(listaDePagos.isEmpty()){
+             numero_de_pago=1;
+         }else{
+             for(int i=0;i<listaDePagos.size();i++){
+             
+             if(listaDePagos.get(i).getPago()>numero_de_pago){
+                 numero_de_pago=listaDePagos.get(i).getPago();
+             }
+                }
+             numero_de_pago*=2;
+         }
+        
+         
+         pago.setPago(numero_de_pago);
+         pagoDao.create(pago);
+         ReservaJpaController reservaDao= new ReservaJpaController(this.db.db.EntityManager);
+         String tiquetes="";
+         for(int i=0;i<this.model.reservaciones.size();i++){
+             this.model.reservaciones.get(i).setPago(pago);
+             reservaDao.create(this.model.reservaciones.get(i));
+             tiquetes+=this.model.reservaciones.get(i).imprimeTiquete()+"\n";
+             
+         }
+          JOptionPane.showMessageDialog(null, tiquetes, "Mostrando Tiquetes",JOptionPane.PLAIN_MESSAGE);
+          this.dispose();
+     }catch(Exception se){
+         JOptionPane.showMessageDialog(null, se.getMessage(), "Error al pagar",JOptionPane.PLAIN_MESSAGE);
+     }
+     
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,13 +230,15 @@ public class View extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonAceptar;
+    private javax.swing.JButton jButtonCancelar;
+    private javax.swing.JComboBox<TipodePago> jComboBoxPagos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelMonto;
+    private javax.swing.JLabel jLabelTipodePago;
     private javax.swing.JTextField jTextFieldMonto;
     // End of variables declaration//GEN-END:variables
+    public Model model;
+    public Controller controller;
+    public DBQuerys db= new DBQuerys();
 }

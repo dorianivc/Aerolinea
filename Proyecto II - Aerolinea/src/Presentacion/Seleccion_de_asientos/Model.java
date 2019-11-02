@@ -5,6 +5,10 @@ package Presentacion.Seleccion_de_asientos;
 
 
 
+import static Logica.Reserva_.usuario;
+import Logica.Usuario;
+import Logica.Viaje;
+import Logica.Vuelo;
 import Presentacion.Seleccion_de_asientos.Asiento;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,6 +30,9 @@ public class Model extends Observable{
    File archivoFisicoDisponible= new File("src/media/negro.png");
    BufferedImage ocupado= ImageIO.read(archivoFisicoOcupado);
    BufferedImage disponible= ImageIO.read(archivoFisicoDisponible);
+   public Viaje viaje;
+   public Vuelo vuelo;
+   public Usuario usuario;
 
     public int getFilas() {
         return filas;
@@ -100,6 +107,8 @@ public class Model extends Observable{
    public Model(int filas, int columnas) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
        this.filas=filas;
        this.columnas=columnas;
+       this.viaje=null;
+       this.vuelo=null;
    
      this.asientos= new Asiento[filas][columnas];
      

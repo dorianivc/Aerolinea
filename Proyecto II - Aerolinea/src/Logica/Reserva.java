@@ -75,7 +75,11 @@ public class Reserva implements Serializable {
     public void setNumeroAsiento(String numeroAsiento) {
         this.numeroAsiento = numeroAsiento;
     }
-
+    public String imprimeTiquete(){
+        String tiquete;
+        tiquete="Reserva # "+ this.reserva+ "\n"+ "Viaje: "+ this.viaje.getViaje() + "\n"+ "Numero de asiento: "+ this.numeroAsiento+ "\n"+ "Numero de pago: "+ this.pago.getPago()+"\n"+"Usuario: "+ this.usuario.getNombre()+ " "+ this.usuario.getApellidos();
+        return tiquete;
+    }
     public Pago getPago() {
         return pago;
     }

@@ -197,6 +197,7 @@ public class View extends javax.swing.JFrame implements Observer{
         Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model model = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model(user);
         Presentacion.Presentacion_Usuario.Vuelo_Usuario.View view = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.View();
         Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller controller = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller(model, view);
+        view.setController(controller);
         view.setLocationRelativeTo(null);
         view.setVisible(true);
         this.dispose();

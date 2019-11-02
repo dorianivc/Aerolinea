@@ -5,10 +5,22 @@
  */
 package Presentacion.pagar;
 
-/**
- *
- * @author Gabriel
- */
+
 public class Controller {
+    public Model model;
     
+    public Controller(Model model){
+        this.model=model;
+    }
+    public Controller(){
+        model=null;
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+    public void setModel(Model model) {
+        this.model = model;
+    }
 }
