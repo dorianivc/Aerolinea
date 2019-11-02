@@ -60,7 +60,7 @@ public class AvionTableModel extends AbstractTableModel{
         AvionDisponible a=aviones.get(rowIndex);
         switch(columnIndex){
             case 0: return a.getCodigoMatricula();
-           case 1: return a.getAno().getYear();
+           case 1: return a.getAno();
            case 2: return a.getMarca();
            case 3: return a.getModelo();
             case 4: return a.getFilas();

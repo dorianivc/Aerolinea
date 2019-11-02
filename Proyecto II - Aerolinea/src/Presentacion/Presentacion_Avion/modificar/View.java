@@ -171,8 +171,7 @@ public class View extends javax.swing.JFrame implements Observer{
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         int anioo=Integer.parseInt(anio.getText());
-        Date fecha = new Date(anioo,0,1);
-        model.getAvion().setAno(fecha);
+        model.getAvion().setAno(anio.getText());
         model.getAvion().setModelo(modelo.getText());
         model.getAvion().setMarca(this.marca.getText());
         model.getAvion().setFilas(Integer.parseInt(filas.getText()));
@@ -256,10 +255,9 @@ public class View extends javax.swing.JFrame implements Observer{
     
     @Override
     public void update(Observable o, Object arg) {
-        Date y = model.avion.getAno();
-        int x = y.getYear();
+      
         codigo.setText(model.avion.getCodigoMatricula());
-        anio.setText(String.valueOf(x));
+        anio.setText(model.avion.getAno());
         modelo.setText(model.avion.getModelo());
         marca.setText(model.avion.getMarca());
         filas.setText(String.valueOf(model.avion.getFilas()));

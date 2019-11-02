@@ -338,7 +338,7 @@ public class DBQuerys {
         String sql = "insert into Aerolinea.Avion_Disponible (codigo_matricula, ano, modelo, marca,  "
                 + " filas, columnas, cantidad_de_pasajeros) "
                 + " values('%s','%s','%s','%s','%s','%s','%s')";
-        sql = String.format(sql, a.getCodigoMatricula(), a.getAno().getYear(), a.getModelo(), a.getMarca(), a.getFilas(),
+        sql = String.format(sql, a.getCodigoMatricula(), a.getAno(), a.getModelo(), a.getMarca(), a.getFilas(),
                 a.getColumnas(), a.getCantidadDePasajeros());
 
         int count = executeUpdate(sql);
@@ -366,12 +366,12 @@ public class DBQuerys {
                 int filas = Integer.parseInt(rs.getString("filas"));
                 int columnas = Integer.parseInt(rs.getString("columnas"));
                 int can = Integer.parseInt(rs.getString("cantidad_de_pasajeros"));
-                Date fecha = new Date(ano, 0, 1);
+               
                 AvionDisponible avion = new AvionDisponible();
                 avion.setCodigoMatricula(llave);
                 avion.setModelo(modelo);
                 avion.setMarca(marca);
-                avion.setAno(fecha);
+                avion.setAno("");
                 avion.setFilas(filas);
                 avion.setColumnas(columnas);
                 avion.setCantidadDePasajeros(can);
@@ -396,7 +396,7 @@ public class DBQuerys {
         String sql = "update Aerolinea.Avion_Disponible a  set a.ano  ='%s', a.modelo ='%s',  a.marca ='%s', "
                 + " a.filas ='%s',  a.columnas ='%s',  a.cantidad_de_pasajeros ='%s' "
                 + "where a.codigo_matricula ='%s'";
-        sql = String.format(sql, a.getAno().getYear(), a.getModelo(), a.getMarca(), a.getFilas(),
+        sql = String.format(sql, a.getAno(), a.getModelo(), a.getMarca(), a.getFilas(),
                 a.getColumnas(), a.getCantidadDePasajeros(), a.getCodigoMatricula());
 
         int count = executeUpdate(sql);
@@ -508,7 +508,7 @@ public class DBQuerys {
             avion.setCodigoMatricula(llave);
             avion.setModelo(modelo);
             avion.setMarca(marca);
-            avion.setAno(fecha);
+            avion.setAno("");
             avion.setFilas(filas);
             avion.setColumnas(columnas);
             avion.setCantidadDePasajeros(can);

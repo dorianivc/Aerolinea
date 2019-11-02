@@ -40,14 +40,14 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "AvionDisponible.findByCantidadDePasajeros", query = "SELECT a FROM AvionDisponible a WHERE a.cantidadDePasajeros = :cantidadDePasajeros")})
 public class AvionDisponible implements Serializable {
 
+    @Column(name = "ano")
+    private String ano;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "codigo_matricula")
     private String codigoMatricula;
-    @Column(name = "ano")
-    @Temporal(TemporalType.DATE)
-    private Date ano;
     @Column(name = "modelo")
     private String modelo;
     @Column(name = "marca")
@@ -66,7 +66,7 @@ public class AvionDisponible implements Serializable {
 
     public AvionDisponible(String codigoMatricula, Date ano, String modelo, String marca, Integer filas, Integer columnas, Integer cantidadDePasajeros) {
         this.codigoMatricula = codigoMatricula;
-        this.ano = ano;
+        this.ano = ano.toString();
         this.modelo = modelo;
         this.marca = marca;
         this.filas = filas;
@@ -88,13 +88,6 @@ public class AvionDisponible implements Serializable {
         this.codigoMatricula = codigoMatricula;
     }
 
-    public Date getAno() {
-        return ano;
-    }
-
-    public void setAno(Date ano) {
-        this.ano = ano;
-    }
 
     public String getModelo() {
         return modelo;
@@ -168,6 +161,14 @@ public class AvionDisponible implements Serializable {
     @Override
     public String toString() {
         return this.codigoMatricula+" - "+ this.marca+" "+ this.modelo;
+    }
+
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
     }
     
 }

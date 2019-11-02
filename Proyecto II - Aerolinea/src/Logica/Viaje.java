@@ -37,6 +37,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Viaje.findByFecha", query = "SELECT v FROM Viaje v WHERE v.fecha = :fecha")})
 public class Viaje implements Serializable {
 
+    @Column(name = "precio")
+    private Integer precio;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -122,6 +125,14 @@ public class Viaje implements Serializable {
     
     public String mostrarViaje(){
         return "Viaje: "+getViaje()+" "+getFecha();
+    }
+
+    public Integer getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
     }
     
 }
