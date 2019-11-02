@@ -13,7 +13,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import Logica.Pago;
 import Logica.Reserva;
-import Logica.Ticket;
 import Logica.Usuario;
 import Logica.Viaje;
 import java.util.List;
@@ -45,11 +44,6 @@ public class ReservaJpaController implements Serializable {
                 pago = em.getReference(pago.getClass(), pago.getPago());
                 reserva.setPago(pago);
             }
-            Ticket ticket = reserva.getTicket();
-            if (ticket != null) {
-                ticket = em.getReference(ticket.getClass(), ticket.getTicket());
-                reserva.setTicket(ticket);
-            }
             Usuario usuario = reserva.getUsuario();
             if (usuario != null) {
                 usuario = em.getReference(usuario.getClass(), usuario.getUsuario());
@@ -64,10 +58,6 @@ public class ReservaJpaController implements Serializable {
             if (pago != null) {
                 pago.getReservaList().add(reserva);
                 pago = em.merge(pago);
-            }
-            if (ticket != null) {
-                ticket.getReservaList().add(reserva);
-                ticket = em.merge(ticket);
             }
             if (usuario != null) {
                 usuario.getReservaList().add(reserva);
@@ -93,8 +83,6 @@ public class ReservaJpaController implements Serializable {
             Reserva persistentReserva = em.find(Reserva.class, reserva.getReserva());
             Pago pagoOld = persistentReserva.getPago();
             Pago pagoNew = reserva.getPago();
-            Ticket ticketOld = persistentReserva.getTicket();
-            Ticket ticketNew = reserva.getTicket();
             Usuario usuarioOld = persistentReserva.getUsuario();
             Usuario usuarioNew = reserva.getUsuario();
             Viaje viajeOld = persistentReserva.getViaje();
@@ -102,10 +90,6 @@ public class ReservaJpaController implements Serializable {
             if (pagoNew != null) {
                 pagoNew = em.getReference(pagoNew.getClass(), pagoNew.getPago());
                 reserva.setPago(pagoNew);
-            }
-            if (ticketNew != null) {
-                ticketNew = em.getReference(ticketNew.getClass(), ticketNew.getTicket());
-                reserva.setTicket(ticketNew);
             }
             if (usuarioNew != null) {
                 usuarioNew = em.getReference(usuarioNew.getClass(), usuarioNew.getUsuario());
@@ -123,14 +107,6 @@ public class ReservaJpaController implements Serializable {
             if (pagoNew != null && !pagoNew.equals(pagoOld)) {
                 pagoNew.getReservaList().add(reserva);
                 pagoNew = em.merge(pagoNew);
-            }
-            if (ticketOld != null && !ticketOld.equals(ticketNew)) {
-                ticketOld.getReservaList().remove(reserva);
-                ticketOld = em.merge(ticketOld);
-            }
-            if (ticketNew != null && !ticketNew.equals(ticketOld)) {
-                ticketNew.getReservaList().add(reserva);
-                ticketNew = em.merge(ticketNew);
             }
             if (usuarioOld != null && !usuarioOld.equals(usuarioNew)) {
                 usuarioOld.getReservaList().remove(reserva);
@@ -181,11 +157,6 @@ public class ReservaJpaController implements Serializable {
             if (pago != null) {
                 pago.getReservaList().remove(reserva);
                 pago = em.merge(pago);
-            }
-            Ticket ticket = reserva.getTicket();
-            if (ticket != null) {
-                ticket.getReservaList().remove(reserva);
-                ticket = em.merge(ticket);
             }
             Usuario usuario = reserva.getUsuario();
             if (usuario != null) {

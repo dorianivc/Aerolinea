@@ -41,16 +41,13 @@ public class Reserva implements Serializable {
     @Column(name = "numero_asiento")
     private String numeroAsiento;
     @JoinColumn(name = "pago", referencedColumnName = "pago")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Pago pago;
-    @JoinColumn(name = "ticket", referencedColumnName = "ticket")
-    @ManyToOne(optional = false)
-    private Ticket ticket;
     @JoinColumn(name = "usuario", referencedColumnName = "usuario")
     @ManyToOne(optional = false)
     private Usuario usuario;
     @JoinColumn(name = "viaje", referencedColumnName = "viaje")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Viaje viaje;
 
     public Reserva() {
@@ -67,7 +64,11 @@ public class Reserva implements Serializable {
     public void setReserva(Integer reserva) {
         this.reserva = reserva;
     }
-
+ public String imprimeTiquete(){
+        String tiquete;
+        tiquete="Reserva # "+ this.reserva+ "\n"+ "Viaje: "+ this.viaje.getViaje() + "\n"+ "Numero de asiento: "+ this.numeroAsiento+ "\n"+ "Numero de pago: "+ this.pago.getPago()+"\n"+"Usuario: "+ this.usuario.getNombre()+ " "+ this.usuario.getApellidos();
+        return tiquete;
+    }
     public String getNumeroAsiento() {
         return numeroAsiento;
     }
@@ -75,25 +76,13 @@ public class Reserva implements Serializable {
     public void setNumeroAsiento(String numeroAsiento) {
         this.numeroAsiento = numeroAsiento;
     }
-    public String imprimeTiquete(){
-        String tiquete;
-        tiquete="Reserva # "+ this.reserva+ "\n"+ "Viaje: "+ this.viaje.getViaje() + "\n"+ "Numero de asiento: "+ this.numeroAsiento+ "\n"+ "Numero de pago: "+ this.pago.getPago()+"\n"+"Usuario: "+ this.usuario.getNombre()+ " "+ this.usuario.getApellidos();
-        return tiquete;
-    }
+
     public Pago getPago() {
         return pago;
     }
 
     public void setPago(Pago pago) {
         this.pago = pago;
-    }
-
-    public Ticket getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
     }
 
     public Usuario getUsuario() {

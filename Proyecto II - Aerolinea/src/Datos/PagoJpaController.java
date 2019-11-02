@@ -5,7 +5,6 @@
  */
 package Datos;
 
-import Datos.exceptions.IllegalOrphanException;
 import Datos.exceptions.NonexistentEntityException;
 import Datos.exceptions.PreexistingEntityException;
 import Logica.Pago;
@@ -82,7 +81,7 @@ public class PagoJpaController implements Serializable {
         }
     }
 
-    public void edit(Pago pago) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Pago pago) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -92,18 +91,6 @@ public class PagoJpaController implements Serializable {
             TipodePago tipoPagocodigopagoNew = pago.getTipoPagocodigopago();
             List<Reserva> reservaListOld = persistentPago.getReservaList();
             List<Reserva> reservaListNew = pago.getReservaList();
-            List<String> illegalOrphanMessages = null;
-            for (Reserva reservaListOldReserva : reservaListOld) {
-                if (!reservaListNew.contains(reservaListOldReserva)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Reserva " + reservaListOldReserva + " since its pago field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (tipoPagocodigopagoNew != null) {
                 tipoPagocodigopagoNew = em.getReference(tipoPagocodigopagoNew.getClass(), tipoPagocodigopagoNew.getTipoDePago());
                 pago.setTipoPagocodigopago(tipoPagocodigopagoNew);
@@ -123,6 +110,12 @@ public class PagoJpaController implements Serializable {
             if (tipoPagocodigopagoNew != null && !tipoPagocodigopagoNew.equals(tipoPagocodigopagoOld)) {
                 tipoPagocodigopagoNew.getPagoList().add(pago);
                 tipoPagocodigopagoNew = em.merge(tipoPagocodigopagoNew);
+            }
+            for (Reserva reservaListOldReserva : reservaListOld) {
+                if (!reservaListNew.contains(reservaListOldReserva)) {
+                    reservaListOldReserva.setPago(null);
+                    reservaListOldReserva = em.merge(reservaListOldReserva);
+                }
             }
             for (Reserva reservaListNewReserva : reservaListNew) {
                 if (!reservaListOld.contains(reservaListNewReserva)) {
@@ -152,7 +145,7 @@ public class PagoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -164,21 +157,15 @@ public class PagoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The pago with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<Reserva> reservaListOrphanCheck = pago.getReservaList();
-            for (Reserva reservaListOrphanCheckReserva : reservaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Pago (" + pago + ") cannot be destroyed since the Reserva " + reservaListOrphanCheckReserva + " in its reservaList field has a non-nullable pago field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             TipodePago tipoPagocodigopago = pago.getTipoPagocodigopago();
             if (tipoPagocodigopago != null) {
                 tipoPagocodigopago.getPagoList().remove(pago);
                 tipoPagocodigopago = em.merge(tipoPagocodigopago);
+            }
+            List<Reserva> reservaList = pago.getReservaList();
+            for (Reserva reservaListReserva : reservaList) {
+                reservaListReserva.setPago(null);
+                reservaListReserva = em.merge(reservaListReserva);
             }
             em.remove(pago);
             em.getTransaction().commit();

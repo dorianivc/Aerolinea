@@ -5,7 +5,6 @@
  */
 package Datos;
 
-import Datos.exceptions.IllegalOrphanException;
 import Datos.exceptions.NonexistentEntityException;
 import Datos.exceptions.PreexistingEntityException;
 import java.io.Serializable;
@@ -82,7 +81,7 @@ public class ViajeJpaController implements Serializable {
         }
     }
 
-    public void edit(Viaje viaje) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Viaje viaje) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -92,18 +91,6 @@ public class ViajeJpaController implements Serializable {
             Vuelo vueloNew = viaje.getVuelo();
             List<Reserva> reservaListOld = persistentViaje.getReservaList();
             List<Reserva> reservaListNew = viaje.getReservaList();
-            List<String> illegalOrphanMessages = null;
-            for (Reserva reservaListOldReserva : reservaListOld) {
-                if (!reservaListNew.contains(reservaListOldReserva)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Reserva " + reservaListOldReserva + " since its viaje field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             if (vueloNew != null) {
                 vueloNew = em.getReference(vueloNew.getClass(), vueloNew.getVuelo());
                 viaje.setVuelo(vueloNew);
@@ -123,6 +110,12 @@ public class ViajeJpaController implements Serializable {
             if (vueloNew != null && !vueloNew.equals(vueloOld)) {
                 vueloNew.getViajeList().add(viaje);
                 vueloNew = em.merge(vueloNew);
+            }
+            for (Reserva reservaListOldReserva : reservaListOld) {
+                if (!reservaListNew.contains(reservaListOldReserva)) {
+                    reservaListOldReserva.setViaje(null);
+                    reservaListOldReserva = em.merge(reservaListOldReserva);
+                }
             }
             for (Reserva reservaListNewReserva : reservaListNew) {
                 if (!reservaListOld.contains(reservaListNewReserva)) {
@@ -152,7 +145,7 @@ public class ViajeJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -164,21 +157,15 @@ public class ViajeJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The viaje with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            List<Reserva> reservaListOrphanCheck = viaje.getReservaList();
-            for (Reserva reservaListOrphanCheckReserva : reservaListOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Viaje (" + viaje + ") cannot be destroyed since the Reserva " + reservaListOrphanCheckReserva + " in its reservaList field has a non-nullable viaje field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             Vuelo vuelo = viaje.getVuelo();
             if (vuelo != null) {
                 vuelo.getViajeList().remove(viaje);
                 vuelo = em.merge(vuelo);
+            }
+            List<Reserva> reservaList = viaje.getReservaList();
+            for (Reserva reservaListReserva : reservaList) {
+                reservaListReserva.setViaje(null);
+                reservaListReserva = em.merge(reservaListReserva);
             }
             em.remove(viaje);
             em.getTransaction().commit();
