@@ -125,7 +125,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return "Logica.Pago[ pago=" + pago + " ]";
+        return String.valueOf(this.getMonto())+" "+this.getTipoPagocodigopago().getTipoDePago();
     }
     
 }

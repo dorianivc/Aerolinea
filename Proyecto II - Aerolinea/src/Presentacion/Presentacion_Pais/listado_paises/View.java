@@ -38,7 +38,6 @@ public class View extends javax.swing.JFrame implements Observer{
         JButtonBuscar = new javax.swing.JButton();
         jButtonAgregar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
-        jButtonEscoger = new javax.swing.JButton();
         jLabel_Paises = new javax.swing.JLabel();
         jButtonModificar = new javax.swing.JButton();
 
@@ -92,8 +91,6 @@ public class View extends javax.swing.JFrame implements Observer{
             }
         });
 
-        jButtonEscoger.setText("Escoger");
-
         jLabel_Paises.setText("Paises");
 
         jButtonModificar.setText("Modificar");
@@ -116,8 +113,6 @@ public class View extends javax.swing.JFrame implements Observer{
                         .addComponent(jButtonEliminar)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonModificar)
-                        .addGap(28, 28, 28)
-                        .addComponent(jButtonEscoger)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -151,7 +146,6 @@ public class View extends javax.swing.JFrame implements Observer{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
-                    .addComponent(jButtonEscoger)
                     .addComponent(jButtonEliminar)
                     .addComponent(jButtonModificar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -264,7 +258,6 @@ public class View extends javax.swing.JFrame implements Observer{
     private javax.swing.JTable Tablapaises;
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JButton jButtonEscoger;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;

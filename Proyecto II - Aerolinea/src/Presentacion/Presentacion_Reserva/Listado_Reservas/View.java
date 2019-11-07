@@ -150,7 +150,7 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_RegresarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        this.TableReservas.setModel(new reservaTableModel(model.buscarReservas(idBuscador.getText())));
+           model.buscarReservas(idBuscador.getText());
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed

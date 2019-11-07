@@ -17,8 +17,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -64,14 +62,15 @@ public class AvionDisponible implements Serializable {
     public AvionDisponible() {
     }
 
-    public AvionDisponible(String codigoMatricula, Date ano, String modelo, String marca, Integer filas, Integer columnas, Integer cantidadDePasajeros) {
+    public AvionDisponible(String codigoMatricula, String ano, String modelo, String marca, Integer filas, Integer columnas, Integer cantidadDePasajeros) {
         this.codigoMatricula = codigoMatricula;
-        this.ano = ano.toString();
+        this.ano = ano;
         this.modelo = modelo;
         this.marca = marca;
         this.filas = filas;
         this.columnas = columnas;
         this.cantidadDePasajeros = cantidadDePasajeros;
+        
     }
     
     

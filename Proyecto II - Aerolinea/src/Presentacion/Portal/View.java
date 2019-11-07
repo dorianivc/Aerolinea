@@ -19,6 +19,7 @@ public class View extends javax.swing.JFrame {
      */
     public View() {
         initComponents();
+        
     }
 
     /**
@@ -33,9 +34,7 @@ public class View extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jLabelVuelos = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         viajes = new javax.swing.JMenu();
         jMenuItemListadoPaises = new javax.swing.JMenuItem();
@@ -50,7 +49,7 @@ public class View extends javax.swing.JFrame {
         reservas = new javax.swing.JMenuItem();
         jMenuItemReportes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -63,20 +62,7 @@ public class View extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
-        jLabelVuelos.setText("Vuelos de la semana");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/Portal/aerolinea.png"))); // NOI18N
 
         viajes.setText("Ventana");
 
@@ -182,10 +168,16 @@ public class View extends javax.swing.JFrame {
         jMenuBar1.add(viajes);
 
         jMenu2.setText("Ayuda");
-        jMenuBar1.add(jMenu2);
 
-        jMenu3.setText("Usuario");
-        jMenuBar1.add(jMenu3);
+        jMenuItem4.setText("Sobre...");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem4);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -193,21 +185,11 @@ public class View extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelVuelos))
-                .addContainerGap(36, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabelVuelos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -303,6 +285,10 @@ public class View extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_jMenuItemReportesActionPerformed
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+       JOptionPane.showMessageDialog(null, "Dorian Vallecillo Calderón dorianivc1@gmial.com \nSergio Solis Barramtes Sergio05_18m@hotmail.com \nGabriel Segura Quesada gaseque34@gmai.com", "Información",JOptionPane.PLAIN_MESSAGE);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -342,20 +328,18 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem Horarios;
     private javax.swing.JMenuItem ListadoDeAviones;
     private javax.swing.JMenuItem MetodosDePago;
-    private javax.swing.JLabel jLabelVuelos;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItemListadoCuidades;
     private javax.swing.JMenuItem jMenuItemListadoPaises;
     private javax.swing.JMenuItem jMenuItemListadoRutas;
     private javax.swing.JMenuItem jMenuItemListadoViajes;
     private javax.swing.JMenuItem jMenuItemReportes;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JMenuItem listadoUsuarios;
     private javax.swing.JMenuItem reservas;
     private javax.swing.JMenu viajes;

@@ -6,6 +6,8 @@
 package Presentacion.Presentacion_Viajes.Listado_Viajes;
 
 import Logica.Viaje;
+import Logica.Vuelo;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -35,11 +37,11 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel_Paises = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableViajes = new javax.swing.JTable();
-        viaje = new javax.swing.JTextField();
         jLabelNombre_Pais = new javax.swing.JLabel();
         Buscar = new javax.swing.JButton();
         Agregar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
+        vuelos = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -65,13 +67,7 @@ public class View extends javax.swing.JFrame implements Observer {
         ));
         jScrollPane1.setViewportView(TableViajes);
 
-        viaje.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viajeActionPerformed(evt);
-            }
-        });
-
-        jLabelNombre_Pais.setText("Codigo del Viaje");
+        jLabelNombre_Pais.setText("Buscar por vuelo:");
 
         Buscar.setText("Buscar");
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -99,13 +95,13 @@ public class View extends javax.swing.JFrame implements Observer {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelNombre_Pais)
-                        .addGap(18, 18, 18)
-                        .addComponent(viaje, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vuelos, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Buscar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -130,9 +126,9 @@ public class View extends javax.swing.JFrame implements Observer {
                 .addComponent(jLabel_Paises, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabelNombre_Pais)
-                    .addComponent(Buscar))
+                    .addComponent(Buscar)
+                    .addComponent(vuelos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(17, 17, 17)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -145,10 +141,6 @@ public class View extends javax.swing.JFrame implements Observer {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void viajeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viajeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_viajeActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         Presentacion.Presentacion_Viajes.Agregar_Viaje.View view = new Presentacion.Presentacion_Viajes.Agregar_Viaje.View();
@@ -170,7 +162,8 @@ public class View extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        model.buscar(viaje.getText());
+        Vuelo v = (Vuelo) this.vuelos.getSelectedItem();
+        model.buscar(v.getVuelo());
     }//GEN-LAST:event_BuscarActionPerformed
 
     /**
@@ -217,16 +210,24 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabelNombre_Pais;
     private javax.swing.JLabel jLabel_Paises;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField viaje;
+    private javax.swing.JComboBox<Vuelo> vuelos;
     // End of variables declaration//GEN-END:variables
 
     Model model;
     Controller controller;
+    boolean bandera=true;
     
     @Override
     public void update(Observable o, Object arg) {
         this.TableViajes.setRowHeight(40);
         this.TableViajes.setModel(new ViajeTableModel(model.getViajes()));
+        if(bandera){
+            List<Vuelo> v = model.buscarVuelos();
+            for(int i=0;i<v.size();i++){
+                this.vuelos.addItem(v.get(i));
+            }
+            bandera=false;
+        }
     }
 
     public Model getModel() {

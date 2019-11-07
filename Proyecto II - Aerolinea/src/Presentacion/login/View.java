@@ -43,15 +43,18 @@ public class View extends javax.swing.JFrame implements Observer{
         jButtonRegistrar = new javax.swing.JButton();
         jButtonCancelar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jAdministradorButton = new javax.swing.JButton();
-        jButtonCliente = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SISTEMA GESTOR DE AEROLINEA");
+        setMinimumSize(new java.awt.Dimension(458, 300));
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Usuario: ");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(50, 73, 54, 16);
 
         jButtonAcceder.setText("Acceder");
         jButtonAcceder.addActionListener(new java.awt.event.ActionListener() {
@@ -59,14 +62,22 @@ public class View extends javax.swing.JFrame implements Observer{
                 jButtonAccederActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonAcceder);
+        jButtonAcceder.setBounds(299, 94, 90, 32);
 
         jLabel2.setText("Contraseña: ");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(44, 130, 72, 16);
+        getContentPane().add(jTextFieldUsuario);
+        jTextFieldUsuario.setBounds(110, 69, 183, 24);
 
         jPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(jPasswordField);
+        jPasswordField.setBounds(122, 127, 171, 22);
 
         jButtonRegistrar.setText("Registrar");
         jButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -74,6 +85,8 @@ public class View extends javax.swing.JFrame implements Observer{
                 jButtonRegistrarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonRegistrar);
+        jButtonRegistrar.setBounds(210, 177, 90, 32);
 
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -81,79 +94,17 @@ public class View extends javax.swing.JFrame implements Observer{
                 jButtonCancelarActionPerformed(evt);
             }
         });
+        getContentPane().add(jButtonCancelar);
+        jButtonCancelar.setBounds(114, 177, 90, 32);
 
         jLabel3.setText("Login");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(175, 24, 31, 16);
 
-        jAdministradorButton.setText("Administrador");
-        jAdministradorButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jAdministradorButtonActionPerformed(evt);
-            }
-        });
-
-        jButtonCliente.setText("Cliente");
-        jButtonCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonClienteActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonRegistrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jAdministradorButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jPasswordField))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(65, 65, 65)
-                                    .addComponent(jLabel3))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonCliente)
-                    .addComponent(jButtonAcceder))
-                .addContainerGap(81, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel3)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(1, 1, 1)
-                .addComponent(jButtonAcceder)
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonRegistrar)
-                    .addComponent(jButtonCancelar)
-                    .addComponent(jAdministradorButton)
-                    .addComponent(jButtonCliente))
-                .addContainerGap(14, Short.MAX_VALUE))
-        );
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Presentacion/login/star.png"))); // NOI18N
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(-4, -2, 510, 270);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -167,9 +118,20 @@ public class View extends javax.swing.JFrame implements Observer{
             Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
         if(user != null){
             if(model.esAdmin(user)){
-                this.jAdministradorButtonActionPerformed(evt);
-            }else
-                this.jButtonClienteActionPerformed(evt);
+                Presentacion.Portal.View ventana= new  Presentacion.Portal.View();
+                ventana.setLocationRelativeTo(null);
+                ventana.setVisible(true);
+                this.dispose();
+            }else{
+                Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model model = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model(user);
+                Presentacion.Presentacion_Usuario.Vuelo_Usuario.View view = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.View();
+                Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller controller = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller(model, view);
+                view.setController(controller);
+                view.setLocationRelativeTo(null);
+                view.setVisible(true);
+                this.dispose();
+            }
+                
         }else{
             JOptionPane.showMessageDialog(null, "Datos invalidos", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
@@ -189,24 +151,6 @@ public class View extends javax.swing.JFrame implements Observer{
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButtonRegistrarActionPerformed
-
-    private void jAdministradorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAdministradorButtonActionPerformed
-        Presentacion.Portal.View ventana= new  Presentacion.Portal.View();
-        ventana.setLocationRelativeTo(null);
-        ventana.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jAdministradorButtonActionPerformed
-
-    private void jButtonClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClienteActionPerformed
-        Usuario user = model.getUsuario(jTextFieldUsuario.getText(), jPasswordField.getText());
-        Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model model = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Model(user);
-        Presentacion.Presentacion_Usuario.Vuelo_Usuario.View view = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.View();
-        Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller controller = new Presentacion.Presentacion_Usuario.Vuelo_Usuario.Controller(model, view);
-        view.setController(controller);
-        view.setLocationRelativeTo(null);
-        view.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_jButtonClienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,15 +188,14 @@ public class View extends javax.swing.JFrame implements Observer{
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jAdministradorButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButtonAcceder;
     private javax.swing.JButton jButtonCancelar;
-    private javax.swing.JButton jButtonCliente;
     private javax.swing.JButton jButtonRegistrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField;
     private javax.swing.JTextField jTextFieldUsuario;
     // End of variables declaration//GEN-END:variables

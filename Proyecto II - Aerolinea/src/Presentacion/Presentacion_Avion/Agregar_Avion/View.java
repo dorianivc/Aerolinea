@@ -178,18 +178,18 @@ public class View extends javax.swing.JFrame {
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         String matricula=this.Codigo.getText();
-        int anio=Integer.parseInt(this.Anio.getText());
-        Date fecha = new Date(anio,0,1);
+        String anio=this.Anio.getText();
+        //Date fecha = new Date(anio,0,1);
      
         String modelo=this.Modelo.getText();
         String marca=this.Marca.getText();
         int filas=Integer.parseInt(this.Filas.getText()); 
         int columnas=Integer.parseInt(this.Columnas.getText());
         
-        if(matricula.length()<1 || anio<1 || modelo.length()<1 || marca.length()<1 || filas<1 || columnas<1){
+        if(matricula.length()<1 ||  modelo.length()<1 || marca.length()<1 || filas<1 || columnas<1){
             JOptionPane.showMessageDialog(null, "Datos Ingresados son Invalidos", "Datos Invalidos",JOptionPane.PLAIN_MESSAGE);
         }else{
-            AvionDisponible avion=new AvionDisponible(matricula,fecha,modelo,marca,filas,columnas,(filas*columnas));
+            AvionDisponible avion=new AvionDisponible(matricula,anio,modelo,marca,filas,columnas,(filas*columnas));
             String x = avion.getMarca();
             this.controller.agregarAvion(avion);
         }

@@ -74,7 +74,7 @@ public class Viaje implements Serializable {
     }
     
     public String getFechaS(){
-        return String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+String.valueOf(fecha.getDay());
+        return String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+String.valueOf(fecha.getDate());
     }
 
     public void setFecha(Date fecha) {

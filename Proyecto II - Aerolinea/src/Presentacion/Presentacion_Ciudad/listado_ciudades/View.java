@@ -42,7 +42,6 @@ public class View extends javax.swing.JFrame implements Observer{
         jButtonAgregar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonModificar = new javax.swing.JButton();
-        jButtonEscoger = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTADO DE CIUDADES");
@@ -92,8 +91,6 @@ public class View extends javax.swing.JFrame implements Observer{
             }
         });
 
-        jButtonEscoger.setText("Escoger");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,10 +116,8 @@ public class View extends javax.swing.JFrame implements Observer{
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonEliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonModificar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEscoger)))
-                .addContainerGap(13, Short.MAX_VALUE))
+                        .addComponent(jButtonModificar)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,8 +135,7 @@ public class View extends javax.swing.JFrame implements Observer{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregar)
                     .addComponent(jButtonEliminar)
-                    .addComponent(jButtonModificar)
-                    .addComponent(jButtonEscoger))
+                    .addComponent(jButtonModificar))
                 .addGap(25, 25, 25))
         );
 
@@ -240,7 +234,6 @@ public class View extends javax.swing.JFrame implements Observer{
     private javax.swing.JButton jButtonAgregar;
     private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
-    private javax.swing.JButton jButtonEscoger;
     private javax.swing.JButton jButtonModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

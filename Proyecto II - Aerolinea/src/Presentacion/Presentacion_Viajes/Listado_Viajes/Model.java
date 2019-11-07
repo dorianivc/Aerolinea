@@ -6,8 +6,8 @@
 package Presentacion.Presentacion_Viajes.Listado_Viajes;
 
 import Datos.DBQuerys;
-import Datos.ViajeJpaController;
 import Logica.Viaje;
+import Logica.Vuelo;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class Model extends Observable {
     
     public void buscar(String v){
         try{
-            setViajes(db.ViajeSearch(v));
+            setViajes(db.ViajeSearchVuelo(v));
         }catch(Exception ex){}
     }
     
@@ -69,6 +69,16 @@ public class Model extends Observable {
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
+    }
+    
+    public List<Vuelo> buscarVuelos(){
+        List<Vuelo> vuelos = new ArrayList<>();
+        try{
+           vuelos = db.VueloSearch("");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
+        }
+        return vuelos;
     }
     
 }
