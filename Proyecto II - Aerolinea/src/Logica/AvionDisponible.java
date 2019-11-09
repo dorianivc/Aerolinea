@@ -6,7 +6,6 @@
 package Logica;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -38,14 +37,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "AvionDisponible.findByCantidadDePasajeros", query = "SELECT a FROM AvionDisponible a WHERE a.cantidadDePasajeros = :cantidadDePasajeros")})
 public class AvionDisponible implements Serializable {
 
-    @Column(name = "ano")
-    private String ano;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "codigo_matricula")
     private String codigoMatricula;
+    @Column(name = "ano")
+    private String ano;
     @Column(name = "modelo")
     private String modelo;
     @Column(name = "marca")
@@ -62,19 +60,6 @@ public class AvionDisponible implements Serializable {
     public AvionDisponible() {
     }
 
-    public AvionDisponible(String codigoMatricula, String ano, String modelo, String marca, Integer filas, Integer columnas, Integer cantidadDePasajeros) {
-        this.codigoMatricula = codigoMatricula;
-        this.ano = ano;
-        this.modelo = modelo;
-        this.marca = marca;
-        this.filas = filas;
-        this.columnas = columnas;
-        this.cantidadDePasajeros = cantidadDePasajeros;
-        
-    }
-    
-    
-    
     public AvionDisponible(String codigoMatricula) {
         this.codigoMatricula = codigoMatricula;
     }
@@ -87,6 +72,13 @@ public class AvionDisponible implements Serializable {
         this.codigoMatricula = codigoMatricula;
     }
 
+    public String getAno() {
+        return ano;
+    }
+
+    public void setAno(String ano) {
+        this.ano = ano;
+    }
 
     public String getModelo() {
         return modelo;
@@ -157,17 +149,9 @@ public class AvionDisponible implements Serializable {
         return true;
     }
 
-    @Override
+   @Override
     public String toString() {
         return this.codigoMatricula+" - "+ this.marca+" "+ this.modelo;
-    }
-
-    public String getAno() {
-        return ano;
-    }
-
-    public void setAno(String ano) {
-        this.ano = ano;
     }
     
 }

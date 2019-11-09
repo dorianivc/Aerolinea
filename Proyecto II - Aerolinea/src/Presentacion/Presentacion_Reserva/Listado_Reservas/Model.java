@@ -51,13 +51,14 @@ public class Model extends Observable{
         this.notifyObservers();   
     }  
     
-    public void buscarReservas(String id){
+    public List<Reserva> buscarReservas(String id){
         List<Reserva> resultado = new ArrayList<Reserva>();
         try {
-            setReservas(db.reservaSearchId(id));
+            resultado = db.reservaSearchId(id);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
+        return resultado;
     }
     
     

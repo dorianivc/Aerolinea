@@ -94,7 +94,7 @@ public class TipodePago implements Serializable {
         return true;
     }
 
-    @Override
+   @Override
     public String toString() {
         return tipoDePago;
     }

@@ -26,7 +26,7 @@ public class Model extends Observable {
         this.usuario = usuario;
         db = new DBQuerys();
         try{
-            this.vuelos=db.VueloSearch("");
+            this.vuelos=db.VueloSearchTime("");
         }catch(Exception ex){
             System.out.print("error al mostrar los vuelos");
         }
@@ -50,9 +50,9 @@ public class Model extends Observable {
     }
 
     public void setVuelos(List<Vuelo> vuelos) {
-        this.vuelos = vuelos;
         this.setChanged();
         this.notifyObservers();
+        this.vuelos = vuelos;
     }
     
     public List<Ciudad> getCiudades(){
@@ -67,20 +67,6 @@ public class Model extends Observable {
         this.notifyObservers();   
     }   
     
-    public void buscarTodosVuelos(){
-        try{
-            this.setVuelos(db.VueloSearch(""));
-        }catch(Exception ex){
-            System.out.print("error al mostrar los vuelos");
-        }
-    }
     
-    public void buscarHorario(String dia){
-        try{
-            this.setVuelos(db.VueloSearch3(dia));
-        }catch(Exception ex){
-            System.out.print("error al mostrar los vuelos");
-        }
-    }
     
 }

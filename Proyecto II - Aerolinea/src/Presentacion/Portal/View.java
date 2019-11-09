@@ -47,7 +47,6 @@ public class View extends javax.swing.JFrame {
         vuelos = new javax.swing.JMenuItem();
         jMenuItemListadoViajes = new javax.swing.JMenuItem();
         reservas = new javax.swing.JMenuItem();
-        jMenuItemReportes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -155,15 +154,6 @@ public class View extends javax.swing.JFrame {
             }
         });
         viajes.add(reservas);
-
-        jMenuItemReportes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemReportes.setText("Reporte ");
-        jMenuItemReportes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemReportesActionPerformed(evt);
-            }
-        });
-        viajes.add(jMenuItemReportes);
 
         jMenuBar1.add(viajes);
 
@@ -276,17 +266,8 @@ public class View extends javax.swing.JFrame {
         view.setVisible(true);
     }//GEN-LAST:event_reservasActionPerformed
 
-    private void jMenuItemReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemReportesActionPerformed
-       DBQuerys db= new DBQuerys();
-       try{
-           db.db.reporte();
-       }catch(Exception se){
-           JOptionPane.showMessageDialog(null, "Se generaron errores al cargar el reporte", "Errores Generados",JOptionPane.PLAIN_MESSAGE);
-       }
-    }//GEN-LAST:event_jMenuItemReportesActionPerformed
-
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-       JOptionPane.showMessageDialog(null, "Dorian Vallecillo Calderón dorianivc1@gmial.com \nSergio Solis Barramtes Sergio05_18m@hotmail.com \nGabriel Segura Quesada gaseque34@gmai.com", "Información",JOptionPane.PLAIN_MESSAGE);
+       JOptionPane.showMessageDialog(null, "Dorian Vallecillo Calderón dorianivc1@gmail.com", "Información",JOptionPane.PLAIN_MESSAGE);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
@@ -339,7 +320,6 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemListadoPaises;
     private javax.swing.JMenuItem jMenuItemListadoRutas;
     private javax.swing.JMenuItem jMenuItemListadoViajes;
-    private javax.swing.JMenuItem jMenuItemReportes;
     private javax.swing.JMenuItem listadoUsuarios;
     private javax.swing.JMenuItem reservas;
     private javax.swing.JMenu viajes;

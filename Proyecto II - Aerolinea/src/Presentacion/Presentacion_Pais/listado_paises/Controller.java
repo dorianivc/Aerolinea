@@ -8,7 +8,7 @@ package Presentacion.Presentacion_Pais.listado_paises;
 import Datos.DBQuerys;
 import Datos.PaisJpaController;
 import Logica.Pais;
-import static Logica.Pais_.pais;
+
 import static Presentacion.Presentacion_Pais.listado_paises.View.PaisController;
 import javax.swing.JOptionPane;
 

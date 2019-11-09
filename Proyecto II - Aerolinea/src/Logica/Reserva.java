@@ -64,11 +64,7 @@ public class Reserva implements Serializable {
     public void setReserva(Integer reserva) {
         this.reserva = reserva;
     }
- public String imprimeTiquete(){
-        String tiquete;
-        tiquete="Reserva # "+ this.reserva+ "\n"+ "Viaje: "+ this.viaje.getViaje() + "\n"+ "Numero de asiento: "+ this.numeroAsiento+ "\n"+ "Numero de pago: "+ this.pago.getPago()+"\n"+"Usuario: "+ this.usuario.getNombre()+ " "+ this.usuario.getApellidos();
-        return tiquete;
-    }
+
     public String getNumeroAsiento() {
         return numeroAsiento;
     }
@@ -125,5 +121,12 @@ public class Reserva implements Serializable {
     public String toString() {
         return "Logica.Reserva[ reserva=" + reserva + " ]";
     }
+
+    public String imprimeTiquete() {
+        
+        String tiquete;
+        tiquete="Reserva # "+ this.reserva+ "\n"+ "Viaje: "+ this.viaje.getViaje() + "\n"+ "Numero de asiento: "+ this.numeroAsiento+ "\n"+ "Numero de pago: "+ this.pago.getPago()+"\n"+"Usuario: "+ this.usuario.getNombre()+ " "+ this.usuario.getApellidos();
+        return tiquete;
+    }
+    }
     
-}

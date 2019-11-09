@@ -120,22 +120,7 @@ public class Vuelo implements Serializable {
 
     @Override
     public String toString() {
-        return this.vuelo + " -" + this.rutaAsignada.toString() + " " + this.horario.getDiaDeLaSemana().charAt(0) + this.horario.getDiaDeLaSemana().charAt(1);
+        return "Logica.Vuelo[ vuelo=" + vuelo + " ]";
     }
-
-    public String gethorario() {
-
-        return "Salida " + horario.getDiaDeLaSemana() + "-"
-                + "Llegada " + horario.getDiaDeLaSemana();
-
-    }
-
-    public String getruta() {
-        return rutaAsignada.getCiudadLlegada().getNombre() + " " + rutaAsignada.getCiudadSalida().getNombre();
-    }
-
-    public String getavion() {
-        return "Modelo Avion: " + avionAsignado.getModelo() + " Espacios " + avionAsignado.getCantidadDePasajeros();
-    }
-
+    
 }

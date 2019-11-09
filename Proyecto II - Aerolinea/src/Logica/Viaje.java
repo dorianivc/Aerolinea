@@ -9,9 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,26 +35,31 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Viaje.findAll", query = "SELECT v FROM Viaje v")
     , @NamedQuery(name = "Viaje.findByViaje", query = "SELECT v FROM Viaje v WHERE v.viaje = :viaje")
-    , @NamedQuery(name = "Viaje.findByFecha", query = "SELECT v FROM Viaje v WHERE v.fecha = :fecha")})
+    , @NamedQuery(name = "Viaje.findByFecha", query = "SELECT v FROM Viaje v WHERE v.fecha = :fecha")
+    , @NamedQuery(name = "Viaje.findByPrecio", query = "SELECT v FROM Viaje v WHERE v.precio = :precio")})
 public class Viaje implements Serializable {
-
-    @Column(name = "precio")
-    private Integer precio;
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "viaje")
     private Integer viaje;
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viaje")
+    @Column(name = "precio")
+    private Integer precio;
+    @OneToMany(mappedBy = "viaje")
     private List<Reserva> reservaList;
     @JoinColumn(name = "vuelo", referencedColumnName = "vuelo")
     @ManyToOne(optional = false)
     private Vuelo vuelo;
-
+    
+    public String mostrarViaje(){
+        return "Viaje: "+getViaje()+" "+getFecha();
+    }
+    
     public Viaje() {
     }
 
@@ -72,13 +78,17 @@ public class Viaje implements Serializable {
     public Date getFecha() {
         return fecha;
     }
-    
-    public String getFechaS(){
-        return String.valueOf(fecha.getYear())+"-"+String.valueOf(fecha.getMonth())+"-"+String.valueOf(fecha.getDate());
-    }
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Integer getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Integer precio) {
+        this.precio = precio;
     }
 
     @XmlTransient
@@ -121,21 +131,6 @@ public class Viaje implements Serializable {
     @Override
     public String toString() {
         return "Logica.Viaje[ viaje=" + viaje + " ]";
-    }
-    
-    public String mostrarViaje(){
-        return "Viaje: "+getViaje()+" "+getFecha();
-    }
-
-    public Integer getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Integer precio) {
-        this.precio = precio;
-    }
-    public void nada(){
-        
     }
     
 }

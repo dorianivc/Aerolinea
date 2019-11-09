@@ -6,7 +6,6 @@
 package Datos;
 
 import Datos.exceptions.NonexistentEntityException;
-import Datos.exceptions.PreexistingEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -35,7 +34,7 @@ public class ViajeJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Viaje viaje) throws PreexistingEntityException, Exception {
+    public void create(Viaje viaje) {
         if (viaje.getReservaList() == null) {
             viaje.setReservaList(new ArrayList<Reserva>());
         }
@@ -69,11 +68,6 @@ public class ViajeJpaController implements Serializable {
                 }
             }
             em.getTransaction().commit();
-        } catch (Exception ex) {
-            if (findViaje(viaje.getViaje()) != null) {
-                throw new PreexistingEntityException("Viaje " + viaje + " already exists.", ex);
-            }
-            throw ex;
         } finally {
             if (em != null) {
                 em.close();

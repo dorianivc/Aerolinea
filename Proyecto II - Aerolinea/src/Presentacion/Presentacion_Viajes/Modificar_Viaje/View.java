@@ -22,10 +22,10 @@ public class View extends javax.swing.JFrame implements Observer {
      */
     public View() {
         initComponents();
-        for(int i=1;i<32;i++){
+        for(int i=0;i<32;i++){
             this.dias.addItem(i);
         }
-        for(int i=1;i<13;i++){
+        for(int i=0;i<13;i++){
             this.meses.addItem(i);
         }
         for(int i=2019;i<2200;i++){

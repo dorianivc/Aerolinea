@@ -47,10 +47,6 @@ public class View extends javax.swing.JFrame implements Observer {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         reservaciones = new javax.swing.JButton();
-        buscarTodos = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        horarioComboBox = new javax.swing.JComboBox<>();
-        horarioBoton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Bienvenido");
@@ -77,7 +73,7 @@ public class View extends javax.swing.JFrame implements Observer {
 
         Vuelos_Disponibles.setText("Vuelos Disponibles");
 
-        BuscarButton.setText("Buscar por origen/destino");
+        BuscarButton.setText("Buscar");
         BuscarButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BuscarButtonActionPerformed(evt);
@@ -95,24 +91,6 @@ public class View extends javax.swing.JFrame implements Observer {
             }
         });
 
-        buscarTodos.setText("Buscar todos");
-        buscarTodos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarTodosActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Busqueda por día:");
-
-        horarioComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
-
-        horarioBoton.setText("Buscar por horario");
-        horarioBoton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                horarioBotonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,7 +100,7 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,33 +111,23 @@ public class View extends javax.swing.JFrame implements Observer {
                                 .addComponent(DestinoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(BuscarButton)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(242, 242, 242)
-                                .addComponent(Vuelos_Disponibles))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(escoger)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(reservaciones)))
+                        .addGap(242, 242, 242)
+                        .addComponent(Vuelos_Disponibles)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel3)
+                .addComponent(escoger)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(horarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buscarTodos)
-                    .addComponent(horarioBoton))
+                .addComponent(reservaciones)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(51, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Vuelos_Disponibles)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -168,20 +136,13 @@ public class View extends javax.swing.JFrame implements Observer {
                     .addComponent(OrigenComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(horarioComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(horarioBoton))
-                .addGap(3, 3, 3)
-                .addComponent(buscarTodos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(escoger)
                     .addComponent(reservaciones))
-                .addContainerGap())
+                .addGap(53, 53, 53))
         );
 
         pack();
@@ -221,14 +182,6 @@ public class View extends javax.swing.JFrame implements Observer {
         Ciudad d = (Ciudad) this.DestinoComboBox.getSelectedItem();
         controller.buscar(o.getCiudad(), d.getCiudad());
     }//GEN-LAST:event_BuscarButtonActionPerformed
-
-    private void buscarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarTodosActionPerformed
-        model.buscarTodosVuelos();
-    }//GEN-LAST:event_buscarTodosActionPerformed
-
-    private void horarioBotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horarioBotonActionPerformed
-        model.buscarHorario((String) horarioComboBox.getSelectedItem());
-    }//GEN-LAST:event_horarioBotonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -271,13 +224,9 @@ public class View extends javax.swing.JFrame implements Observer {
     private javax.swing.JComboBox<Ciudad> OrigenComboBox;
     private javax.swing.JTable TableVuelos;
     private javax.swing.JLabel Vuelos_Disponibles;
-    private javax.swing.JButton buscarTodos;
     private javax.swing.JButton escoger;
-    private javax.swing.JButton horarioBoton;
-    private javax.swing.JComboBox<String> horarioComboBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton reservaciones;
     // End of variables declaration//GEN-END:variables

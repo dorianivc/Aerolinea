@@ -15,32 +15,23 @@ import javax.swing.JOptionPane;
  * @author Gabriel
  */
 public class Controller {
-
     Model model;
-    View view;
+    View view; 
     DBQuerys db;
-
+    
     public Controller(Model model, View view) {
         this.model = model;
         this.view = view;
-        db = new DBQuerys();
+        db= new DBQuerys();
         view.setModel(model);
         view.setController(this);
     }
-
-    public void buscar(String o, String d) {
-        try {
-            List<Vuelo> lista = db.VueloSearch2(o, d);
-            model.setVuelos(lista);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
-        }
-    }
-
-    public void buscarTodos() {
-        try {
-            model.buscarTodosVuelos();
-        } catch (Exception ex) {
+    
+       public void buscar(String o,String d){
+        try{         
+           List<Vuelo> lista = db.VueloSearch2(o,d);
+           model.setVuelos(lista);
+        }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error", "Error", JOptionPane.PLAIN_MESSAGE, null);
         }
     }

@@ -125,11 +125,10 @@ public class Ruta implements Serializable {
         return true;
     }
 
-    @Override
+        @Override
     public String toString() {
        Integer rute= this.ruta;
        String ruta= rute.toString();
-       return ruta+" - "+this.ciudadSalida.getCiudad()+" - "+this.ciudadLlegada.getCiudad();
-    }
+       return ruta+" - "+this.ciudadSalida.getCiudad()+" - "+this.ciudadLlegada.getCiudad();}
     
 }

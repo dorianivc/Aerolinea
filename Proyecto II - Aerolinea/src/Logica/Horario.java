@@ -121,7 +121,7 @@ public class Horario implements Serializable {
         return true;
     }
 
-    @Override
+     @Override
     public String toString() {
         String salida= this.horario+" - "+ this.getDiaDeLaSemana().charAt(0)+this.getDiaDeLaSemana().charAt(1);
         Integer hora= this.salida.getHours();

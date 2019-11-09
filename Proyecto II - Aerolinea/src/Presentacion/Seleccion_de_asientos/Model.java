@@ -5,7 +5,7 @@ package Presentacion.Seleccion_de_asientos;
 
 
 
-import static Logica.Reserva_.usuario;
+
 import Logica.Usuario;
 import Logica.Viaje;
 import Logica.Vuelo;

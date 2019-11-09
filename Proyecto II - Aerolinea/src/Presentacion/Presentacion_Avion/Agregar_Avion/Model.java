@@ -27,8 +27,8 @@ public class Model {
         Icon icon= new ImageIcon(getClass().getResource("check_verde.png"));
         AvionDisponibleJpaController avionDao = new AvionDisponibleJpaController(db.db.EntityManager);
         try{
-         //  avionDao.create(avion);
-         db.AvionAdd(avion);
+           avionDao.create(avion);
+          //db.AvionAdd(avion);
            JOptionPane.showMessageDialog(null, "Avión agregado con éxito", "Avion agregado", JOptionPane.PLAIN_MESSAGE, icon);
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Avion no agregado", JOptionPane.PLAIN_MESSAGE, null);

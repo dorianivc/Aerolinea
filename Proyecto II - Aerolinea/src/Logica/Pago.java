@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -49,7 +48,7 @@ public class Pago implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pago")
+    @OneToMany(mappedBy = "pago")
     private List<Reserva> reservaList;
     @JoinColumn(name = "TipoPago_codigo_pago", referencedColumnName = "tipo_de_pago")
     @ManyToOne(optional = false)
@@ -125,7 +124,7 @@ public class Pago implements Serializable {
 
     @Override
     public String toString() {
-        return String.valueOf(this.getMonto())+" "+this.getTipoPagocodigopago().getTipoDePago();
+        return "Pago: " + pago + " "+ this.fecha;
     }
     
 }

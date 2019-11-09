@@ -48,6 +48,21 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "usuario")
     private String usuario;
+
+    public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correoElectronico, Date fechaNacimiento, String direccion, String telefono, String celular, Short admin) {
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.correoElectronico = correoElectronico;
+        this.fechaNacimiento = fechaNacimiento;
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.celular = celular;
+        this.admin = admin;
+    }
+
+   
     @Column(name = "contrasena")
     private String contrasena;
     @Column(name = "nombre")
@@ -71,19 +86,6 @@ public class Usuario implements Serializable {
     private List<Reserva> reservaList;
 
     public Usuario() {
-    }
-    
-     public Usuario(String usuario, String contrasena, String nombre, String apellidos, String correoElectronico, Date fechaNacimiento, String direccion, String telefono, String celular, Short admin) {
-        this.usuario = usuario;
-        this.contrasena = contrasena;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.correoElectronico = correoElectronico;
-        this.fechaNacimiento = fechaNacimiento;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.celular = celular;
-        this.admin = admin;
     }
 
     public Usuario(String usuario) {
